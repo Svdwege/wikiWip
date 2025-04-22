@@ -1,4 +1,5 @@
 = Home
+Sjoerd van de Wege <s.vandewege@student.han.nl>
 
 this wiki contains all notes made during the projects runtime footnote:1[that were uploaded to the wiki]
 it has a few main folders the first is the meeting page and subpages these contain notes made during the meetings 
@@ -6,3 +7,5 @@ the notes are named in the following way: `meeting-YYYY-MM-DD.md`
 
 Then there is the notes page, this has subpages for each distinct component of the project.
 These notes may link to other pages. And should contain their own list of references
+
+test

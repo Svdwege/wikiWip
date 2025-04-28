@@ -6,7 +6,7 @@ This document describes the C++ classes and functions used for handling and deco
 For the full original GEMmotors document, please visit link:https://hannl-my.sharepoint.com/personal/jaap_janssens_han_nl/_layouts/15/onedrive.aspx?CID=f663e4aa%2D0285%2D40f3%2Da3e6%2D5114972ff027&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FGEMMotors%2DG1%2EX%2DREV008%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[this link].
 
 The CAN message definitions from the GEMmotors manual are included in the project's documentation on the GitLab wiki. Refer to the tables located at:
-*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Documentation#[#tab1_signal_list][Tab 2: CAN RX message 0]
+*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Documentation#tab1_signal_list[Tab 2: CAN RX message 0]
 *   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab3_can_tx_status_0[Tab 3: CAN TX message status_0]
 *   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab4_can_tx_status_1[Tab 4: CAN TX message status_1]
 *   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab7_error_list[Tab 7: Error list]

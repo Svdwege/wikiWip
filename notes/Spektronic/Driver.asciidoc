@@ -6,7 +6,7 @@ This document outlines the C++ code for the Spectronik driver, which communicate
 For the full Protium UART Specification document, please refer to the relevant sections on the project's documentation page: link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[Protium UART Specification].
 
 -------------------------------------------------------------------------------
-= Data Structures
+ Data Structures
 -------------------------------------------------------------------------------
 
 This section describes the primary data structure used to store Protium sensor readings.
@@ -24,7 +24,7 @@ This class (`ProtiumData`) holds parsed sensor values from the Protium's UART ou
 *   `valid` (bool): Parsing success indicator (from `ILoggable` base).
 
 -------------------------------------------------------------------------------
-= Logging Output (`toString`)
+ Logging Output (`toString`)
 -------------------------------------------------------------------------------
 
 The `ProtiumData` class implements the `ILoggable::toString()` method to generate a formatted string for easy logging or transmission of the sensor data.
@@ -37,14 +37,14 @@ SPC,<FanPercentage>,<H2PressureSensor1>,<H2PressureSensor2>,<H2TankPressure>,<Su
 ....
 
 -------------------------------------------------------------------------------
-= Spektronic Class
+ Spektronic Class
 -------------------------------------------------------------------------------
 
 [[spektronic_class]]
 The `Spektronic` class manages the overall UART communication, including sending commands (`sendStart()`, `sendEnd()`) and processing received data (`parseProtiumData()`, `uartRxEventCallback()`, `gpioExtiCallback()`). It utilizes the `ProtiumData` class to store the parsed sensor readings. 
 
 -------------------------------------------------------------------------------
-= ProtiumData Parsing Function
+ ProtiumData Parsing Function
 -------------------------------------------------------------------------------
 
 [[parse_protium_data]]

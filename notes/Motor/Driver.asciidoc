@@ -10,7 +10,7 @@ The CAN message definitions from the GEMmotors manual are included in the projec
 *   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab3_can_tx_status_0[Tab 3: CAN TX message status_0]
 *   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab4_can_tx_status_1[Tab 4: CAN TX message status_1]
 *   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab7_error_list[Tab 7: Error list]
-*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab8_warning_list[Tab 8: Warning list]
+*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab8_warning_list[#tab8_warning_list]
 
 -------------------------------------------------------------------------------
 == Data Structures

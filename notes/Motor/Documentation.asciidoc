@@ -132,7 +132,7 @@ Units depend on selected motor control mode (in % of torque or RPM*10)
 | 8 | 8..0 | motor_temp | Signed 8 bit | Maximum inverter temperature in deg C
 |===
 
-[#tab4_can_tx_status_1] // <-- Added Anchor for Tab 4
+[#tab4_can_tx_status_1] 
 .Tab. 4: CAN TX message status_1 with ID: CAN TX address +1
 |===
 | Byte | Bits | Description | Data Type | Value
@@ -155,7 +155,7 @@ see Tab. 8.
 Error message is only sent if any error status is active - that is, if value is different than zero - see Tab.
 7.
 
-[#tab6_can_tx_status_3] // <-- Added Anchor for Tab 6 (for completeness)
+[#tab6_can_tx_status_3] 
 .Tab. 6: CAN TX message status_3 with ID: CAN TX address +3
 |===
 | Byte | Description | Data Type | Value

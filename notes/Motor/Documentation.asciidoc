@@ -1,0 +1,258 @@
+
+
+
+==============================================================================
+GEMmotors G1.X Instruction Manual - Extracted Information for ASCII Doc
+==============================================================================
+
+This document contains extracted information from the GEMmotors G1.X Instruction manual
+(Revision 008, date: 8.9.2021), specifically focusing on the Signal Cable and
+CAN Communication sections and their associated tables.
+
+For the full document, please visit link:https://hannl-my.sharepoint.com/personal/jaap_janssens_han_nl/_layouts/15/onedrive.aspx?CID=f663e4aa%2D0285%2D40f3%2Da3e6%2D5114972ff027&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FGEMMotors%2DG1%2EX%2DREV008%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[this link].
+
+------------------------------------------------------------------------------
+2.2.1 Signal cable
+------------------------------------------------------------------------------
+
+Motors G1.X have a single signal cable that is as standard option terminated without connector, i.e.
+direct connections of the wires. Signals in wires you can refer the wire color as shown in Tab. 1.
+
+In case that you want to use a connector please contact GEM motors, typical recommendation is to
+use a 10-pin connector Würth 661010213322. The pinout of the signal connector is shown on Fig. 13.
+(Note: Fig. 13 showing connector pinout is not included in this ASCII extract)
+
+.Tab. 1: Signal list and short description
+|===
+|Name | Type | Voltage level | Function | Signal connector pin (wire color)
+| +12 V | Input | U=12 V ± 10%, I < 500 mA | MCU DC supply | 5 (red)
+| Brake | Input | 12V = brakes off; GND = brakes on | Brake signal input | 4 (orange)
+| HW Enable | Input | OV = disable; 12V = enable motor | Motor enable (disable) signal | 3 (brown)
+| CAN High | Standard | Standard voltage level | Communication | 2 (blue)
+| UART RX | Standard | 3,3 V TTL | Communication | 1 (green)
+| UART TX | Standard | 3,3 V TTL | Communication | 10 (white)
+| CAN Low | Standard | Standard voltage level | Communication | 9 (yellow)
+| MODE | Input | OV = mode change, 12V = no change | Mode change button | 8 (gray)
+| Throttle | Analog input | OV = no throttle, 12V = full throttle | Throttle analogue input | 7 (violet)
+| GND | Input | GND | Signal ground | 6 (black)
+|===
+
+Detailed description of the signals is as follows:
+
+*   +12 V: To avoid motor damage, +12 V MCU supply voltage should be stable (12 V +/-10%) and
+    without interruption while DC link is connected. Contactor coil voltage should be filtered to
+    avoid interferences on +12 V supply voltage line during switches.
+*   Brake: OV = regeneration on (brakes on, throttle signal ignored) ; 12V = brakes off
+    The signal does not need to be connected if the functionality is not required or if it is activated
+    via CAN communication.
+*   HW Enable: This signal is used to HW enable the motor's power electronics (and HW disable).
+    To enable the power electronics, apply DC supply voltage 12V to this signal. If this signal is lost
+    for any amount of time, during the operation, the motor shuts down, provides no output
+    power and needs to be switched on again. It is still accessible through CAN communication.
+*   CAN high, CAN Low: See page 17 for details. (Details are below in 3.3.1)
+    CAN signals does not need to be connected if motor is controlled via analogue signals (brake -
+    pin 2 and throttle – pin 9). CAN can be still used for motor diagnostic (not for control).
+*   UART RX; UART TX: The signals are reserved for motor debugging only and are not used.
+*   MODE: This input is typically connected to a push-button so the motor drive modes can be
+    changed by pressing push-button (connected to GND for 50ms for single mode change, or
+    connected to GND continuously for sequential mode changes through all available modes).
+    The signal need not be connected if only one mode is active or if modes are selected via CAN.
+*   Throttle: This input is typically connected to a throttle control grip. Analogue control input
+    voltage range is 0-12V (or 0-5V, selectable in SW). The signal does not need to be
+    connected if throttle (motor power) is controlled via CAN message.
+
+At special request, the input signals and functionality can be customized.
+
+------------------------------------------------------------------------------
+3.3.1 Communication settings and messages
+------------------------------------------------------------------------------
+
+CAN settings:
+*   protocol: CAN 2.0 A,
+*   typical baud rate: 125 kbps, (125 to 500)
+*   RX period: 10 ms,
+*   TX period: one message every RX period (cyclic),
+*   Endianess format: Intel
+*   RX and TX addresses can be set via user setting (GEM Flash tool)
+*   0x100 and 0x101 CAN addresses are reserved for motor bootloader communication
+
+Motor controller accepts the following messages:
+
+.Tab. 2: CAN RX message 0 with ID: CAN RX address
+|===
+| Byte | Bits | Description | Data Type | Value
+| 1, 2 | 16..0 | control_value | Signed 16 bit | Input control level for torque or speed regulation +
+-100 .. 100 for TORQUE control mode (in % of maximum torque) +
+-10000 .. 10000 for SPEED control mode (value is in RPM * 10 units)
+| 3 | 1..0 | control_mode | Unsigned 8 bit | 0 - operate in mode set by settings +
+1 - operate in TORQUE control mode +
+2 - operate in SPEED control mode
+| 3 | 4..2 | motor_mode | Unsigned 8 bit | Current motor mode +
+0 - normal +
+1 - boost +
+2 - reverse (in analogue control) +
+3 - regeneration +
+4 .. 7 - custom modes
+| 3 | 5 | sw_enable | Unsigned 8 bit | Software enable signal +
+0 - stay in IDLE state +
+1 - switch to RUN state
+| 3 | 6 | reserved | Unsigned 8 bit | 0
+| 3 | 7 | debug_mode | Unsigned 8 bit | Debug mode enable +
+0 - Normal operational +
+1 - Debug mode
+| 4, 5 | | Reserved | Unsigned 8 bit | Not in use, should not be sent by VCU.
+|===
+
+Motor control unit provides the following messages:
+
+.Tab. 3: CAN TX message status_0 with ID: CAN TX address + 0
+|===
+| Byte | Bits | Description | Data Type | Value
+| 1, 2 | 16..0 | control_value | Signed 16 bit | Current control level -10000 .. 10000 +
+Units depend on selected motor control mode (in % of torque or RPM*10)
+| 3 | 1..0 | control_mode | Unsigned 8 bit | Current motor control mode +
+0 - TORQUE +
+1 - SPEED
+| 3 | 4..2 | motor_mode | Unsigned 8 bit | Current motor mode +
+0 - normal +
+1 - boost +
+2 - reverse (in analogue control) +
+3 - regeneration +
+4 .. 7 custom modes
+| 3 | 5 | sw_enable | Unsigned 8 bit | SW enable status +
+0 - DISABLED +
+1 - ENABLED
+| 3 | 7..6 | motor_state | Unsigned 8 bit | Current motor state +
+0 - INIT +
+1 - IDLE +
+2 - RUN +
+3 - ERROR
+| 4, 5 | 16..0 | motor_torque | Signed 16 bit | Current motor torque in Nm
+| 6, 7 | 16..0 | motor_rpm | Signed 16 bit | Current RPM value 0.1 RPM resolution
+| 8 | 8..0 | motor_temp | Signed 8 bit | Maximum inverter temperature in deg C
+|===
+
+.Tab. 4: CAN TX message status_1 with ID: CAN TX address +1
+|===
+| Byte | Bits | Description | Data Type | Value
+| 1, 2 | 16..0 | inv_peak_cur | Signed 16 bit | Maximum PEAK current of all inverters in A
+| 3, 4 | 16..0 | motor_power | Signed 16 bit | Current motor power in W
+| 5, 6 | | Reserved | Unsigned 8 bit | Not in use, not sent by MCU.
+| 7, 8 | | (Reserved) | |
+|===
+
+Warning message is only sent if any warning status is active - that is, if value is different than zero -
+see Tab. 8.
+
+.Tab. 5: CAN TX message status_2 with ID: CAN TX address +2
+|===
+| Byte | Description | Data Type | Value
+| 1, 2, 3, 4, 5, 6, 7, 8 | warning_code | Unsigned 64 bit | warning code bit-field (See Tab. 8 for bit definitions)
+|===
+
+Error message is only sent if any error status is active - that is, if value is different than zero - see Tab.
+7.
+
+.Tab. 6: CAN TX message status_3 with ID: CAN TX address +3
+|===
+| Byte | Description | Data Type | Value
+| 1, 2, 3, 4, 5, 6, 7, 8 | error_code | Unsigned 64 bit | error code bit-field (See Tab. 7 for bit definitions)
+|===
+
+On each received CAN message, one of the transmit messages is sent.
+
+------------------------------------------------------------------------------
+3.3.3 Error list
+------------------------------------------------------------------------------
+
+.Tab. 7: Error list
+|===
+| Error code | Description
+| 1 | Settings not found
+| 2 | Motor stalled
+| 3 | Controller data reading timeout
+| 4 | Invalid hall sensor sequence
+| 5 | Invalid hall sector
+| 6 | Error reading temperature sensor
+| 7 | Position sensor reading error
+| 8 | Error reading encoder
+| 9 | Zero position offset not set
+| 10 | HW enable not set
+| 11 | Error reading inverter 1 temperature
+| 12 | Error reading inverter 2 temperature
+| 13 | Error reading inverter 3 temperature
+| 14 | Error reading inverter 4 temperature
+| 15 | Error reading inverter 5 temperature
+| 16 | Error reading inverter 6 temperature
+| 17 | Error reading CPU temperature
+| 18 | Error reading hall temperature
+| 19 | Error reading dclink temperature
+| 20 | Error in dclink communication
+| 21 | Inverter 1 overcurrent
+| 22 | Inverter 2 overcurrent
+| 23 | Inverter 3 overcurrent
+| 24 | Inverter 4 overcurrent
+| 25 | Inverter 5 overcurrent
+| 26 | Inverter 6 overcurrent
+| 27 | DC overvoltage
+| 28 | DC undervoltage
+| 29 | Double CAN id on the bus
+| 30 | CAN communication timeout
+| 31 | Inverter 1 fault
+| 32 | Inverter 2 fault
+| 33 | Inverter 3 fault
+| 34 | Inverter 4 fault
+| 35 | Inverter 5 fault
+| 36 | Inverter 6 fault
+| 37 | CAN send error
+| 38 | Lost frames on CAN bus
+| 39 | Overspeed error
+| 40 | CPU overloaded
+|===
+
+------------------------------------------------------------------------------
+3.3.4 Warning list
+------------------------------------------------------------------------------
+
+.Tab. 8: Warning list
+|===
+| Warning code | Description
+| 2 | Motor about to stall
+| 6 | Delay in reading temperature sensor
+| 7 | Delay in reading position sensor
+| 11 | Delay in reading inverter 1 temperature
+| 12 | Delay in reading inverter 2 temperature
+| 13 | Delay in reading inverter 3 temperature
+| 14 | Delay in reading inverter 4 temperature
+| 15 | Delay in reading inverter 5 temperature
+| 16 | Delay in reading inverter 6 temperature
+| 17 | Delay in reading CPU temperature
+| 18 | Delay in reading hall temperature
+| 19 | Delay in reading dclink temperature
+| 20 | Delay in dclink communication
+| 21 | Inverter 1 overcurrent
+| 22 | Inverter 2 overcurrent
+| 23 | Inverter 3 overcurrent
+| 24 | Inverter 4 overcurrent
+| 25 | Inverter 5 overcurrent
+| 26 | Inverter 6 overcurrent
+| 27 | DC overvoltage
+| 28 | DC undervoltage
+| 30 | CAN communication timeout
+| 31 | Inverter 1 fault
+| 32 | Inverter 2 fault
+| 33 | Inverter 3 fault
+| 34 | Inverter 4 fault
+| 35 | Inverter 5 fault
+| 36 | Inverter 6 fault
+| 37 | CAN send warning
+| 38 | Lost frames on CAN bus
+| 39 | Overspeed error
+| 40 | CPU overloaded
+| 41 | Torque limited
+| 42 | Starting at high RPM
+|===
+
+==============================================================================
+End of Extracted Information
+==============================================================================

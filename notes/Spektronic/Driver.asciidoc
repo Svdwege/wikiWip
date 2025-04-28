@@ -3,7 +3,7 @@
 
 This document outlines the C++ code for the Spectronik driver, which communicates with the Protium-1000/2500 system via UART. It is based on the Protium UART Specification.
 
-For the full Protium UART Specification document, please refer to the relevant sections on the project's documentation page: link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation].
+For the full Protium UART Specification document, please refer to the relevant sections on the project's documentation page: link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[Protium UART Specification].
 
 -------------------------------------------------------------------------------
 = Data Structures
@@ -14,7 +14,7 @@ This section describes the primary data structure used to store Protium sensor r
 === ProtiumData Class
 
 [[protium_data_class]]
-This class (`ProtiumData`) holds parsed sensor values from the Protium's UART output, specifically from the running phase messages. Details on the message format can be found in the project documentation page: link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation].
+This class (`ProtiumData`) holds parsed sensor values from the Protium's UART output, specifically from the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[running phase messages]. Details on the message format can be found in the project documentation page: link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation].
 
 *   `FanPercentage` (int): Fan status/speed percentage (from `FAN`).
 *   `H2PressureSensor1` (float): Hydrogen pressure sensor 1 reading (from `H2P1`).

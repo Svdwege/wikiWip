@@ -1,6 +1,7 @@
 ---
 title: Motor driver
 ---
+
 ==============================================================================
 GEMmotors G1.X Instruction Manual - Extracted Information for ASCII Doc
 ==============================================================================
@@ -20,21 +21,18 @@ In case that you want to use a connector please contact GEM motors, typical reco
 use a 10-pin connector Würth 661010213322. The pinout of the signal connector is shown on Fig. 13.
 (Note: Fig. 13 showing connector pinout is not included in this ASCII extract)
 
-Tab. 1: Signal list and short description
-+-----------+----------+---------------------------+--------------------------+--------------------------+
-| Name      | Type     | Voltage level             | Function                 | Signal connector pin     |
-|           |          |                           |                          | (wire color)             |
-+-----------+----------+---------------------------+--------------------------+--------------------------+
-| +12 V     | Input    | U=12 V ± 10%, I < 500 mA  | MCU DC supply            | 5 (red)                  |
-| Brake     | Input    | 12V = brakes off; GND = brakes on | Brake signal input     | 4 (orange)               |
-| HW Enable | Input    | OV = disable; 12V = enable motor | Motor enable (disable) signal | 3 (brown)                |
-| CAN High  | Standard | Standard voltage level    | Communication            | 2 (blue)                 |
-| UART RX   | Standard | 3,3 V TTL                 | Communication            | 1 (green)                |
-| UART TX   | Standard | 3,3 V TTL                 | Communication            | 10 (white)               |
-| CAN Low   | Standard | Standard voltage level    | Communication            | 9 (yellow)               |
-| MODE      | Input    | OV = mode change, 12V = no change | Mode change button     | 8 (gray)                 |
-| Throttle  | Analog   | OV = no throttle, 12V = full throttle | Throttle analogue input | 7 (violet)               |
-|           | input    |                           |                          |                          |
-| GND       | Input    | GND                       | Signal ground            | 6 (black)                |
-+-----------+----------+---------------------------+--------------------------+--------------------------+
+.Tab. 1: Signal list and short description
+|===
+|Name | Type | Voltage level | Function | Signal connector pin (wire color)
+| +12 V | Input | U=12 V ± 10%, I < 500 mA | MCU DC supply | 5 (red)
+| Brake | Input | 12V = brakes off; GND = brakes on | Brake signal input | 4 (orange)
+| HW Enable | Input | OV = disable; 12V = enable motor | Motor enable (disable) signal | 3 (brown)
+| CAN High | Standard | Standard voltage level | Communication | 2 (blue)
+| UART RX | Standard | 3,3 V TTL | Communication | 1 (green)
+| UART TX | Standard | 3,3 V TTL | Communication | 10 (white)
+| CAN Low | Standard | Standard voltage level | Communication | 9 (yellow)
+| MODE | Input | OV = mode change, 12V = no change | Mode change button | 8 (gray)
+| Throttle | Analog input | OV = no throttle, 12V = full throttle | Throttle analogue input | 7 (violet)
+| GND | Input | GND | Signal ground | 6 (black)
+|===
 

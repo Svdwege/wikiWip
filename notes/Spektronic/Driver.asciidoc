@@ -14,7 +14,7 @@ This section describes the primary data structure used to store Protium sensor r
 === ProtiumData Class
 
 [[protium_data_class]]
-This class (`ProtiumData`) holds parsed sensor values from the Protium's UART output, specifically from the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[running phase messages]. Details on the message format can be found in the project documentation page: link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation].
+This class (`ProtiumData`) holds parsed sensor values from the Protium's UART output, specifically from the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[running phase messages].
 
 *   `FanPercentage` (int): Fan status/speed percentage (from `FAN`).
 *   `H2PressureSensor1` (float): Hydrogen pressure sensor 1 reading (from `H2P1`).
@@ -36,14 +36,12 @@ The `toString()` method serializes the key sensor values into a comma-separated 
 SPC,<FanPercentage>,<H2PressureSensor1>,<H2PressureSensor2>,<H2TankPressure>,<SuperCapacitorVoltage>
 ....
 
-This format provides a direct, concise representation of the most relevant sensor readings for external logging or display systems. Although other data points might be present in the raw UART message or could be added to the `ProtiumData` class, this specific `toString` implementation focuses on these five core values.
-
 -------------------------------------------------------------------------------
 = Spektronic Class
 -------------------------------------------------------------------------------
 
 [[spektronic_class]]
-The `Spektronic` class manages the overall UART communication, including sending commands (`sendStart()`, `sendEnd()`) and processing received data (`parseProtiumData()`, `uartRxEventCallback()`, `gpioExtiCallback()`). It utilizes the `ProtiumData` class to store the parsed sensor readings. Commands are detailed in the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[project documentation].
+The `Spektronic` class manages the overall UART communication, including sending commands (`sendStart()`, `sendEnd()`) and processing received data (`parseProtiumData()`, `uartRxEventCallback()`, `gpioExtiCallback()`). It utilizes the `ProtiumData` class to store the parsed sensor readings. 
 
 -------------------------------------------------------------------------------
 = ProtiumData Parsing Function
@@ -52,4 +50,4 @@ The `Spektronic` class manages the overall UART communication, including sending
 [[parse_protium_data]]
 `Spektronic::parseProtiumData(const char *long_string)`:
 
-This private function is responsible for taking a raw UART message string (expected to be from the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation[running phase output format]) and extracting the sensor values. It uses standard C string manipulation functions (`strdup`, `strtok_r`, `strchr`, `sscanf`) to parse the key-value pairs and populate a `ProtiumData` object.
+This private function is responsible for taking a raw UART message string and extracting the sensor values. It uses standard C string manipulation functions (`strdup`, `strtok_r`, `strchr`, `sscanf`) to parse the key-value pairs and populate a `ProtiumData` object.

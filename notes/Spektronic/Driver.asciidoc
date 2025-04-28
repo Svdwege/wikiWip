@@ -1,7 +1,7 @@
 [[spektronic_driver_code]]
 = Spektronic Driver Code Documentation
 
-This document outlines the C++ code for the Spectronik driver, which communicates with the Protium-1000/2500 system via UART. It is based on the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/DocumentationProtium UART Specification].
+This document outlines the C++ code for the Spectronik driver, which communicates with the Protium-1000/2500 system via UART. It is based on the link:[https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Spektronic/Documentation]Protium UART Specification].
 
 -------------------------------------------------------------------------------
  Data Structures

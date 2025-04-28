@@ -52,11 +52,19 @@ It is important to note that while the `decodeData` functions populate multiple 
 
 *   `MotorTelemetry::toString()`: Returns a string formatted as 
 ....
-"MTL,<<motor_rpm>>,<<motor_torque>>"
+MTL,<<motor_rpm>>,<<motor_torque>>
 ....
 It includes the `motor_rpm` and `motor_torque` values, but omits `control_value`, `control_mode`, `motor_mode`, `sw_enable`, and `motor_state`.
-*   `MotorPower::toString()`: Returns a string formatted as "MPW,<<motor_power>>,<<inv_peak_cur>>". It includes the `motor_power` and `inv_peak_cur` values.
-*   `MotorCtrlCommand::toString()`: Returns a string formatted as "THR,<<control_value>>". It includes the `control_value` which is the main command parameter for this class.
+*   `MotorPower::toString()`: Returns a string formatted as 
+....
+MPW,<<motor_power>>,<<inv_peak_cur>>
+....
+It includes the `motor_power` and `inv_peak_cur` values.
+*   `MotorCtrlCommand::toString()`: Returns a string formatted as 
+....
+THR,<<control_value>>
+....
+It includes the `control_value` which is the main command parameter for this class.
 
 -------------------------------------------------------------------------------
  CAN Message Decoding Functions

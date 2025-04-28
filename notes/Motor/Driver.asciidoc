@@ -71,7 +71,7 @@ This function decodes the data from the CAN TX message status_1 (Tab 4), as deta
 *   Marks the output object as having valid data after successful decoding.
 *   Logs the successful decoding using `tpf.INFO`.
 
-= CanControlCommandHandler::decodeData
+== CanControlCommandHandler::decodeData
 
 This function decodes the data from the CAN RX message 0 (Tab 2), as detailed in the project link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Documentation[documentation]. Note that only the `control_value` field is currently being decoded by this implementation; other fields in the message byte are commented out in the original code.
 

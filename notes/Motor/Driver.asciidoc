@@ -8,6 +8,7 @@ For the full document, please visit link:https://hannl-my.sharepoint.com/persona
 -------------------------------------------------------------------------------
 == Data Structures
 -------------------------------------------------------------------------------
+Details on the CAN message definitions (Tabs 2, 3, 4, 7, 8) are available in the extracted information document, specifically in the link:<<_3_3_1_communication_settings_and_messages,Communication Settings and Messages>>, link:<<_3_3_3_error_list,Error List>>, and link:<<_3_3_4_warning_list,Warning List>> sections.
 
 The following classes are used to represent the data received from or sent to the motor controller via CAN bus. Each class inherits from `ILoggable`, indicating they provide a `toString()` method for logging purposes.
 

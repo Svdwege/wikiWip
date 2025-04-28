@@ -1,6 +1,7 @@
 ---
-title: Motor driver
+title: Motor documentation
 ---
+
 
 ==============================================================================
 GEMmotors G1.X Instruction Manual - Extracted Information for ASCII Doc

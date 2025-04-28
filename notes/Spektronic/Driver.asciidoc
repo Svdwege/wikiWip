@@ -1,0 +1,53 @@
+[[spektronic_driver_code]]
+= Spektronic Driver Code Documentation
+
+This document outlines the C++ code for the Spectronik driver, which communicates with the Protium-1000/2500 system via UART. It is based on the link:https://hannl-my.sharepoint.com/shared?listurl=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FProtium%201000%2D2500%20UART%20Specification%20%2D%2023%2E03%2E15%20%281%29%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[Protium UART Specification].
+
+-------------------------------------------------------------------------------
+= Data Structures
+-------------------------------------------------------------------------------
+
+This section describes the primary data structure used to store Protium sensor readings.
+
+=== ProtiumData Class
+
+[[protium_data_class]]
+This class (`ProtiumData`) holds parsed sensor values from the Protium's UART output, specifically from the link:https://hannl-my.sharepoint.com/shared?listurl=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FProtium%201000%2D2500%20UART%20Specification%20%2D%23_running_phase&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[running phase messages].
+
+*   `FanPercentage` (int): Fan status/speed percentage (from `FAN`).
+*   `H2PressureSensor1` (float): Hydrogen pressure sensor 1 reading (from `H2P1`).
+*   `H2PressureSensor2` (float): Hydrogen pressure sensor 2 reading (from `H2P2`).
+*   `H2TankPressure` (float): Hydrogen tank pressure reading (from `Tank_P`).
+*   `SuperCapacitorVoltage` (float): Super capacitor voltage reading (from `UCB_V`).
+*   `valid` (bool): Parsing success indicator (from `ILoggable` base).
+
+-------------------------------------------------------------------------------
+= Logging Output (`toString`)
+-------------------------------------------------------------------------------
+
+The `ProtiumData` class implements the `ILoggable::toString()` method to generate a formatted string for easy logging or transmission of the sensor data.
+
+The `toString()` method serializes the key sensor values into a comma-separated string prefixed with "SPC".
+
+.Output Format
+....
+SPC,<FanPercentage>,<H2PressureSensor1>,<H2PressureSensor2>,<H2TankPressure>,<SuperCapacitorVoltage>
+....
+
+This format provides a direct, concise representation of the most relevant sensor readings for external logging or display systems. Although other data points might be present in the raw UART message or could be added to the `ProtiumData` class, this specific `toString` implementation focuses on these five core values.
+
+-------------------------------------------------------------------------------
+= Spektronic Class
+-------------------------------------------------------------------------------
+
+[[spektronic_class]]
+The `Spektronic` class manages the overall UART communication, including sending commands (`sendStart()`, `sendEnd()`) and processing received data (`parseProtiumData()`, `uartRxEventCallback()`, `gpioExtiCallback()`). It utilizes the `ProtiumData` class to store the parsed sensor readings.
+
+-------------------------------------------------------------------------------
+= ProtiumData Parsing Function
+-------------------------------------------------------------------------------
+
+[[parse_protium_data]]
+`Spektronic::parseProtiumData(const char *long_string)`:
+
+This private function is responsible for taking a raw UART message string (expected to be from the link:https://hannl-my.sharepoint.com/shared?listurl=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FProtium%201000%2D2500%20UART%20Specification%20%2D%23_running_phase&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[running phase output format]) and extracting the sensor values. It uses standard C string manipulation functions (`strdup`, `strtok_r`, `strchr`, `sscanf`) to parse the key-value pairs and populate a `ProtiumData` object.

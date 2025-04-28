@@ -43,7 +43,7 @@ This class (`MotorCtrlCommand`) represents the control command data intended to 
 *   `control_value` (int16_t): Input control level for torque or speed regulation (matches Bytes 1 & 2 of Tab 2). This is the main command value (e.g., throttle level, target speed/torque).
 
 -------------------------------------------------------------------------------
-= Logging Output (`toString`)
+ Logging Output (`toString`)
 -------------------------------------------------------------------------------
 
 Each of the data structure classes implements the `ILoggable` interface, which requires a `toString()` method. This method is used to generate a concise string representation of the data for logging purposes.
@@ -55,7 +55,7 @@ It is important to note that while the `decodeData` functions populate multiple 
 *   `MotorCtrlCommand::toString()`: Returns a string formatted as "THR,<<control_value>>". It includes the `control_value` which is the main command parameter for this class.
 
 -------------------------------------------------------------------------------
-= CAN Message Decoding Functions
+ CAN Message Decoding Functions
 -------------------------------------------------------------------------------
 
 These functions are responsible for taking raw CAN message data (`uint8_t* rawData`) and populating the corresponding data structure classes.
@@ -71,7 +71,7 @@ This function decodes the data from the CAN TX message status_1 (Tab 4), as deta
 *   Marks the output object as having valid data after successful decoding.
 *   Logs the successful decoding using `tpf.INFO`.
 
-== CanControlCommandHandler::decodeData
+=== CanControlCommandHandler::decodeData
 
 This function decodes the data from the CAN RX message 0 (Tab 2), as detailed in the project link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Documentation[documentation]. Note that only the `control_value` field is currently being decoded by this implementation; other fields in the message byte are commented out in the original code.
 

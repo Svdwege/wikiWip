@@ -3,19 +3,25 @@
 
 This document describes the C++ classes and functions used for handling and decoding CAN messages related to the GEMmotors G1.X motor driver, based on the information provided in the GEMmotors-G1.X-REV008 instruction manual.
 
-For the full document, please visit link:https://hannl-my.sharepoint.com/personal/jaap_janssens_han_nl/_layouts/15/onedrive.aspx?CID=f663e4aa%2D0285%2D40f3%2Da3e6%2D5114972ff027&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FGEMMotors%2DG1%2EX%2DREV008%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[this link].
+For the full original GEMmotors document, please visit link:https://hannl-my.sharepoint.com/personal/jaap_janssens_han_nl/_layouts/15/onedrive.aspx?CID=f663e4aa%2D0285%2D40f3%2Da3e6%2D5114972ff027&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FGEMMotors%2DG1%2EX%2DREV008%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[this link].
+
+The CAN message definitions from the GEMmotors manual are included in the project's documentation on the GitLab wiki. Refer to the tables located at:
+*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab2_can_rx_0[Tab 2: CAN RX message 0]
+*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab3_can_tx_status_0[Tab 3: CAN TX message status_0]
+*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab4_can_tx_status_1[Tab 4: CAN TX message status_1]
+*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab7_error_list[Tab 7: Error list]
+*   link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab8_warning_list[Tab 8: Warning list]
 
 -------------------------------------------------------------------------------
 == Data Structures
 -------------------------------------------------------------------------------
-The CAN message definitions (Tabs 2, 3, 4, 7, 8) from the GEMmotors manual are included in the project's documentation on the GitLab wiki, specifically in the sections located at link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#_3_3_1_communication_settings_and_messages[Communication Settings], link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#_3_3_3_error_list[Error List], and link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#_3_3_4_warning_list[Warning List].
 
 The following classes are used to represent the data received from or sent to the motor controller via CAN bus. Each class inherits from `ILoggable`, indicating they provide a `toString()` method for logging purposes.
 
 === MotorTelemetry Class
 
 [[motor_telemetry_class]]
-This class (`MotorTelemetry`) is designed to hold comprehensive telemetry data received from the motor controller. Its members directly correspond to the fields in the link:<<can_communication_settings,CAN TX message status_0>> (Tab 3) message.
+This class (`MotorTelemetry`) is designed to hold comprehensive telemetry data received from the motor controller. Its members directly correspond to the fields in the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab3_can_tx_status_0[CAN TX message status_0 (Tab 3)], as detailed in the project documentation.
 
 *   `control_value` (int16_t): Represents the current control level as reported by the motor (matches Bytes 1 & 2 of Tab 3).
 *   `control_mode` (uint8_t): The current control mode (matches Bits 1 & 0 of Byte 3 in Tab 3).
@@ -29,7 +35,7 @@ This class (`MotorTelemetry`) is designed to hold comprehensive telemetry data r
 === MotorPower Class
 
 [[motor_power_class]]
-This class (`MotorPower`) holds specific power and current data received from the motor controller. Its members correspond to the fields in the link:<<can_communication_settings,CAN TX message status_1>> (Tab 4) message.
+This class (`MotorPower`) holds specific power and current data received from the motor controller. Its members correspond to the fields in the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab4_can_tx_status_1[CAN TX message status_1 (Tab 4)], as detailed in the project documentation.
 
 *   `inv_peak_cur` (int16_t): Maximum PEAK current of all inverters in A (matches Bytes 1 & 2 of Tab 4).
 *   `motor_power` (int16_t): Current motor power in W (matches Bytes 3 & 4 of Tab 4).
@@ -37,7 +43,7 @@ This class (`MotorPower`) holds specific power and current data received from th
 === MotorCtrlCommand Class
 
 [[motor_ctrl_command_class]]
-This class (`MotorCtrlCommand`) represents the control command data intended to be sent *to* the motor controller. Its primary member corresponds to the input control level in the link:<<can_communication_settings,CAN RX message 0>> (Tab 2).
+This class (`MotorCtrlCommand`) represents the control command data intended to be sent *to* the motor controller. Its primary member corresponds to the input control level in the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab2_can_rx_0[CAN RX message 0 (Tab 2)], as detailed in the project documentation.
 
 *   `control_value` (int16_t): Input control level for torque or speed regulation (matches Bytes 1 & 2 of Tab 2). This is the main command value (e.g., throttle level, target speed/torque).
 
@@ -61,7 +67,7 @@ These functions are responsible for taking raw CAN message data (`uint8_t* rawDa
 
 === CanPowerHandler::decodeData
 
-This function decodes the data from the link:<<can_communication_settings,CAN TX message status_1>> (Tab 4) into a `MotorPower` object.
+This function decodes the data from the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab4_can_tx_status_1[CAN TX message status_1 (Tab 4)], as detailed in the project documentation, into a `MotorPower` object.
 
 .Decoding Logic:
 *   Records the time when the message was processed.
@@ -72,7 +78,7 @@ This function decodes the data from the link:<<can_communication_settings,CAN TX
 
 === CanControlCommandHandler::decodeData
 
-This function decodes the data from the link:<<can_communication_settings,CAN RX message 0>> (Tab 2) into a `MotorCtrlCommand` object. Note that only the `control_value` field is currently being decoded by this implementation; other fields in the message byte are commented out in the original code.
+This function decodes the data from the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab2_can_rx_0[CAN RX message 0 (Tab 2)], as detailed in the project documentation. Note that only the `control_value` field is currently being decoded by this implementation; other fields in the message byte are commented out in the original code.
 
 .Decoding Logic:
 *   Records the message processing time.
@@ -81,7 +87,7 @@ This function decodes the data from the link:<<can_communication_settings,CAN RX
 
 === CanTelemetryHandler::decodeData
 
-This function decodes the data from the link:<<can_communication_settings,CAN TX message status_0>> (Tab 3) into a `MotorTelemetry` object.
+This function decodes the data from the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Driver#tab3_can_tx_status_0[CAN TX message status_0 (Tab 3)], as detailed in the project documentation.
 
 .Decoding Logic:
 *   Records the message processing time.

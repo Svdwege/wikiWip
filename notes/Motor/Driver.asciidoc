@@ -8,7 +8,7 @@ For the full original GEMmotors document (external PDF), please visit link:https
 The CAN message definitions (Tabs 2, 3, 4, 7, 8) from the GEMmotors manual are included in the project's documentation on the GitLab wiki. Refer to the relevant sections on the link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Motor/Documentation[Documentation page].
 
 -------------------------------------------------------------------------------
-= Data Structures
+ Data Structures
 -------------------------------------------------------------------------------
 
 The following classes are used to represent the data received from or sent to the motor controller via CAN bus. Each class inherits from `ILoggable`, indicating they provide a `toString()` method for logging purposes.

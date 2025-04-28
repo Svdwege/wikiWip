@@ -1,0 +1,96 @@
+[[motor_driver_code]]
+= Motor Driver Code Documentation
+
+This document describes the C++ classes and functions used for handling and decoding CAN messages related to the GEMmotors G1.X motor driver, based on the information provided in the GEMmotors-G1.X-REV008 instruction manual.
+
+For the full document, please visit link:https://hannl-my.sharepoint.com/personal/jaap_janssens_han_nl/_layouts/15/onedrive.aspx?CID=f663e4aa%2D0285%2D40f3%2Da3e6%2D5114972ff027&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FGEMMotors%2DG1%2EX%2DREV008%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[this link].
+
+-------------------------------------------------------------------------------
+== Data Structures
+-------------------------------------------------------------------------------
+
+The following classes are used to represent the data received from or sent to the motor controller via CAN bus. Each class inherits from `ILoggable`, indicating they provide a `toString()` method for logging purposes.
+
+=== MotorTelemetry Class
+
+[[motor_telemetry_class]]
+This class (`MotorTelemetry`) is designed to hold comprehensive telemetry data received from the motor controller. Its members directly correspond to the fields in the link:<<can_communication_settings,CAN TX message status_0>> (Tab 3) message.
+
+*   `control_value` (int16_t): Represents the current control level as reported by the motor (matches Bytes 1 & 2 of Tab 3).
+*   `control_mode` (uint8_t): The current control mode (matches Bits 1 & 0 of Byte 3 in Tab 3).
+*   `motor_mode` (uint8_t): The current motor operational mode (matches Bits 4 through 2 of Byte 3 in Tab 3).
+*   `sw_enable` (uint8_t): Software enable status (matches Bit 5 of Byte 3 in Tab 3).
+*   `motor_state` (uint8_t): Current motor operational state (matches Bits 7 & 6 of Byte 3 in Tab 3).
+*   `motor_torque` (int16_t): Measured or estimated motor torque in Nm (matches Bytes 4 & 5 of Tab 3).
+*   `motor_rpm` (int16_t): Measured motor speed with 0.1 RPM resolution (matches Bytes 6 & 7 of Tab 3). Note: The raw value needs to be divided by 10 to get RPM.
+*   `motor_temp` (uint8_t): Maximum inverter temperature in degrees C (matches Byte 8 of Tab 3).
+
+=== MotorPower Class
+
+[[motor_power_class]]
+This class (`MotorPower`) holds specific power and current data received from the motor controller. Its members correspond to the fields in the link:<<can_communication_settings,CAN TX message status_1>> (Tab 4) message.
+
+*   `inv_peak_cur` (int16_t): Maximum PEAK current of all inverters in A (matches Bytes 1 & 2 of Tab 4).
+*   `motor_power` (int16_t): Current motor power in W (matches Bytes 3 & 4 of Tab 4).
+
+=== MotorCtrlCommand Class
+
+[[motor_ctrl_command_class]]
+This class (`MotorCtrlCommand`) represents the control command data intended to be sent *to* the motor controller. Its primary member corresponds to the input control level in the link:<<can_communication_settings,CAN RX message 0>> (Tab 2).
+
+*   `control_value` (int16_t): Input control level for torque or speed regulation (matches Bytes 1 & 2 of Tab 2). This is the main command value (e.g., throttle level, target speed/torque).
+
+-------------------------------------------------------------------------------
+== Logging Output (`toString`)
+-------------------------------------------------------------------------------
+
+Each of the data structure classes implements the `ILoggable` interface, which requires a `toString()` method. This method is used to generate a concise string representation of the data for logging purposes.
+
+It is important to note that while the `decodeData` functions populate multiple data members within these classes based on the full CAN message content, the `toString()` implementations currently only include a subset of these members in the generated log string.
+
+*   `MotorTelemetry::toString()`: Returns a string formatted as "MTL,<<motor_rpm>>,<<motor_torque>>". It includes the `motor_rpm` and `motor_torque` values, but omits `control_value`, `control_mode`, `motor_mode`, `sw_enable`, and `motor_state`.
+*   `MotorPower::toString()`: Returns a string formatted as "MPW,<<motor_power>>,<<inv_peak_cur>>". It includes the `motor_power` and `inv_peak_cur` values.
+*   `MotorCtrlCommand::toString()`: Returns a string formatted as "THR,<<control_value>>". It includes the `control_value` which is the main command parameter for this class.
+
+-------------------------------------------------------------------------------
+== CAN Message Decoding Functions
+-------------------------------------------------------------------------------
+
+These functions are responsible for taking raw CAN message data (`uint8_t* rawData`) and populating the corresponding data structure classes.
+
+=== CanPowerHandler::decodeData
+
+This function decodes the data from the link:<<can_communication_settings,CAN TX message status_1>> (Tab 4) into a `MotorPower` object.
+
+.Decoding Logic:
+*   Records the time when the message was processed.
+*   Decodes the signed 16-bit value for `inv_peak_cur` from the first two bytes of the raw data (`rawData[0]` is the high byte, `rawData[1]` is the low byte), matching Bytes 1 and 2 of Tab 4.
+*   Decodes the signed 16-bit value for `motor_power` from the next two bytes (`rawData[2]` high, `rawData[3]` low), matching Bytes 3 and 4 of Tab 4.
+*   Marks the output object as having valid data after successful decoding.
+*   Logs the successful decoding using `tpf.INFO`.
+
+=== CanControlCommandHandler::decodeData
+
+This function decodes the data from the link:<<can_communication_settings,CAN RX message 0>> (Tab 2) into a `MotorCtrlCommand` object. Note that only the `control_value` field is currently being decoded by this implementation; other fields in the message byte are commented out in the original code.
+
+.Decoding Logic:
+*   Records the message processing time.
+*   Decodes the signed 16-bit `control_value` from the first two bytes (`rawData[0]` high, `rawData[1]` low), matching Bytes 1 and 2 of Tab 2.
+*   Logs the successful decoding using `tpf.INFO`.
+
+=== CanTelemetryHandler::decodeData
+
+This function decodes the data from the link:<<can_communication_settings,CAN TX message status_0>> (Tab 3) into a `MotorTelemetry` object.
+
+.Decoding Logic:
+*   Records the message processing time.
+*   Decodes the signed 16-bit `control_value` from Bytes 1 and 2 (`rawData[0]` high, `rawData[1]` low), matching Tab 3.
+*   Extracts the lowest bit (Bit 0) from Byte 3 for `control_mode`, matching Tab 3.
+*   Extracts bits 1, 2, and 3 from Byte 3 for `motor_mode`, matching Tab 3.
+*   Extracts bit 4 from Byte 3 for `sw_enable`, matching Tab 3.
+*   Extracts bits 6 and 7 from Byte 3 for `motor_state`, matching Tab 3.
+*   Decodes the signed 16-bit `motor_torque` from Bytes 4 and 5 (`rawData[3]` high, `rawData[4]` low), matching Tab 3.
+*   Decodes the signed 16-bit `motor_rpm` from Bytes 6 and 7 (`rawData[5]` high, `rawData[6]` low), matching Tab 3. Remember this value needs to be divided by 10 for RPM.
+*   Takes the unsigned 8-bit `motor_temp` from Byte 8, matching Tab 3.
+*   Marks the output object as valid.
+*   Logs the successful decoding using `tpf.INFO`.

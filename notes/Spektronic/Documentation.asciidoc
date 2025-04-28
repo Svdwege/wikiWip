@@ -6,7 +6,7 @@ This document outlines the UART communication protocol for the Protium-1000/2500
 For the full original document, please visit link:https://hannl-my.sharepoint.com/shared?listurl=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FProtium%201000%2D2500%20UART%20Specification%20%2D%2023%2E03%2E15%20%281%29%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[this link].
 
 -------------------------------------------------------------------------------
-= UART Specification
+ UART Specification
 -------------------------------------------------------------------------------
 
 The following parameters define the UART communication settings for the Protium-1000/2500:
@@ -21,18 +21,6 @@ The following parameters define the UART communication settings for the Protium-
 | Flow Control | None
 | Logic Level | 5V HIGH, 0V LOW
 |===
-
--------------------------------------------------------------------------------
-= Formatting Conventions
--------------------------------------------------------------------------------
-
-For clarification within the original specification document:
-
-*   Sample message output from the Protium-1000/2500 is written in blue.
-*   Sample commands to the Protium-1000/2500 are written in green.
-*   Hexadecimal values are written in red, with a "0x" prefix (unless otherwise specified).
-
-(Note: These color conventions are from the source document and are described here for reference, they are not applied in this AsciiDoc text).
 
 -------------------------------------------------------------------------------
 = UART Connector Specification
@@ -88,7 +76,7 @@ A sample parsing algorithm would involve:
 
 All UART input transmitted *to* the Protium-1000/2500 is also sent as a string of ASCII characters. Each command string must be followed by a newline character.
 
-A comprehensive list of all available commands can be found in link:<<annexa_commands,Annex A>> of this document.
+A comprehensive list of all available commands can be found in `Annex A` of this document.
 
 The Protium-1000/2500 expects specific commands depending on its current operational phase. If an unrecognized or incorrect command is received in the current phase, the system will display the following error message:
 
@@ -178,7 +166,6 @@ System Off
 Note the difference in the initial shutdown message ("Shutdown initiated" vs. "Abnormal shutdown initiated") depending on how the phase was entered.
 
 -------------------------------------------------------------------------------
-[[annexa_commands]]
 = Annex A: List of Commands
 -------------------------------------------------------------------------------
 

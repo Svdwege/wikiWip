@@ -19,7 +19,7 @@ In case that you want to use a connector please contact GEM motors, typical reco
 use a 10-pin connector Würth 661010213322. The pinout of the signal connector is shown on Fig. 13.
 (Note: Fig. 13 showing connector pinout is not included in this ASCII extract)
 
-[#tab1_signal_list] // <-- Added Anchor for Tab 1 (for completeness, though not referenced by driver code)
+[#tab1_signal_list]
 .Tab. 1: Signal list and short description
 |===
 |Name | Type | Voltage level | Function | Signal connector pin (wire color)

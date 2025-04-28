@@ -76,7 +76,7 @@ CAN settings:
 
 Motor controller accepts the following messages:
 
-[#tab2_can_rx_0] // <-- Added Anchor for Tab 2
+[#tab2_can_rx_0] 
 .Tab. 2: CAN RX message 0 with ID: CAN RX address
 |===
 | Byte | Bits | Description | Data Type | Value
@@ -104,7 +104,7 @@ Motor controller accepts the following messages:
 
 Motor control unit provides the following messages:
 
-[#tab3_can_tx_status_0] // <-- Added Anchor for Tab 3
+[#tab3_can_tx_status_0] 
 .Tab. 3: CAN TX message status_0 with ID: CAN TX address + 0
 |===
 | Byte | Bits | Description | Data Type | Value
@@ -145,7 +145,7 @@ Units depend on selected motor control mode (in % of torque or RPM*10)
 Warning message is only sent if any warning status is active - that is, if value is different than zero -
 see Tab. 8.
 
-[#tab5_can_tx_status_2] // <-- Added Anchor for Tab 5 (for completeness)
+[#tab5_can_tx_status_2] 
 .Tab. 5: CAN TX message status_2 with ID: CAN TX address +2
 |===
 | Byte | Description | Data Type | Value
@@ -168,7 +168,7 @@ On each received CAN message, one of the transmit messages is sent.
 3.3.3 Error list
 ------------------------------------------------------------------------------
 
-[#tab7_error_list] // <-- Added Anchor for Tab 7
+[#tab7_error_list] 
 .Tab. 7: Error list
 |===
 | Error code | Description
@@ -218,7 +218,7 @@ On each received CAN message, one of the transmit messages is sent.
 3.3.4 Warning list
 ------------------------------------------------------------------------------
 
-[#tab8_warning_list] // <-- Added Anchor for Tab 8
+[#tab8_warning_list] 
 .Tab. 8: Warning list
 |===
 | Warning code | Description

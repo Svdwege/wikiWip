@@ -23,7 +23,7 @@ The following parameters define the UART communication settings for the Protium-
 |===
 
 -------------------------------------------------------------------------------
-= UART Connector Specification
+ UART Connector Specification
 -------------------------------------------------------------------------------
 
 The Protium-1000/2500 utilizes a 4-pin Molex PicoBlade connector for UART communication. A premade cable assembly with part number 0151340403 from Molex may be used. The pinout is as follows:
@@ -34,7 +34,7 @@ The Protium-1000/2500 utilizes a 4-pin Molex PicoBlade connector for UART commun
 *   4. GND
 
 -------------------------------------------------------------------------------
-= Serial Communication With PLC
+ Serial Communication With PLC
 -------------------------------------------------------------------------------
 
 Serial communication with a PLC (Programmable Logic Controller) that has RS232/RS485 capabilities is feasible, provided the following conditions are met:
@@ -44,7 +44,7 @@ Serial communication with a PLC (Programmable Logic Controller) that has RS232/R
 *   A full duplex connection is required, meaning separate wires are used for the Receive (Rx) and Transmit (Tx) signals.
 
 -------------------------------------------------------------------------------
-= Message Output from the Protium-1000/2500
+ Message Output from the Protium-1000/2500
 -------------------------------------------------------------------------------
 
 All UART output transmitted *from* the Protium-1000/2500 is presented in a human-readable format, essentially a string of ASCII characters.
@@ -71,7 +71,7 @@ A sample parsing algorithm would involve:
 3.  From the resulting substrings that contain readings of interest, extracting the numerical or status value by using the colon (`:`) to separate the reading name from its value.
 
 -------------------------------------------------------------------------------
-= Message Input to the Protium-1000/2500
+ Message Input to the Protium-1000/2500
 -------------------------------------------------------------------------------
 
 All UART input transmitted *to* the Protium-1000/2500 is also sent as a string of ASCII characters. Each command string must be followed by a newline character.
@@ -85,7 +85,7 @@ Command not found.
 ....
 
 -------------------------------------------------------------------------------
-= Phases of Operation
+ Phases of Operation
 -------------------------------------------------------------------------------
 
 The Protium-1000/2500 operates through 3 distinct phases. During each phase, the system will expect and respond to a different set of commands:
@@ -95,7 +95,7 @@ The Protium-1000/2500 operates through 3 distinct phases. During each phase, the
 *   End
 
 -------------------------------------------------------------------------------
-= Startup Phase
+ Startup Phase
 -------------------------------------------------------------------------------
 
 Upon powering up, the Protium-1000/2500 enters the Startup phase and will initially display identification and status messages. A typical sequence of initial messages might include:
@@ -126,7 +126,7 @@ start
 ....
 
 -------------------------------------------------------------------------------
-= Running Phase
+ Running Phase
 -------------------------------------------------------------------------------
 
 Once the Protium-1000/2500 enters the Running phase, it begins to output status messages at a regular frequency of 1Hz. The format of these messages includes various system parameters separated by pipe characters (`|`) and terminated by an exclamation point (`!`), as described in the Message Output section.
@@ -134,7 +134,7 @@ Once the Protium-1000/2500 enters the Running phase, it begins to output status 
 Refer back to the link:<<_message_output_from_the_protium-10002500,Message Output>> section for the detailed format of the running phase messages and the recommended parsing algorithm.
 
 -------------------------------------------------------------------------------
-= End Phase
+ End Phase
 -------------------------------------------------------------------------------
 
 The Protium-1000/2500 will enter the End Phase under two primary conditions:
@@ -166,7 +166,7 @@ System Off
 Note the difference in the initial shutdown message ("Shutdown initiated" vs. "Abnormal shutdown initiated") depending on how the phase was entered.
 
 -------------------------------------------------------------------------------
-= Annex A: List of Commands
+ Annex A: List of Commands
 -------------------------------------------------------------------------------
 
 This annex provides a list of commands accepted by the Protium-1000/2500 via UART, along with their function, the phase(s) in which they are considered valid, and the hexadecimal bytes representing the command string to be transmitted.

@@ -51,3 +51,19 @@ The `Spektronic` class manages the overall UART communication, including sending
 `Spektronic::parseProtiumData(const char *long_string)`:
 
 This private function is responsible for taking a raw UART message string and extracting the sensor values. It uses standard C string manipulation functions (`strdup`, `strtok_r`, `strchr`, `sscanf`) to parse the key-value pairs and populate a `ProtiumData` object.
+
+-------------------------------------------------------------------------------
+ GPIO External Interrupt Callback (Button)
+-------------------------------------------------------------------------------
+
+[[gpio_exti_callback]]
+`Spektronic::gpioExtiCallback()`:
+
+This function is invoked by an external GPIO interrupt, typically triggered by a user button press. It manages an internal state flag (`sendingEnabled`) to control the transmission of start/end commands via UART.
+
+When the button is pressed:
+
+*   The function toggles the state of the `sendingEnabled` flag (`sendingEnabled = !sendingEnabled;`).
+*   It then checks the *new* state of `sendingEnabled`:
+    *   If `sendingEnabled` is now `true`, the `sendStart()` method is called, transmitting the command string `"start\r"` via UART.
+    *   If `sendingEnabled` is now `false`, the `sendEnd()` method is called, transmitting the command string `"end\r"` via UART.

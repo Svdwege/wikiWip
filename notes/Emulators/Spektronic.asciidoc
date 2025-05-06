@@ -1,0 +1,49 @@
+= Spektronic emulator
+
+This document describes a C code snippet for the MKL25Z4 microcontroller implementing UART communication to simulate and transmit dynamic system data based on received commands and button input.
+
+== Hardware Configuration
+
+*   **Target MCU:** MKL25Z4
+*   **UART Peripheral:** UART2
+*   **UART Pins:**
+    *   PTE23 (MUX 4) for UART2_TX
+    *   PTE22 (MUX 4) for UART2_RX
+*   **Baud Rate:** 57600 bps
+*   **Data Format:** 8N1 (8 data bits, No parity, 1 stop bit)
+*   **Button Input:** PORTC Pin 3 (Used to stop transmission)
+*   **LED Output:** PTE31 (Used for a simple blinking pattern)
+
+== Configuration Constants for Dynamic Behavior
+
+The behavior of the simulated dynamic variables (`FAN`, `H2P1`, `H2P2`, `Tank_P`, `UCB_V`) is controlled by preprocessor `#define` constants. Modifying these values directly alters the simulation:
+
+*   `TIME_STEP`: Determines how much the internal `time_counter` increments each update cycle, affecting the speed of all time-dependent functions (Ramp, Sin, Cos).
+*   `H2P1_INCREMENT`: Controls the step size for the linear increase (Ramp) of the `H2P1` value per time step.
+*   `H2P2_AMPLITUDE`, `H2P2_OFFSET`: Define the amplitude and vertical shift of the sine wave function applied to `H2P2`.
+*   `TANK_P_AMPLITUDE`, `TANK_P_OFFSET`: Define the amplitude and vertical shift of the cosine wave function applied to `Tank_P`.
+*   `UCB_V_AMPLITUDE`, `UCB_V_OFFSET`: Define the amplitude and vertical shift of the combined sine/cosine function applied to `UCB_V`.
+
+Changing these constants before compiling the code will change the rate, range, and characteristics of the data simulation.
+
+== UART Command Interface
+
+The system responds to specific commands received via UART. These commands control the data transmission mode:
+
+*   **`values\r`**: Upon receiving this exact string, the system performs *one* update of the dynamic values and transmits the formatted data string (`long_string`) *one time*.
+*   **`start\r`**: Upon receiving this exact string, the system enters a mode where it *continuously* updates the dynamic values and transmits the formatted data string periodically.
+*   **`end\r`**: Upon receiving this exact string (or if the button connected to PORTC pin 3 is pressed), the system stops the continuous transmission mode (if active) and transmits a fixed "System Off" message (`end_string`) *one time*.
+
+....
+[2J|FC_V : 31.01 V |   FC_A  :  7.63 A |   FC_W  : 236.5 W |   Energy:    88 Wh|   FCT1:  47.85 C   |   FAN :    %d %%    |   H2P1  :  %.2f B |   H2P2  :  %.2f B |   Tank-P:  %.2f B |   Tank-T:  0.00 C |   V_Set:  36.00 V |   I_Set:  11.00 A |   UCB_V:  %.2f V |   Stasis_selector: 0   |   STASIS_V1  : 35.20 B |   STASIS_V2  : 35.80 B |   Number_of_cell  :50 |                  |                    |                   |                   ! Fan PWM auto  \r\n
+....
+
+== String Construction
+
+The `snprintf` function is used to build the string `long_string` by inserting dynamic values into the template. The format specifiers in the template are replaced by the current values of specific program variables:
+
+*   `%d`: Replaced by the value of `FAN * 100`. Since `FAN` is 0 or 1, this will insert `0` or `100` into the "FAN" field.
+*   `%.2f` (first instance): Replaced by the value of the `float` variable `H2P1`, formatted to two decimal places.
+*   `%.2f` (second instance): Replaced by the value of the `float` variable `H2P2`, formatted to two decimal places.
+*   `%.2f` (third instance): Replaced by the value of the `float` variable `Tank_P`, formatted to two decimal places.
+*   `%.2f` (fourth instance): Replaced by the value of the `float` variable `UCB_V`, formatted to two decimal places.

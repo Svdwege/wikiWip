@@ -8,4 +8,32 @@ the notes are named in the following way: `meeting-YYYY-MM-DD.md`
 Then there is the notes page, this has subpages for each distinct component of the project.
 These notes may link to other pages. And should contain their own list of references
 
-test
+== Full architecture
+
+[mermaid]
+----
+graph LR
+    ADXL[ADXL345] --> P1[Proc]
+    Spc[Spectronik controller]--> P2[processing]
+
+    cb[CanCallback] --> Can_Throttle
+    cb --> Can_Telemetry
+    cb --> Can_Motor
+
+    Can_Throttle -->Collect
+    Can_Telemetry -->Collect
+    Can_Motor -->Collect
+
+    P1 --> Collect[Collector]
+    P2[processing] --> Collect
+
+    Collect --> ESP32
+    Collect --> openlogger
+
+    openlogger --> microSD
+
+    ESP32 --> MQTT
+    MQTT --> Server
+    Server --> Database
+    Database --> Dashboard
+----

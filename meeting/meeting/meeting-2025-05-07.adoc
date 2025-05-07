@@ -1,0 +1,18 @@
+= meeting 2025-05-07
+
+dashboard
+. add torque graph
+. volt pref is 55. ranges:  30-36 yellow 36-55 green 55-60 yellow 60- red 
+. Q throttle in history graph? 
+.. A: Yes is good feedback to driver 
+. Q throttle in % in DB 
+.. A: yes
+. Should be a message on the can bus with throttle control in 0-100 range for throttle
+.. look into the correct id and field
+. Vladimirs has finished the emulator code. printed emulator box and putting mcu in there. 
+. add realtime efficiency and flow calc to dashboard
+
+. [PT] stopwatch in car? on screen? counter and lap timer
+.. [PT] timer on display for instruction: this time at this corner
+
+

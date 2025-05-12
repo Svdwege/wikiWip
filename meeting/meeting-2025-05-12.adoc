@@ -1,0 +1,47 @@
+
+. dashboard has a graph per historical value
+. server access for dashboard 
+.. vpn will be given by julian
+.. needer for login url, creds and vpn
+. code refactored.
+. gnns test today,
+. logger DTR implemtation todo
+. config for can parsing
+. extend conf with GPIO info
+. TODO fix up docs
+. next group use the emulator
+. fix the mcu to the PLA case.
+. router tested with current sim card functional.
+. budget asked answered on 13th from Adish
+.. everything has been ordered by Remko
+.. PCB should be deliverd before wednesday.
+.. order arle resubmitted. no movement within a week order by remko and fight with admin for money back
+.. Anna has approved of approx 230
+. remko this weekend improved gnss +adapt pcb approaching Freeze.
+. for automotive: discussion final delivery of materials: deliverables
+.. symposium
+.. docs: transferability of knowledge of what is being build.
+... Docs for next team:  report or github wiki? both? 
+.... shape: TBD 
+.... grading: the quicker the higher the grade the more effort by remko the lower the grade
+.... deliver: 
+..... presentation: finalization oral exam with all tutors, no ppt needed 
+..... personal eval: procedure as applicable to the previous team, 
+.... symposium: persent your work. after eco marathon 
+.... meet and greet: 23trd of june meet and greet clients and S3 students for next year
+... ensure it can be build upon
+... next week finalize what to handin.
+. plan box no connectors in box with but using cable glands. 
+.. connect to wire using DEUTCH automotive connectors
+... outside of this meeting. which connectors on which cable for which purpose.
+.... make doc on what goes where 
+..... spectronic
+..... accelerometer
+..... can
+..... gnss.
+..... power
+. make a video in poland for presentation and video for promotional and S4 valueable to show how it functions. symposium suggestions on how to show. 
+.. prototypes and products + laptop with some videos + vehicle
+. julian needs 2 hours for reserve driver
+. practice on deck and oosterbeek 
+. julian 13th meeting with Remko, morning 1 on 1 

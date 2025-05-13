@@ -1,3 +1,5 @@
+[source, sql]
+----
 /******************************************************************
  * @file    Create_database_and_table.sql
  * 
@@ -45,3 +47,4 @@ CREATE TABLE IF NOT EXISTS `test_data` (
   KEY `seq_num` (`seq_num`),
   KEY `timestamp` (`timestamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT= 'This is an testtable for testing the telemetry unit';
+----

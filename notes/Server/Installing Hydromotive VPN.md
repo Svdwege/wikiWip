@@ -11,23 +11,21 @@ Let's get started!
 ## Table of contents
 
 <!-- TOC -->
-
 * [Installing Hydromotive OpenVPN](#installing-hydromotive-openvpn)
-    * [Table of contents](#table-of-contents)
-    * [Installation](#installation)
-        * [Prerequisites](#prerequisites)
-        * [Download and install OpenVPN GUI](#download-and-install-openvpn-gui)
-        * [Install the Hydromotive certificate](#install-the-hydromotive-certificate)
-        * [Connect to the Hydromotive VPN](#connect-to-the-hydromotive-vpn)
-        * [Disconnect to the Hydromotive VPN](#disconnect-to-the-hydromotive-vpn)
-    * [Contact](#contact)
-
+  * [Table of contents](#table-of-contents)
+  * [Installation](#installation)
+    * [Prerequisites](#prerequisites)
+    * [Download and install OpenVPN GUI](#download-and-install-openvpn-gui)
+    * [Install the Hydromotive certificate](#install-the-hydromotive-certificate)
+    * [Connect to the Hydromotive VPN](#connect-to-the-hydromotive-vpn)
+    * [Disconnect from the Hydromotive VPN](#disconnect-from-the-hydromotive-vpn)
+  * [Contact](#contact)
 <!-- TOC -->
 
 ## Installation
 
 To install the OpenVPN certificates, you first need to install the OpenVPN GUI.
-This manual will guide you through this process.
+This tutorial will guide you through this process.
 
 ### Prerequisites
 
@@ -79,14 +77,15 @@ Now the Hydromotive certificates are successfully installed. Let's verify that t
 
 ### Connect to the Hydromotive VPN
 
-1. In Windows 11, look at the hidden icons (Bottom right corner) to see if the program is running.
-2. Then right-click the OpenVPN GUI icon and click on _Connect._
-3. After a successful connection, you ill get a notification that your connected to the VPN.
+1. **In Windows 11**, look at the hidden icons (Bottom right corner) to see if the program is running.
+2. Then **right-click the OpenVPN GUI icon** and **click on _Connect_**.
+3. After a successful connection, you will get a notification that you are connected to the VPN.
 
-### Disconnect to the Hydromotive VPN
+### Disconnect from the Hydromotive VPN
 
-1. In Windows 11, look at the hidden icons (Bottom right corner).
-2. Then right-click the OpenVPN GUI icon and click on _Close connection._
+1. **In Windows 11**, look at the hidden icons (Bottom right corner).
+2. Then **right-click the OpenVPN GUI icon** and click on **_Close connection_**.
+3. After a successful disconnection, you will get a notification that you are disconnected from the VPN.
 
 ## Contact
 

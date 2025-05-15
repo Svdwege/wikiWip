@@ -16,9 +16,9 @@ Let's get started!
   * [Installation](#installation)
     * [Prerequisites](#prerequisites)
     * [Download and install OpenVPN GUI](#download-and-install-openvpn-gui)
-    * [Install the Hydromotive certificate](#install-the-hydromotive-certificate)
-    * [Connect to the Hydromotive VPN](#connect-to-the-hydromotive-vpn)
-    * [Disconnect from the Hydromotive VPN](#disconnect-from-the-hydromotive-vpn)
+    * [Install the Hydromotive certificates](#install-the-hydromotive-certificates)
+  * [Connect to the Hydromotive VPN](#connect-to-the-hydromotive-vpn)
+  * [Disconnect from the Hydromotive VPN](#disconnect-from-the-hydromotive-vpn)
   * [Contact](#contact)
 <!-- TOC -->
 
@@ -35,22 +35,22 @@ Additionally, you will need the OpenVPN certificates, which can be obtained from
 
 ### Download and install OpenVPN GUI
 
-> "**Note:** Ensure that you install the community edition and not the commercial (paid) edition"
+> "**Note:** Ensure that you install the community edition and not the commercial (paid) edition."
 
-1. Go to the OpenVPN website
+1. Go to the OpenVPN website.
 2. Click on _Community_.
 
    [Or use this link](https://openvpn.net/community-downloads/)
 
-3. Download the latest release
-4. Install the program using the `.MSI` executable
+3. Download the latest release.
+4. Install the program using the `.MSI` executable.
 
-### Install the Hydromotive certificate
+### Install the Hydromotive certificates
 
 > "**Note:** Before proceeding, ensure that you have the hydromotive.zip folder!"
 
 1. **Unpack the** `hydromotive.zip` **folder** on your system.
-2. **Check the contents of the unzipped folder**, probably named `hydromotive`
+2. **Check the contents of the unzipped folder**, probably named `hydromotive`.
 
    It should contain the following files:
     - ese-hydromotive.ovpn
@@ -60,10 +60,11 @@ Additionally, you will need the OpenVPN certificates, which can be obtained from
     - readme.md
     - secret_hydromotive.txt
 
-> "**Note**: Proceed with this tutorial after checking that every file is present in the unzipped folder and the OpenVPN
-> GUI is successfully installed."
+> "**Note**: Proceed with this tutorial after checking that every file is present in the unzipped folder."
+> 
+> "**Note**: Also verify that the OpenVPN GUI is successfully installed."
 
-3. **Copy all the above-named files** to `C:\Users\<YOURNAME>\OpenVPN\config.`
+3. **Copy all the above-named files** to `C:\Users\<YOURNAME>\OpenVPN\config`.
 
 Now the Hydromotive certificates are successfully installed. Let's verify that this is indeed the case.
 
@@ -72,13 +73,13 @@ Now the Hydromotive certificates are successfully installed. Let's verify that t
 6. **Click on _Connect_**. Most likely, you need to log in using a _client certificate secret_ password. This password
    is present in the `readme.md` file.
 
-### Connect to the Hydromotive VPN
+## Connect to the Hydromotive VPN
 
 1. **In Windows 11**, look at the hidden icons (Bottom right corner) to see if the program is running.
 2. Then **right-click the OpenVPN GUI icon** and **click on _Connect_**.
 3. After a successful connection, you will get a notification that you are connected to the VPN.
 
-### Disconnect from the Hydromotive VPN
+## Disconnect from the Hydromotive VPN
 
 1. **In Windows 11**, look at the hidden icons (Bottom right corner).
 2. Then **right-click the OpenVPN GUI icon** and click on **_Close connection_**.

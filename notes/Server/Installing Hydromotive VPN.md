@@ -24,9 +24,6 @@ Let's get started!
 
 ## Installation
 
-To install the OpenVPN certificates, you first need to install the OpenVPN GUI.
-This tutorial will guide you through this process.
-
 ### Prerequisites
 
 To successfully complete this tutorial, you need to have the OpenVPN GUI installed. This tutorial will guide you through

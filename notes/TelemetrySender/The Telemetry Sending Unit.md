@@ -37,6 +37,7 @@ All of these parts need to work in collaboration to function successfully. The m
   * [Contact](#contact)
 <!-- TOC -->
 
+
 # List of abbreviations
 
 | abbreviations |                 Definition                  |
@@ -92,6 +93,7 @@ Now, the PlatformIO plugin will initialize, and the build targets and configurat
 # The dataflow
 
 Since this is the second part in the Telemetry chain, it only needs to handle one data source: the _Data Collection Unit_.
+In **Figure 1** presents a global overview of the dataflow.
 
 ```mermaid
   graph LR
@@ -150,11 +152,11 @@ _**Figure 2**: The dataflow in the  Telemetry Sending unit._
 
 From the _Telemetry Data Collection Unit_, we receive asynchronous data from a Universal Asynchronous Receiver-Transmitter (UART) databus.
 
-The messages are structured in CSV format as shown in **Figure 2**.
+The messages are structured in CSV format as shown in **Figure 3**.
 ```CSV
 <HH:MM:SS,sss,ID,token_1,token_2,etc>
 ```
-_**Figure 2:** The used CSV format to send data over the UART. See **Table 1** for an explanation of the format._
+_**Figure 3:** The used CSV format to send data over the UART. See **Table 1** for an explanation of the format._
 
 
 _**Table 1**: Explanation of the CSV Format_
@@ -183,12 +185,12 @@ _**Table 2**: All the Identifiers that are used to collect and send data._
 
 #### Format of Accelerometer data
 
-The accelerometer data follows the format shown in **Figure 3**.
+The accelerometer data follows the format shown in **Figure 4**.
 
 ````CSV
 <HH:MM:SS,sss,ACC,axis-X,axis-Y,axis-Z>
 ````
-_**Figure 3**: The format of the accelerometer message._
+_**Figure 4**: The format of the accelerometer message._
 
 
 _**Table 3**: Explanation of the Accelerometer data format_
@@ -205,12 +207,12 @@ _**Table 3**: Explanation of the Accelerometer data format_
 
 #### Format of Motor Telemetry data
 
-The Motor Telemetry data follows the format shown in **Figure 4**.
+The Motor Telemetry data follows the format shown in **Figure 5**.
 
 ````CSV
 <HH:MM:SS,sss,MTL,rpm,trq>
 ````
-_**Figure 4**: The format of the  Motor Telemetry message._
+_**Figure 5**: The format of the  Motor Telemetry message._
 
 _**Table 4**: Explanation of the  Motor Telemetry data format_
 
@@ -225,12 +227,12 @@ _**Table 4**: Explanation of the  Motor Telemetry data format_
 
 #### Format of Motor Power data
 
-The Motor Power data follows the format shown in **Figure 5**.
+The Motor Power data follows the format shown in **Figure 6**.
 
 ````CSV
 <HH:MM:SS,sss,MPW,pwr>
 ````
-_**Figure 5**: The format of the  Motor Power message._
+_**Figure 6**: The format of the  Motor Power message._
 
 _**Table 5**: Explanation of the  Motor Power data format_
 
@@ -244,12 +246,12 @@ _**Table 5**: Explanation of the  Motor Power data format_
 
 #### Format of Spectronik data
 
-The Spectronik data follows the format shown in **Figure 6**.
+The Spectronik data follows the format shown in **Figure 7**.
 
 ````CSV
 <HH:MM:SS,sss,SPC,fan,H2P1,H2P2,TankP,vsc>
 ````
-_**Figure 6**: The format of the  Spectronik message._
+_**Figure 7**: The format of the  Spectronik message._
 
 _**Table 6**: Explanation of the  Spectronik data format_
 
@@ -267,12 +269,12 @@ _**Table 6**: Explanation of the  Spectronik data format_
 
 #### Format of Throttle data
 
-The Throttle data follows the format shown in **Figure 7**.
+The Throttle data follows the format shown in **Figure 8**.
 
 ````CSV
 <HH:MM:SS,sss,THR,thr>
 ````
-_**Figure 7**: The format of the  Throttle message._
+_**Figure 8**: The format of the  Throttle message._
 
 _**Table 7**: Explanation of the  Throttle data format_
 
@@ -295,24 +297,24 @@ Please note that this data is sent as byte data with start and stop bytes and mi
 - At the end of every message, before the stop byte, there is a 2-byte Cyclic Redundancy Check (CRC).
 - The CRC used is _CRC-16-CCITT_.
 
-the general format is shown in **Figure 8**.
+the general format is shown in **Figure 9**.
 
 ```String
 \x0112:15:30,350,<ID>,<token_1>,<token_2>,<etc>\xAA\xBB\x18
 ```
-_**Figure 8**: The general raw format of the messages being sent over the UART_
+_**Figure 9**: The general raw format of the messages being sent over the UART_
 
 These raw data stings could be used to emulate the _Telemetry Data collection Unit_.
 
 
 #### Raw format of the Accelerometer
 
-The raw format of the accelerometer data follows the format shown in **Figure 9**.
+The raw format of the accelerometer data follows the format shown in **Figure 10**.
 
 ```String
 \x0100:33:58,334,ACC,-251,74,36\xB2\xA4\x18
 ```
-_**Figure 9**: The raw data string of the accelerometer message, including CRC and start and stop bytes. See **Table 8** for more information about the data types._
+_**Figure 10**: The raw data string of the accelerometer message, including CRC and start and stop bytes. See **Table 8** for more information about the data types._
 
 _**Table 8**: Explanation of the Raw Accelerometer Data Format._
 
@@ -332,12 +334,12 @@ _**Table 8**: Explanation of the Raw Accelerometer Data Format._
 
 #### Raw format of the Motor Telemetry
 
-The raw format of the Motor Telemetry data follows the format shown in **Figure 10**.
+The raw format of the Motor Telemetry data follows the format shown in **Figure 11**.
 
 ```String
 \x0100:33:47,024,MTL,0,0\x85\xA3\x18
 ```
-_**Figure 10**: The raw data string of the Motor Telemetry message, including CRC and start and stop bytes. See **Table 9* for more information about the data types._
+_**Figure 11**: The raw data string of the Motor Telemetry message, including CRC and start and stop bytes. See **Table 9* for more information about the data types._
 
 _**Table 9**: Explanation of the Raw  Motor Telemetry Data Format._
 
@@ -356,12 +358,12 @@ _**Table 9**: Explanation of the Raw  Motor Telemetry Data Format._
 
 #### Raw format of the Motor Power
 
-The raw format of the Motor Power data follows the format shown in **Figure 11**.
+The raw format of the Motor Power data follows the format shown in **Figure 12**.
 
 ```String
 \x0100:47:35,934,MPW,0\x8C\x05\x18
 ```
-_**Figure 11**: The raw data string of the Motor Power message, including CRC and start and stop bytes. See **Table 11** for more information about the data types._
+_**Figure 12**: The raw data string of the Motor Power message, including CRC and start and stop bytes. See **Table 11** for more information about the data types._
 
 _**Table 10**: Explanation of the Raw  Motor Power Data Format._
 
@@ -379,12 +381,12 @@ _**Table 10**: Explanation of the Raw  Motor Power Data Format._
 
 #### Raw format of the Spectronik
 
-The raw format of the Spectronik data follows the format shown in **Figure 12**.
+The raw format of the Spectronik data follows the format shown in **Figure 13**.
 
 ```String
 \x0100:47:32,199,SPC,100,7.22,0.00,0.02,0.0\xF2\xCF\x18
 ```
-_**Figure 12**: The raw data string of the Spectronik message, including CRC and start and stop bytes. See **Table 11** for more information about the data types._
+_**Figure 13**: The raw data string of the Spectronik message, including CRC and start and stop bytes. See **Table 11** for more information about the data types._
 
 _**Table 11**: Explanation of the Raw  Spectronik Data Format._
 
@@ -406,12 +408,12 @@ _**Table 11**: Explanation of the Raw  Spectronik Data Format._
 
 #### Raw format of the Throttle
 
-The raw format of the Throttle data follows the format shown in **Figure 13**.
+The raw format of the Throttle data follows the format shown in **Figure 14**.
 
 ```String
 \x0100:47:36,181,THR,0,\xAB\xBA\x18
 ```
-_**Figure 13**: The raw data string of the Throttle message, including CRC and start and stop bytes. See **Table 12** for more information about the data types._
+_**Figure 14**: The raw data string of the Throttle message, including CRC and start and stop bytes. See **Table 12** for more information about the data types._
 
 _**Table 12**: Explanation of the Raw  Throttle Data Format._
 

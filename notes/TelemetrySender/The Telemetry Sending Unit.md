@@ -411,7 +411,7 @@ _**Table 11**: Explanation of the Raw  Spectronik Data Format._
 The raw format of the Throttle data follows the format shown in **Figure 14**.
 
 ```String
-\x0100:47:36,181,THR,0,\xAB\xBA\x18
+\x0100:47:36,181,THR,0\xAB\xBA\x18
 ```
 _**Figure 14**: The raw data string of the Throttle message, including CRC and start and stop bytes. See **Table 12** for more information about the data types._
 

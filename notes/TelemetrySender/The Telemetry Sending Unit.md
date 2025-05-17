@@ -525,25 +525,25 @@ _**Figure 16**: The beautified JSON object. This is more readable._
 
 _**Table 13**: All the abbreviations that are present in the JSON object._
 
-| Component | JSON block | Description                                               |
-|-----------|------------|-----------------------------------------------------------|
-| seq       | None       | sequence number of message, is used to track the messages |
-| tim       | None       | Shows the timestamp of the latest datacollection          |
-| vhl       | -          | Vehicle data block                                        |
-| accX      | vhl        | Acceleration in X-axis                                    |
-| accY      | vhl        | Acceleration in Y-axis                                    |
-| accZ      | vhl        | Acceleration in Z-axis                                    |
-| mtr       | -          | Information related to the Hub-motor                      |
-| pwr       | mtr        | Power of Hub-motor                                        |
-| rpm       | mtr        | RPM of Hub-motor                                          |
-| trq       | mtr        | RPM of Hub-motor                                          |
-| trq       | mtr        | RPM of Hub-motor                                          |
-| spc       | -          | Information related to the Spectronik fuel cell           |
-| vsc       | spc        | Super capacitor voltage                                   |
-| tankP     | spc        | Hydrogen tank pressure                                    |
-| fan       | spc        | Fan speed of the fuel cell                                |
-| H2P1      | spc        | Hydrogen pressure sensor 1                                |
-| H2P2      | spc        | Hydrogen pressure sensor 2                                |
+| Component | JSON block |                        Description                        |
+|:---------:|:----------:|:---------------------------------------------------------:|
+|    seq    |    None    | sequence number of message, is used to track the messages |
+|    tim    |    None    |     Shows the timestamp of the latest datacollection      |
+|    vhl    |     -      |                    Vehicle data block                     |
+|   accX    |    vhl     |                  Acceleration in X-axis                   |
+|   accY    |    vhl     |                  Acceleration in Y-axis                   |
+|   accZ    |    vhl     |                  Acceleration in Z-axis                   |
+|    mtr    |     -      |           Information related to the Hub-motor            |
+|    pwr    |    mtr     |                    Power of Hub-motor                     |
+|    rpm    |    mtr     |                     RPM of Hub-motor                      |
+|    trq    |    mtr     |                     RPM of Hub-motor                      |
+|    trq    |    mtr     |                     RPM of Hub-motor                      |
+|    spc    |     -      |      Information related to the Spectronik fuel cell      |
+|    vsc    |    spc     |                  Super capacitor voltage                  |
+|   tankP   |    spc     |                  Hydrogen tank pressure                   |
+|    fan    |    spc     |                Fan speed of the fuel cell                 |
+|   H2P1    |    spc     |                Hydrogen pressure sensor 1                 |
+|   H2P2    |    spc     |                Hydrogen pressure sensor 2                 |
 
 ### Debugging the MQTT 
 

@@ -1,5 +1,3 @@
-# The telemetry Sending unit
-
 Welcome to the _Telemetry Sending Unit_ wiki page! Here, you will find detailed information on how to effectively use the software and contribute to its further development. Discover insights into the data flow, and understand the expected input and output data to maximize your experience with our tool.
 
 The _Telemetry Unit_ consists of three major parts:
@@ -13,7 +11,6 @@ All of these parts need to work in collaboration to function successfully. The m
 # Table of contents
 
 <!-- TOC -->
-* [The telemetry Sending unit](#the-telemetry-sending-unit)
 * [Table of contents](#table-of-contents)
 * [List of abbreviations](#list-of-abbreviations)
 * [Installation](#installation)

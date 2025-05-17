@@ -35,6 +35,8 @@ All of these parts need to work in collaboration to function successfully. The m
     * [The used protocol to send data to the server](#the-used-protocol-to-send-data-to-the-server-)
       * [Used topics](#used-topics)
     * [The dataformat for sending to the server](#the-dataformat-for-sending-to-the-server)
+    * [Debugging the MQTT](#debugging-the-mqtt-)
+      * [Using the Ubuntu teminal to check MQTT messages](#using-the-ubuntu-teminal-to-check-mqtt-messages)
   * [Contact](#contact)
 <!-- TOC -->
 
@@ -51,6 +53,7 @@ All of these parts need to work in collaboration to function successfully. The m
 |      MSB      |           Most Significant Bytes            |
 |      LSB      |           Least Significant Bytes           |
 |     MQTT      |     Message Queuing Telemetry Transport     |
+|     hm25      |              Hydromotive 2025               |
 |     JSON      |         JavaScript Object Notation          |
 
 
@@ -542,6 +545,24 @@ _**Table 13**: All the abbreviations that are present in the JSON object._
 | H2P1      | spc        | Hydrogen pressure sensor 1                                |
 | H2P2      | spc        | Hydrogen pressure sensor 2                                |
 
+### Debugging the MQTT 
+
+Debugging and verifying that the messages are indeed send by the microcontroller can be a bit tricky. There are different options to check this. 
+For example, you can use the program _MinimalDockerMQTTSubscriber_ found in the `examples\MQTT` folder in the repoitory.
+
+or by using a terminal command in Ubuntu (Linux Operating System). This aprouch is often used due to the simplicity.
+
+#### Using the Ubuntu teminal to check MQTT messages
+
+1. To check MQTT messages, you first need to install the `Mosquitto-client` tool.
+  This can be done by the following command:
+  ```Bash
+  sudo apt-get install mosquitto-clients
+  ```
+2. After a successful installation, you can use the following command to subscribe to the topic on the broker:
+```Bash
+  mosquitto_sub -h <IP-OF-BROKER> -t "<TOPIC>" -u <USERNAME> -p <PASSWORD>
+```
 
 ## Contact
 

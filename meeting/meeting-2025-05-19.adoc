@@ -1,0 +1,26 @@
+
+components ordered: mouser.
+
+3 weeks before poland.
+
+Ready visually 21st, reveal on 25.
+
+new spectronik is here, supply valve changed but no test as battery is being worked.
+
+last friday testing.
+didnt fully go to plan but still valueable
+
+check pins for connector 
+
+- [] separate connectors from Automotive
+- [] drill box for telemetry 
+- [] wet and dry case? not going out on a wet track: sandwich design
+- [] space for unit left side
+- [] Wiring needs to be long enough
+- [] make wireViz diagram
+- [] remko will make proposal for sandwich case
+
+
+
+
+

@@ -1,17 +1,25 @@
 @startuml
  
 Interface ILoggable {
-    + updateTimestamp() 
-    + isValid() const
-    + getSampletimeString() const
-    {abstract} + toString()
+    + void updateTimestamp() 
+    + bool isValid() const
+    + std::string getSampletimeString() const
+    {abstract} + std::string toString()
 
 }
+
+class accelerometerData implements ILoggable {
+    + std::string toString() override
+    + int16_t Xaccel
+    + int16_t Yaccel
+    + int16_t Zaccel
+}
+
 Interface IProcess {
     # ILoggable *Data
-    {abstract} + init();
-    {abstract} + update();
-    {abstract} + register_data(ILoggable *data);
+    {abstract} + void init();
+    {abstract} + void update();
+    {abstract} + void register_data(ILoggable *data);
 }
 
 
@@ -86,9 +94,9 @@ class StatusManager<int N>{
     - GPIO Spare_gpio
 }   
 
-StatusManager <-- Peripheral
-StatusManager <-- Error
-StatusManager <-- Status
+StatusManager --> Peripheral
+StatusManager --> Error
+StatusManager --> Status
 
 Collector <-- IProcess
 Collector <-- ILoggable

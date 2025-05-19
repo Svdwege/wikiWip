@@ -15,6 +15,54 @@ class accelerometerData implements ILoggable {
     + int16_t Zaccel
 }
 
+class MotorCtrlCommand implements ILoggable {
+    + std::string toString() override
+    + uint8_t control_value
+    + uint8_t control_mode
+    + uint8_t motor_mode
+    + uint8_t sw_enable 
+    + uint8_t debug_mode 
+}
+
+class MotorPower implements ILoggable {
+    + std::string toString() override
+    + uint16_t inv_peak_cur
+    + uint16_t motor_power
+}
+
+class MotorTelemetry implements ILoggable {
+    + std::string toString() override
+    + int16_t control_value
+    + uint8_t control_mode
+    + uint8_t motor_mode
+    + uint8_t sw_enable
+    + uint8_t motor_state
+    + int16_t motor_torque
+    + int16_t motor_rpm
+    + int8_t  motor_temp
+}
+class Protium implements ILoggable {
+    + std::string toString() override
+    + float FuelCellVoltage
+    + float FuelCellCurrent
+    + float FuelCellPower
+    + float EnergyConsumed
+    + float FuelCellTemperature1
+    + uint8_t FanPercentage
+    + uint16_t NumberOfCells
+    + float H2PressureSensor1
+    + float H2PressureSensor2
+    + float H2TankPressure
+    + float H2TankTemperature
+    + float VoltageSetpoint
+    + float CurrentSetpoint
+    + float SuperCapacitorVoltage
+    + uint8_t StasisSelector
+    + float StasisValve1Pressure
+    + float StasisValve2Pressure
+
+}
+
 Interface IProcess {
     # ILoggable *Data
     {abstract} + void init();
@@ -34,12 +82,10 @@ class ADXL345 implements IProcess {
 }
 
 class Spectronik implements IProcess {
-    + sendStart();
-    + sendEnd();
-    + getProtiumData() const;
-    + printProtiumData(const ProtiumData& data) const;
     + uartRxEventCallback(UART_HandleTypeDef *huart, uint16_t Size);
     + gpioExtiCallback();
+    + sendStart();
+    + sendEnd();
     - parseProtiumData(const char *long_string);
 }
 
@@ -93,6 +139,35 @@ class StatusManager<int N>{
     - std::array<GPIO,N> status_gpios
     - GPIO Spare_gpio
 }   
+
+class CanDispatcher {
+    + void init();
+    + void registerHandler(uint32_t id, ICanMessageHandler *handler);
+    + void dispatch(uint32_t id, uint8_t len, const uint8_t *data);
+    - std:map<uint32_t,ICanMessageHandler*> handlers
+    - CAN_HandleTypeDef* hcan;
+
+}
+
+Interface ICanMessageHandler {
+    {abstract} + void handlerawData(uint32_t, uint8_t, const uint8_t*);
+}
+
+class CanTelemetryHandler implements ICanMessageHandler, IProcess {
+    - void decodeData() 
+
+}
+
+class CanPowerHandler implements ICanMessageHandler, IProcess {
+    - void decodeData() 
+
+}
+class CanControlCommandHandler implements ICanMessageHandler, IProcess {
+    - void decodeData() 
+
+}
+
+
 
 StatusManager --> Peripheral
 StatusManager --> Error

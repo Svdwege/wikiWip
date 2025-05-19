@@ -1,0 +1,159 @@
+connectors:
+  J1:
+    type: MSTBVA
+    notes: Telemetry side
+    subtype: female
+    pincount: 4
+    pinlabels:
+      - PPS
+      - TX
+      - GND
+      - V+
+  J2:
+    type: MSTBVA
+    notes: Telemetry side
+    subtype: female
+    pincount: 3
+    pinlabels:
+      - GND
+      - TX
+      - RX
+  J3:
+    type: MSTBVA
+    notes: Telemetry side
+    subtype: female
+    pincount: 7
+    pinlabels:
+      - GND
+      - GND
+      - SCK
+      - MISO
+      - MOSI
+      - SS
+      - IRQ
+  J4:
+    type: MSTBVA
+    notes: Telemetry side
+    subtype: female
+    pincount: 3
+    pinlabels:
+      - CANL
+      - GND
+      - CANH
+
+  DeutchF2:
+    type: Deutch 2 pin
+    subtype: female
+    pincount: 2
+
+  DeutchM2:
+    type: Deutch 2 pin
+    subtype: male
+    pincount: 2
+
+  DeutchF4:
+    type: Deutch 4 pin
+    subtype: female
+    pincount: 4
+
+  DeutchM4:
+    type: Deutch 4 pin
+    subtype: male
+    pincount: 4
+
+  DeutchF6:
+    type: Deutch 6 pin
+    subtype: female
+    pincount: 6
+
+  DeutchM6:
+    type: Deutch 6 pin
+    subtype: male
+    pincount: 6
+
+cables:
+  W: &template_Wire
+    category: bundle
+    wirecount: 10
+    colors:
+      - BK
+      - RD
+      - VT
+      - GY
+      - BU
+      - WH
+      - BN
+      - YE
+      - OG
+      - GN
+    shield: true
+    gauge: 0.25 mm2
+    show_equiv: true
+    length: 0.2
+
+  CAN:
+    category: bundle
+    wirecount: 2
+    colors:
+      - YE
+      - BU
+    shield: false
+    length: 0.2
+    notes: CAN twisted pair
+
+  W1: 
+    <<: *template_Wire
+  W2: 
+    <<: *template_Wire
+  W3: 
+    <<: *template_Wire
+  W4: 
+    <<: *template_Wire
+  W5: 
+    <<: *template_Wire
+  W6: 
+    <<: *template_Wire
+  W7: 
+    <<: *template_Wire
+  
+
+connections:
+  - 
+    - J3: [1,2,3-7]
+    - W1: [1,1,3-7]
+  - 
+    - J3: 1
+    - W1: s
+  -
+    - W1: [1,3-7]
+    - DeutchF6.Telemetry_Accelerometer: [1-6]
+    - <==>
+    - DeutchM6.Accelerometer: [1-6]
+    - W2: [1,3-7]
+
+  -
+    - J1: [3,4,1,2]
+    - W3: [1,2,3,4]
+    - DeutchF4.Telemetry_GNSS: [1-4]
+    - <==>
+    - DeutchM4.GNSS: [1-4]
+    - W4: [1,2,3,4]
+
+  -
+    - J2: 1
+    - W5: s
+  -
+    - J2: [1-3]
+    - W5: [1-3]
+    - DeutchF4.Telemetry_Spectronic: [1-3]
+    - <==>
+    - DeutchM4.Spectronic: [1-3]
+    - W6: [1-3]
+
+  -
+    - J4: [1,3]
+    - W7: [YE, BU]
+    - DeutchF2.Telemetry_CAN: [1, 2]
+    - <==>
+    - DeutchM2.CAN: [1, 2]
+    - CAN.CAN_twistedpair: [YE, BU]

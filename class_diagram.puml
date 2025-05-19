@@ -47,7 +47,7 @@ class TimeSource {
     + {static} systemTime_t GetTime()
     + volatile {static} systemTime_t time;
     + {static} void update_msTick()
-    + {static} void update_fromGNSS(const int_fast8_t hour, const int_fast8_t minute, const int_fast8_t second, const int_fast16_t ms) 
+    + {static} void update_fromGNSS(const int_fast8_t , const int_fast8_t , const int_fast8_t , const int_fast16_t ) 
 }
 
 enum Status {
@@ -85,5 +85,13 @@ class StatusManager<int N>{
     - std::array<GPIO,N> status_gpios
     - GPIO Spare_gpio
 }   
+
+StatusManager <-- Peripheral
+StatusManager <-- Error
+StatusManager <-- Status
+
+Collector <-- IProcess
+Collector <-- ILoggable
+TimeSource -> ILoggable
 
 @enduml

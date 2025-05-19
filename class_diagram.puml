@@ -63,7 +63,7 @@ enum Error {
     ADXL345_NO_DATA_OBJ,
     COUNT,
     INVALID
-};
+}
 
 enum Peripheral {
     ADXL345 = 0,
@@ -71,7 +71,7 @@ enum Peripheral {
     CAN,
     SPECTRONIK,
     PERIPHERAL_COUNT_,
-};
+}
 
 class StatusManager<int N>{
     + void add_Pin(Peripheral, GPIO)
@@ -83,7 +83,6 @@ class StatusManager<int N>{
     - Status status_
     - Error bin_status
     - std::array<GPIO,N> status_gpios
-    - GPIO Spare_gpio
     - GPIO Spare_gpio
 }   
 

@@ -42,6 +42,7 @@ class Collector {
     - IProcess *process[DATA_SOURCE_COUNT]{};
     - ILoggable *loggable[DATA_SOURCE_COUNT]{};
 }
+
 class TimeSource {
     + {static} systemTime_t GetTime()
     + volatile {static} systemTime_t time;
@@ -49,5 +50,41 @@ class TimeSource {
     + {static} void update_fromGNSS(const int_fast8_t hour, const int_fast8_t minute, const int_fast8_t second, const int_fast16_t ms) 
 }
 
+enum Status {
+    ADXL345_PWR_ON = 0,
+    ADXL345_CONFIGURED,
+    ADXL345_OK,
+    COUNT,
+    INVALID
+
+}
+
+enum Error {
+    ADXL345_NO_DATA_OBJ,
+    COUNT,
+    INVALID
+};
+
+enum Peripheral {
+    ADXL345 = 0,
+    LOGGER,
+    CAN,
+    SPECTRONIK,
+    PERIPHERAL_COUNT_,
+};
+
+class StatusManager<int N>{
+    + void add_Pin(Peripheral, GPIO)
+    + void add_SparePin(const GPIO)
+    + void set_status(const Status)
+    + void set_bin_status(const Error)
+    + Status get_status()
+    + Error get_bin_status()
+    - Status status_
+    - Error bin_status
+    - std::array<GPIO,N> status_gpios
+    - GPIO Spare_gpio
+    - GPIO Spare_gpio
+}   
 
 @enduml

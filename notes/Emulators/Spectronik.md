@@ -1,18 +1,14 @@
 ---
 title: Spectronik
 ---
-
-
-
-
-
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
 
 ### Table of Contents (Spectronik Emulator Details)
+
 <!-- TOC -->
-* [Spectronik Emulator Detailed Documentation](#spectronik-emulator-detailed-documentation)
+    * [Spectronik Emulator Detailed Documentation](#spectronik-emulator-detailed-documentation)
     * [Table of Contents (Spectronik Emulator Details)](#table-of-contents-spectronik-emulator-details)
     * [1. Introduction](#1-introduction)
     * [2. Hardware](#2-hardware-)
@@ -31,6 +27,7 @@ title: Spectronik
       * [3.5. String Construction](#35-string-construction-)
   * [Contact](#contact)
 <!-- TOC -->
+
 ---
 ### 1. Introduction
 

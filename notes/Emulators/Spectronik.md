@@ -1,6 +1,7 @@
 ---
 title: Spectronik
 ---
+
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
@@ -14,9 +15,9 @@ title: Spectronik
   * [2. Hardware](#2-hardware)
     * [2.1. Configuration Overview](#21-configuration-overview)
     * [2.2. Design Document & PCB Visuals](#22-design-document-pcb--visuals)
-      * [2.2.1. Schematic](#221-schematic-)
-      * [2.2.2. PCB Layout](#222-pcb-layout-)
-      * [2.2.3. 3D Model](#223-3d-model-)
+      * [2.2.1. Schematic](#221-schematic)
+      * [2.2.2. PCB Layout](#222-pcb-layout)
+      * [2.2.3. 3D Model](#223-3d-model)
 * [3. Software](#3-software-)
   * [3.1. Overview](#31-overview)
   * [3.2. Configuration Constants for Dynamic Behavior](#32-configuration-constants-for-dynamic-behavior-)
@@ -65,13 +66,13 @@ The complete hardware design files, including schematics and PCB layout, are ava
     *   [View/Download emulator.pdf from GitLab](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/blob/Spectronik-emulator/emulator.pdf?ref_type=heads)
     *   *(The full KiCad project can be found in the same repository directory.)*
 
-##### 2.2.1. Schematic 
+##### 2.2.1. Schematic
 The schematic outlines the connections between the FRDM-KL25Z development board, LEDs, button, UART level shifters, and external connector.
 
 ![Emulator Schematic](https://i.imgur.com/4vR2G6j.png)
 *Figure 1: Spektronic Emulator Circuit Schematic*
 
-##### 2.2.2. PCB Layout 
+##### 2.2.2. PCB Layout
 *(Placeholder for an image of the PCB layout)*
 
 *   **Example:**
@@ -80,7 +81,7 @@ The schematic outlines the connections between the FRDM-KL25Z development board,
     *Figure 2: Spektronic Emulator PCB Layout*
     ```
 
-##### 2.2.3. 3D Model 
+##### 2.2.3. 3D Model
 *(Placeholder for an image of the 3D model of the PCB)*
 
 *   **Example:**

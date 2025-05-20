@@ -1,8 +1,6 @@
 ---
 title: Spectronik
 ---
-
-
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
@@ -15,13 +13,13 @@ title: Spectronik
   * [1. Introduction](#1-introduction)
   * [2. Hardware](#2-hardware)
     * [2.1. Configuration Overview](#21-configuration-overview)
-    * [2.2. Design Document & PCB Visuals](#22-design-document-pcb--visuals)
+    * [2.2. Design Document & PCB Visuals](#22-design-document-and-pcb-visuals)
       * [2.2.1. Schematic](#221-schematic)
       * [2.2.2. PCB Layout](#222-pcb-layout)
       * [2.2.3. 3D Model](#223-3d-model)
 * [3. Software](#3-software-)
   * [3.1. Overview](#31-overview)
-  * [3.2. Configuration Constants for Dynamic Behavior](#32-configuration-constants-for-dynamic-behavior-)
+  * [3.2. Configuration Constants for Dynamic Behavior](#32-configuration-constants-for-dynamic-behavior)
   * [3.3. UART Command Interface](#33-uart-command-interface)
   * [3.4. Data String Formats](#34-data-string-formats)
     * [3.4.1. Continuous Data Transmission String (`long_string`) Example](#341-continuous-data-transmission-string-long_string-example)
@@ -59,7 +57,7 @@ The emulator is designed to run on specific hardware with the following configur
     *   **LED1 (Green):** Connected to MCU pin `PTA1`. Used for status indication (e.g., power on, activity).
     *   **LED2 (Red):** Connected to MCU pin `PTA4`. Used for status indication (e.g., transmission active, error).
 
-#### 2.2. Design Document & PCB Visuals
+#### 2.2. Design Document and PCB Visuals
 
 The complete hardware design files, including schematics and PCB layout, are available in the project repository.
 

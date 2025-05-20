@@ -33,5 +33,4 @@ High-quality documentation is a collaborative effort. To ensure this hub and all
     1.  Navigate to the specific detail page for the document you wish to update.
     2.  Make your edits directly there.
     3.  If a document's purpose or scope changes significantly, consider if its placement within this Hub needs adjustment.
-
 ---

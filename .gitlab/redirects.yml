@@ -3,3 +3,4 @@ notes/{Motor-driver}: notes/Motor-driver
 notes/Motor-driver: notes/Motor-documentation
 notes/Emulators/Spektronic: notes/Emulators/Spectronik
 notes/ADXL/Driver: Drivers/ADXL
+notes/Collector/Driver: Drivers/Collector

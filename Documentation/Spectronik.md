@@ -1,6 +1,7 @@
 ---
 title: Spectronik
 ---
+
 # Spectronik documentation
 
 This document outlines the UART communication protocol for the Protium-1000/2500 system.

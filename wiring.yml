@@ -133,11 +133,11 @@ connections:
 
   -
     - J1: [3,4,1,2]
-    - W3: [1,2,3,4]
+    - W3: [1,2,GN,VT]
     - DeutchF4.Telemetry_GNSS: [1-4]
     - <==>
     - DeutchM4.GNSS: [1-4]
-    - W4: [1,2,3,4]
+    - W4: [1,2,GN,VT]
 
   -
     - J2: 1

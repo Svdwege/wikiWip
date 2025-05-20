@@ -2,6 +2,7 @@
 title: Spectronik
 ---
 
+
 # Spectronik documentation
 
 This document outlines the UART communication protocol for the Protium-1000/2500 system.
@@ -189,3 +190,9 @@ System Off
 | `]` | Increase blower intensity by 3% | Running | `5D` |
 
 ---
+
+## Contact
+
+Vladimirs Jurcenoks - [@Vladimir-create](https://gitlab.com/Vladimir-create)  - [v.jurcenoks@student.han.nl](mailto:v.jurcenoks@student.han.nl)
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

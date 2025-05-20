@@ -12,11 +12,9 @@
 
 Below you will find a list of available drivers. Click on the name or the "View Details" link to navigate to its dedicated documentation page.
 
-### 1. 🔩 [Placeholder: Example Driver Name - e.g., Motor Controller Driver]
-*   **Description:** [Briefly describe what this driver does, e.g., "Provides an interface to control the main propulsion motor, including speed, direction, and status feedback."]
-*   **Hardware/System Interfaced:** [e.g., "XYZ Corp Brushless DC Motor Controller Model ABC-123"]
-*   **Status:** [e.g., Planning, In Development, Alpha, Beta, Stable, Deprecated]
-*   **[➡️ View Details for [Example Driver Name]](./Path-To-Example-Driver-Doc)**
+### 1. 🔩 Motor driver
+*   **Description:** This document describes the C++ classes and functions used for handling and decoding CAN messages related to the GEMmotors G1.X motor driver
+*   **[➡️ View Details for [Motor Driver]](Drivers/Motor)**
 
 ### 2. 📡 [Placeholder: Example Driver Name - e.g., CAN Bus Interface Driver]
 *   **Description:** [Briefly describe what this driver does, e.g., "Manages communication over the vehicle's CAN bus, allowing for sending and receiving CAN messages."]

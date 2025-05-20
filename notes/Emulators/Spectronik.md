@@ -1,6 +1,7 @@
 ---
 title: Spectronik
 ---
+
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
@@ -17,7 +18,7 @@ title: Spectronik
       * [2.2.1. Schematic](#221-schematic)
       * [2.2.2. PCB Layout](#222-pcb-layout)
       * [2.2.3. 3D Model](#223-3d-model)
-* [3. Software](#3-software-)
+* [3. Software](#3-software)
   * [3.1. Overview](#31-overview)
   * [3.2. Configuration Constants for Dynamic Behavior](#32-configuration-constants-for-dynamic-behavior)
   * [3.3. UART Command Interface](#33-uart-command-interface)

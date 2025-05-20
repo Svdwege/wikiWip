@@ -3,30 +3,29 @@ title: Spectronik
 ---
 
 
+
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
 
 ### Table of Contents (Spectronik Emulator Details)
 <!-- TOC -->
-* [Spectronik Emulator Detailed Documentation](#spectronik-emulator-detailed-documentation)
-* [Table of Contents (Spectronik Emulator Details)](#table-of-contents-spectronik-emulator-details)
-  * [1. Introduction](#1-introduction)
-    * [2. Hardware](#2-hardware-)
-      * [2.1. Configuration Overview](#21-configuration-overview-)
-      * [2.2. Design Document & PCB Visuals](#22-design-document--pcb-visuals-)
-        * [2.2.1. Schematic](#221-schematic-)
-        * [2.2.2. PCB Layout](#222-pcb-layout-)
-        * [2.2.3. 3D Model](#223-3d-model-)
-    * [3. Software](#3-software-)
-      * [3.1. Overview](#31-overview)
-      * [3.2. Configuration Constants for Dynamic Behavior](#32-configuration-constants-for-dynamic-behavior-)
-      * [3.3. UART Command Interface](#33-uart-command-interface-)
-      * [3.4. Data String Formats](#34-data-string-formats-)
-        * [3.4.1. Continuous Data Transmission String (`long_string`) Example](#341-continuous-data-transmission-string-long_string-example-)
-        * [3.4.2. System Off Message (`end_string`) Example](#342-system-off-message-end_string-example-)
-      * [3.5. String Construction](#35-string-construction-)
-    * [Contact](#contact)
+* [1. Introduction](#1-introduction)
+* [2. Hardware](#2-hardware-)
+  * [2.1. Configuration Overview](#21-configuration-overview-)
+  * [2.2. Design Document & PCB Visuals](#22-design-document--pcb-visuals-)
+    * [2.2.1. Schematic](#221-schematic-)
+    * [2.2.2. PCB Layout](#222-pcb-layout-)
+    * [2.2.3. 3D Model](#223-3d-model-)
+* [3. Software](#3-software-)
+  * [3.1. Overview](#31-overview)
+  * [3.2. Configuration Constants for Dynamic Behavior](#32-configuration-constants-for-dynamic-behavior-)
+  * [3.3. UART Command Interface](#33-uart-command-interface-)
+  * [3.4. Data String Formats](#34-data-string-formats-)
+    * [3.4.1. Continuous Data Transmission String (`long_string`) Example](#341-continuous-data-transmission-string-long_string-example-)
+    * [3.4.2. System Off Message (`end_string`) Example](#342-system-off-message-end_string-example-)
+  * [3.5. String Construction](#35-string-construction-)
+* [Contact](#contact)
 <!-- TOC -->
 ---
 ### 1. Introduction

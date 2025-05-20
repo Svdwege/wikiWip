@@ -1,8 +1,7 @@
 ---
 title: Spectronik
 ---
-
-# Protium-1000/2500 UART Communication Specification
+# Spectronik documentation
 
 This document outlines the UART communication protocol for the Protium-1000/2500 system.
 
@@ -11,25 +10,26 @@ This document outlines the UART communication protocol for the Protium-1000/2500
 ---
 
 <!-- TOC -->
-* Table of Contents
-* [Protium-1000/2500 UART Communication Specification](#protium-10002500-uart-communication-specification)
-  * [UART Specification](#uart-specification)
-  * [UART Connector Specification](#uart-connector-specification)
-  * [Serial Communication with PLC](#serial-communication-with-plc)
-  * [Message Output from the Protium-1000/2500](#message-output-from-the-protium-10002500)
-    * [Example Running Phase Message:](#example-running-phase-message)
-    * [Parsing Algorithm:](#parsing-algorithm)
-  * [Message Input to the Protium-1000/2500](#message-input-to-the-protium-10002500)
-  * [Phases of Operation](#phases-of-operation)
-  * [Startup Phase](#startup-phase)
-  * [Running Phase](#running-phase)
-  * [End Phase](#end-phase)
-    * [Normal Shutdown:](#normal-shutdown)
-    * [Abnormal Shutdown:](#abnormal-shutdown)
-  * [Annex A: List of Commands](#annex-a-list-of-commands)
+* [1. Protium-1000/2500 UART Communication Specification](#1-protium-10002500-uart-communication-specification)
+  * [1.1 UART Specification](#11-uart-specification)
+  * [1.2 UART Connector Specification](#12-uart-connector-specification)
+  * [1.3 Serial Communication with PLC](#13-serial-communication-with-plc)
+* [2. Message Output from the Protium-1000/2500](#2-message-output-from-the-protium-10002500)
+  * [2.1 Example Running Phase Message:](#21-example-running-phase-message)
+* [3. Parsing Algorithm:](#3-parsing-algorithm)
+* [4. Message Input to the Protium-1000/2500](#4-message-input-to-the-protium-10002500)
+* [5. Phases of Operation](#5-phases-of-operation)
+  * [5.1 Startup Phase](#51-startup-phase)
+  * [5.2 Running Phase](#52-running-phase)
+  * [5.3 End Phase](#53-end-phase)
+    * [5.3.1 Normal Shutdown:](#531-normal-shutdown)
+    * [5.3.2 Abnormal Shutdown:](#532-abnormal-shutdown)
+* [Annex A: List of Commands](#annex-a-list-of-commands)
 <!-- TOC -->
 
-## UART Specification
+## 1. Protium-1000/2500 UART Communication Specification
+
+## 1.1 UART Specification
 
 The following parameters define the UART communication settings for the Protium-1000/2500:
 
@@ -44,7 +44,7 @@ The following parameters define the UART communication settings for the Protium-
 
 ---
 
-## UART Connector Specification
+## 1.2 UART Connector Specification
 
 The Protium-1000/2500 uses a 4-pin Molex PicoBlade connector. A premade cable assembly (part number: `0151340403`) may be used. The pinout is:
 
@@ -55,7 +55,7 @@ The Protium-1000/2500 uses a 4-pin Molex PicoBlade connector. A premade cable as
 
 ---
 
-## Serial Communication with PLC
+## 1.3 Serial Communication with PLC
 
 Serial communication with a PLC (RS232/RS485 capable) is possible with the following considerations:
 
@@ -65,14 +65,14 @@ Serial communication with a PLC (RS232/RS485 capable) is possible with the follo
 
 ---
 
-## Message Output from the Protium-1000/2500
+## 2. Message Output from the Protium-1000/2500
 
 All UART output **from** the device is in human-readable **ASCII strings**.
 
 - `|` (pipe, `0x7C`) = start of message / field separator
 - `!` (exclamation, `0x21`) = end of message
 
-### Example Running Phase Message:
+### 2.1 Example Running Phase Message:
 `````c++
 |FC_V : 71.17 V | FCT1: 30.90 C | H2P1 : 0.61 B | DCDCV: XX.X V |
 FC_A : 10.21 A | FCT2: 28.46 C | H2P2 : 0.59 B | DCDCA: XX.X A |
@@ -83,14 +83,14 @@ Fan PWM auto
 Blower auto
 `````
 
-### Parsing Algorithm:
+### 3. Parsing Algorithm:
 1. Extract message from first `|` to `!`.
 2. Split by `|`.
 3. For each field, split by `:` to get name and value.
 
 ---
 
-## Message Input to the Protium-1000/2500
+## 4. Message Input to the Protium-1000/2500
 
 All UART input **to** the device is also an ASCII string and must end with a **newline character**.
 
@@ -101,7 +101,7 @@ Command not found.
 
 ---
 
-## Phases of Operation
+## 5. Phases of Operation
 
 The system has 3 operational phases:
 
@@ -111,7 +111,7 @@ The system has 3 operational phases:
 
 ---
 
-## Startup Phase
+## 5.1 Startup Phase
 
 At power-up, the system enters the Startup phase. It sends identification and status messages such as:
 `````c++
@@ -137,20 +137,20 @@ start
 
 ---
 
-## Running Phase
+## 5.2 Running Phase
 
 Once running, the system outputs status updates at **1Hz**, in the format described earlier.
 
 ---
 
-## End Phase
+## 5.3 End Phase
 
 The system enters the End Phase under:
 
 1. **Normal shutdown** (via `end` command)
 2. **Abnormal shutdown** (e.g. critical error)
 
-### Normal Shutdown:
+### 5.3.1 Normal Shutdown:
 `````c++
 Shutdown initiated
 This Mileage: 14.0 Wh
@@ -159,7 +159,7 @@ Total Mileage: 1.57 kWh
 Total Runtime: 0001:40 hrs
 System Off
 `````
-### Abnormal Shutdown:
+### 5.3.2 Abnormal Shutdown:
 `````c++
 Abnormal shutdown initiated
 This Mileage: 14.0 Wh

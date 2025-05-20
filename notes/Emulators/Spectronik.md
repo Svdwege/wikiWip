@@ -5,6 +5,7 @@ title: Spectronik
 
 
 
+
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
@@ -15,8 +16,8 @@ title: Spectronik
 * [Spectronik Emulator Detailed Documentation](#spectronik-emulator-detailed-documentation)
 * [Table of Contents (Spectronik Emulator Details)](#table-of-contents-spectronik-emulator-details)
   * [1. Introduction](#1-introduction)
-  * [2. Hardware](#2-hardware-)
-    * [2.1. Configuration Overview](#21-configuration-overview-)
+  * [2. Hardware](#2-hardware)
+    * [2.1. Configuration Overview](#21-configuration-overview)
     * [2.2. Design Document & PCB Visuals](#22-design-document--pcb-visuals-)
       * [2.2.1. Schematic](#221-schematic-)
       * [2.2.2. PCB Layout](#222-pcb-layout-)
@@ -38,9 +39,9 @@ This document describes a C code snippet for the MKL25Z4 microcontroller. It imp
 
 ---
 
-### 2. Hardware 
+### 2. Hardware
 
-#### 2.1. Configuration Overview 
+#### 2.1. Configuration Overview
 
 The emulator is designed to run on specific hardware with the following configuration:
 

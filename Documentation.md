@@ -13,7 +13,7 @@
 Navigate to the relevant section below to find the information you need.
 
 ### 📄 General Project Information
-*   **[Project Overview & Goals](./Project-Overview)**: High-level description of the project, its objectives, and scope.
+*   **[Spectronik](Documentation/Spectronik)**: This document outlines the UART communication protocol for the Protium-1000/2500 system.
 *   **[System Architecture](./System-Architecture)**: Diagrams and descriptions of the overall system architecture and its main components.
 *   **[Requirements Document](./Requirements)**: Detailed functional and non-functional requirements for the project.
 *   **[Glossary & Abbreviations](./Glossary)**: Definitions of common terms and abbreviations used throughout the project.

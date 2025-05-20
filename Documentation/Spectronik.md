@@ -3,6 +3,7 @@ title: Spectronik
 ---
 
 
+
 # Spectronik documentation
 
 This document outlines the UART communication protocol for the Protium-1000/2500 system.
@@ -27,6 +28,7 @@ This document outlines the UART communication protocol for the Protium-1000/2500
     * [5.3.1 Normal Shutdown:](#531-normal-shutdown)
     * [5.3.2 Abnormal Shutdown:](#532-abnormal-shutdown)
 * [Annex A: List of Commands](#annex-a-list-of-commands)
+* [Contact](#contact)
 <!-- TOC -->
 
 ## 1. Protium-1000/2500 UART Communication Specification

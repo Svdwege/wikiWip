@@ -1,3 +1,6 @@
+---
+title: Spectronik
+---
 [[spektronic_driver_code]]
 = Spektronic Driver Code Documentation
 

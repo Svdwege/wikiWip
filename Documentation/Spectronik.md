@@ -1,6 +1,7 @@
 ---
 title: Spectronik
 ---
+
 # Protium-1000/2500 UART Communication Specification
 
 This document outlines the UART communication protocol for the Protium-1000/2500 system.
@@ -10,6 +11,7 @@ This document outlines the UART communication protocol for the Protium-1000/2500
 ---
 
 <!-- TOC -->
+* Table of Contents
 * [Protium-1000/2500 UART Communication Specification](#protium-10002500-uart-communication-specification)
   * [UART Specification](#uart-specification)
   * [UART Connector Specification](#uart-connector-specification)

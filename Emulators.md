@@ -4,7 +4,7 @@
 
 > This page is the central directory for all emulators within our project. 
 >
-> Find details, status, and links for each emulator below.
+> Find details, and links for each emulator below.
 
 ---
 
@@ -15,8 +15,7 @@ Click on the name or "View Details" link for dedicated documentation.
 ### 1. 🚀 Spectronik Emulator
 *   **Description:** Simulates the Spectronik fuel cell for rapid prototyping and testing of control sequences.
 *   **Simulates:** Spectronik Fuel Cell
-*   **Status:** Actively Developed / Stable
-*   **[➡️ View Spectronik Emulator Details](./Spektronic) or ([Full GitLab Link](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Emulators/Spektronic))**
+*   **[➡️ View Spectronik Emulator Details](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Emulators/Spectronik) or ([Full GitLab Link](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/notes/Emulators/Spektronic))**
 
 ---
 

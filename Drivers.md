@@ -12,15 +12,13 @@
 
 Below you will find a list of available drivers. Click on the name or the "View Details" link to navigate to its dedicated documentation page.
 
-### 1. 🔩 Motor driver
+### 1. Motor driver
 *   **Description:** This document describes the C++ classes and functions used for handling and decoding CAN messages related to the GEMmotors G1.X motor driver
-*   **[➡️ View Details for [Motor Driver]](Drivers/Motor)**
+*   **[➡️ View Details for [Motor driver]](Drivers/Motor)**
 
-### 2. 📡 [Placeholder: Example Driver Name - e.g., CAN Bus Interface Driver]
-*   **Description:** [Briefly describe what this driver does, e.g., "Manages communication over the vehicle's CAN bus, allowing for sending and receiving CAN messages."]
-*   **Hardware/System Interfaced:** [e.g., "On-board MCP2515 CAN Controller"]
-*   **Status:** [e.g., Planning, In Development, Alpha, Beta, Stable, Deprecated]
-*   **[➡️ View Details for [Example Driver Name]](./Path-To-Example-Driver-Doc)**
+### 2. Spectronik driver
+*   **Description:** This document outlines the C++ code for the Spectronik driver, which communicates with the Protium-1000/2500 system via UART.
+*   **[➡️ View Details for [Spectronik driver]](Drivers/Spectronik)**
 
 
 

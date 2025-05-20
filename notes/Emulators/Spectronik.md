@@ -2,6 +2,7 @@
 title: Spectronik
 ---
 
+
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
@@ -21,11 +22,11 @@ title: Spectronik
 * [3. Software](#3-software-)
   * [3.1. Overview](#31-overview)
   * [3.2. Configuration Constants for Dynamic Behavior](#32-configuration-constants-for-dynamic-behavior-)
-  * [3.3. UART Command Interface](#33-uart-command-interface-)
-  * [3.4. Data String Formats](#34-data-string-formats-)
-    * [3.4.1. Continuous Data Transmission String (`long_string`) Example](#341-continuous-data-transmission-string-long_string-example-)
-    * [3.4.2. System Off Message (`end_string`) Example](#342-system-off-message-end_string-example-)
-  * [3.5. String Construction](#35-string-construction-)
+  * [3.3. UART Command Interface](#33-uart-command-interface)
+  * [3.4. Data String Formats](#34-data-string-formats)
+    * [3.4.1. Continuous Data Transmission String (`long_string`) Example](#341-continuous-data-transmission-string-long_string-example)
+    * [3.4.2. System Off Message (`end_string`) Example](#342-system-off-message-end_string-example)
+  * [3.5. String Construction](#35-string-construction)
 * [Contact](#contact)
 <!-- TOC -->
 ---
@@ -92,13 +93,13 @@ The schematic outlines the connections between the FRDM-KL25Z development board,
 
 ---
 
-### 3. Software 
+### 3. Software
 
 #### 3.1. Overview
 
 The software running on the MKL25Z4 microcontroller is responsible for generating simulated data, handling UART communication, and responding to user commands.
 
-#### 3.2. Configuration Constants for Dynamic Behavior 
+#### 3.2. Configuration Constants for Dynamic Behavior
 
 The behavior of the simulated dynamic variables (`FAN`, `H2P1`, `H2P2`, `Tank_P`, `UCB_V`) is controlled by preprocessor `#define` constants within the C code. Modifying these values directly alters the simulation characteristics before compilation.
 
@@ -110,7 +111,7 @@ The behavior of the simulated dynamic variables (`FAN`, `H2P1`, `H2P2`, `Tank_P`
 
 Changing these constants before compiling the code will change the rate, range, and characteristics of the data simulation.
 
-#### 3.3. UART Command Interface 
+#### 3.3. UART Command Interface
 
 The system responds to specific commands received via UART2. These commands control the data transmission mode. Commands must be terminated with a carriage return (`\r`).
 
@@ -125,18 +126,18 @@ The system responds to specific commands received via UART2. These commands cont
         *   Stops the continuous transmission mode (if active).
         *   Transmits a fixed "System Off" message (`end_string`) *one time*.
 
-#### 3.4. Data String Formats 
+#### 3.4. Data String Formats
 
 This section details the formats of the primary data strings transmitted by the emulator.
 
-##### 3.4.1. Continuous Data Transmission String (`long_string`) Example 
+##### 3.4.1. Continuous Data Transmission String (`long_string`) Example
 The primary data string (`long_string`) transmitted by the emulator during continuous operation or upon receiving the `values\r` command has the following format. Note that `[2J` is an ANSI escape sequence that typically clears the terminal screen.
 
 ```
 [2J|FC_V : 31.01 V | FC_A : 7.63 A | FC_W : 236.5 W | Energy: 88 Wh| FCT1: 47.85 C | FAN : %d %% | H2P1 : %.2f B | H2P2 : %.2f B | Tank-P: %.2f B | Tank-T: 0.00 C | V_Set: 36.00 V | I_Set: 11.00 A | UCB_V: %.2f V | Stasis_selector: 0 | STASIS_V1 : 35.20 B | STASIS_V2 : 35.80 B | Number_of_cell :50 | | | | ! Fan PWM auto \r\n
 ```
 
-##### 3.4.2. System Off Message (`end_string`) Example 
+##### 3.4.2. System Off Message (`end_string`) Example
 When the `end\r` command is received or the physical button connected to `PORTC` pin 3 is pressed, the system transmits the `end_string`. This message is defined in the C code as follows:
 ```c
     Abnormal shutdown initiated
@@ -146,7 +147,7 @@ When the `end\r` command is received or the physical button connected to `PORTC`
     Total Runtime:   0001:40 hrs
     System Off
 ```
-#### 3.5. String Construction 
+#### 3.5. String Construction
 
 The C standard library function `snprintf` is used to build the `long_string` by inserting dynamic values into the template shown above. The format specifiers in the template are replaced by the current values of specific program variables as follows:
 

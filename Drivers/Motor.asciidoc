@@ -1,3 +1,6 @@
+---
+title: Motor
+---
 [[motor_driver_code]]
 = Motor Driver Code Documentation
 

@@ -1,6 +1,7 @@
 ---
 title: Collector
 ---
+
 = Documentation
 
 == ID's send

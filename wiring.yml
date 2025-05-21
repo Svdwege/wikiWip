@@ -87,10 +87,11 @@ cables:
       - OG
       - GN
     shield: true
-    gauge: 0.25 mm2
+    gauge: 0.22 mm2
     show_equiv: true
     length: 0.2
-
+    # light blue ferrules din
+    # white ferrules din
   CAN:
     category: bundle
     wirecount: 2

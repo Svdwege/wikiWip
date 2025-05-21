@@ -5,6 +5,7 @@ title: Motor
 
 
 
+
 # Motor Driver
 
 This document provides an in-depth overview of the C++ software components designed for interfacing with the GEMmotors G1.X motor controller via the CAN bus. The implementation is guided by the GEMmotors G1.X REV008 instruction manual and focuses on robust data handling and configurable logging.
@@ -99,7 +100,10 @@ A key feature of this driver is its highly configurable logging output. Each dat
 *   Prefix: `"MTL"`
 *   Conditionally includes: `control_value`, `control_mode`, `motor_mode`, `sw_enable`, `motor_state`, `motor_torque`, `motor_rpm`, `motor_temp`.
 *   Example (if all `Config::CAN::Telemetry::PARSE_MTL_...` flags are true):
-```c++   MTL,<control_value>,<control_mode>,<motor_mode>,<sw_enable>,<motor_state>,<motor_torque>,<motor_rpm>,<motor_temp>
+```c++
+
+MTL,<control_value>,<control_mode>,<motor_mode>,<sw_enable>,<motor_state>,<motor_torque>,<motor_rpm>,<motor_temp>
+
 ```
 
 ### 3.2 `MotorPower::toString()`

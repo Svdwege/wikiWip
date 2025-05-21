@@ -3,6 +3,7 @@ title: Spectronik
 ---
 
 
+
 # Spectronik Driver
 
 This document outlines the C++ driver for the Spectronik Protium-1000/2500 fuel cell system, facilitating communication via UART. It adheres to the Protium UART Specification.
@@ -17,7 +18,7 @@ For the comprehensive Protium UART Specification, please consult the project's d
   * [1.2 `Spectronik` Class: The Communication Orchestrator](#12-spectronik-class-the-communication-orchestrator)
 * [2. Data Processing & Logging](#2-data-processing--logging)
   * [2.1 Parsing Logic:](#21-parsing-logic)
-  * [2.2 Logging Output - `ProtiumData::toString()` method](#22-logging-output---protiumdatatostring-method-)
+  * [2.2 Logging Output - `ProtiumData::toString()` method](#22-logging-output---protiumdatatostring-method)
   * [2.3 Output Customization & Format:](#23-output-customization--format)
   * [2.4 Example Output (if ALL `PARSE_...` flags in `Config::Spectronik` were `true`):](#24-example-output-if-all-parse_-flags-in-configspectronik-were-true)
 * [3. Configuration Driven Behavior](#3-configuration-driven-behavior)
@@ -106,7 +107,7 @@ This crucial private method is responsible for deserializing the raw UART messag
 6.  **Validity:** The `sensor_data.valid` flag is set to `true` upon completion (unless memory allocation for `strdup` fails).
 7.  **Return:** The populated `ProtiumData` object is returned.
 
-### 2.2 Logging Output - `ProtiumData::toString()` method 
+### 2.2 Logging Output - `ProtiumData::toString()` method
 
 *Signature:* `public std::string ProtiumData::toString() override`
 

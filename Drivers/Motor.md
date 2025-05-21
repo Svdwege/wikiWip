@@ -1,6 +1,7 @@
 ---
 title: Motor
 ---
+
 # Motor Driver
 
 This document provides an in-depth overview of the C++ software components designed for interfacing with the GEMmotors G1.X motor controller via the CAN bus. The implementation is guided by the GEMmotors G1.X REV008 instruction manual and focuses on robust data handling and configurable logging.
@@ -92,25 +93,25 @@ Represents data related to motor control commands, typically status/feedback rec
 A key feature of this driver is its highly configurable logging output. Each data class (`MotorTelemetry`, `MotorPower`, `MotorCtrlCommand`) implements `ILoggable::toString()`. The content of the generated string is **dynamically determined at compile-time** by `PARSE_...` boolean constants defined in `Config.hpp`.
 
 ### 3.1 `MotorTelemetry::toString()`
-    *   Prefix: `"MTL"`
-    *   Conditionally includes: `control_value`, `control_mode`, `motor_mode`, `sw_enable`, `motor_state`, `motor_torque`, `motor_rpm`, `motor_temp`.
-    *   Example (if all `Config::CAN::Telemetry::PARSE_MTL_...` flags are true):
+*   Prefix: `"MTL"`
+*   Conditionally includes: `control_value`, `control_mode`, `motor_mode`, `sw_enable`, `motor_state`, `motor_torque`, `motor_rpm`, `motor_temp`.
+*   Example (if all `Config::CAN::Telemetry::PARSE_MTL_...` flags are true):
         ```
         MTL,<control_value>,<control_mode>,<motor_mode>,<sw_enable>,<motor_state>,<motor_torque>,<motor_rpm>,<motor_temp>
         ```
 
 ### 3.2 `MotorPower::toString()`
-    *   Prefix: `"MPW"`
-    *   Conditionally includes: `motor_power`, `inv_peak_cur`.
-    *   Example (if all `Config::CAN::Power::PARSE_MPW_...` flags are true):
+*   Prefix: `"MPW"`
+*   Conditionally includes: `motor_power`, `inv_peak_cur`.
+*   Example (if all `Config::CAN::Power::PARSE_MPW_...` flags are true):
         ```
         MPW,<motor_power>,<inv_peak_cur>
         ```
 
 ### 3.3 `MotorCtrlCommand::toString()`
-    *   Prefix: `"THR"`
-    *   Conditionally includes: `control_value`, `control_mode`, `motor_mode`, `sw_enable`, `debug_mode`.
-    *   Example (if all `Config::CAN::ControlCommand::PARSE_THR_...` flags are true):
+*   Prefix: `"THR"`
+*   Conditionally includes: `control_value`, `control_mode`, `motor_mode`, `sw_enable`, `debug_mode`.
+*   Example (if all `Config::CAN::ControlCommand::PARSE_THR_...` flags are true):
         ```
         THR,<control_value>,<control_mode>,<motor_mode>,<sw_enable>,<debug_mode>
         ```

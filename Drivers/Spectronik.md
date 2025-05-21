@@ -2,17 +2,32 @@
 title: Spectronik
 ---
 
-# Spectronik Driver 
+
+# Spectronik Driver
 
 This document outlines the C++ driver for the Spectronik Protium-1000/2500 fuel cell system, facilitating communication via UART. It adheres to the Protium UART Specification.
 
 For the comprehensive Protium UART Specification, please consult the project's documentation: [Protium UART Specification](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Documentation/Spectronik/).
 
 ---
+<!-- TOC -->
+<!-- TOC -->
+* [1. Core Components](#1-core-components)
+  * [1.1 `ProtiumData` Class: The Data Hub](#11-protiumdata-class-the-data-hub)
+  * [1.2 `Spectronik` Class: The Communication Orchestrator](#12-spectronik-class-the-communication-orchestrator)
+* [2. Data Processing & Logging](#2-data-processing--logging)
+  * [2.1 Parsing Logic:](#21-parsing-logic)
+  * [2.2 Logging Output - `ProtiumData::toString()` method](#22-logging-output---protiumdatatostring-method-)
+  * [2.3 Output Customization & Format:](#23-output-customization--format)
+  * [2.4 Example Output (if ALL `PARSE_...` flags in `Config::Spectronik` were `true`):](#24-example-output-if-all-parse_-flags-in-configspectronik-were-true)
+* [3. Configuration Driven Behavior](#3-configuration-driven-behavior)
+* [Contact](#contact)
+<!-- TOC -->
+---
 
-## Core Components
+## 1. Core Components
 
-### 1. `ProtiumData` Class: The Data Hub
+### 1.1 `ProtiumData` Class: The Data Hub
 
 The `ProtiumData` class is the central structure for holding parsed sensor values received from the Protium system's UART output, specifically from its "running phase" messages. It inherits from `ILoggable` for standardized logging capabilities.
 
@@ -47,7 +62,7 @@ The class encapsulates a comprehensive set of readings. Note that the actual dat
 
 ---
 
-### 2. `Spectronik` Class: The Communication Orchestrator
+### 1.2 `Spectronik` Class: The Communication Orchestrator
 
 The `Spectronik` class manages all aspects of UART communication with the Protium system.
 
@@ -69,7 +84,7 @@ The `Spectronik` class manages all aspects of UART communication with the Protiu
 
 ---
 
-## Data Processing & Logging
+## 2. Data Processing & Logging
 
 ### `Spectronik::parseProtiumData()` Function
 
@@ -77,7 +92,7 @@ The `Spectronik` class manages all aspects of UART communication with the Protiu
 
 This crucial private method is responsible for deserializing the raw UART message string from the Protium system.
 
-### Parsing Logic:
+### 2.1 Parsing Logic:
 
 1.  **Input Format:** Expects a null-terminated string with key-value pairs, typically delimited by `|` (pipe) or `!` (exclamation mark), and colons `:` separating keys from values (e.g., `KEY1:VALUE1|KEY2:VALUE2!...`).
 2.  **Tokenization:** Uses `strdup` (requires `free` later) to create a mutable copy of the input string, then `strtok_r` to split it into tokens based on `|` or `!`.
@@ -91,13 +106,13 @@ This crucial private method is responsible for deserializing the raw UART messag
 6.  **Validity:** The `sensor_data.valid` flag is set to `true` upon completion (unless memory allocation for `strdup` fails).
 7.  **Return:** The populated `ProtiumData` object is returned.
 
-### `ProtiumData::toString()` Method (Logging Output)
+### 2.2 Logging Output - `ProtiumData::toString()` method 
 
 *Signature:* `public std::string ProtiumData::toString() override`
 
 This method, overriding `ILoggable::toString()`, serializes the sensor data into a formatted string, suitable for logging or transmission.
 
-### Output Customization & Format:
+### 2.3 Output Customization & Format:
 
 The content of the output string is **dynamically determined at compile-time** by the `PARSE_...` boolean constants in the `Config::Spectronik` namespace.
 
@@ -106,7 +121,7 @@ The content of the output string is **dynamically determined at compile-time** b
     *   Integer types (`FanPercentage`, `NumberOfCells`, `StasisSelector`) are converted using `std::to_string`.
     *   Float types are formatted to two decimal places using `snprintf`.
 
-**Example Output (if ALL `PARSE_...` flags in `Config::Spectronik` were `true`):**
+### 2.4 Example Output (if ALL `PARSE_...` flags in `Config::Spectronik` were `true`):
 ```c++
 SPC,<FuelCellVoltage>,<FuelCellCurrent>,<FuelCellPower>,<EnergyConsumed>,<FuelCellTemperature1>,<FanPercentage>,<NumberOfCells>,<H2PressureSensor1>,<H2PressureSensor2>,<H2TankPressure>,<H2TankTemperature>,<VoltageSetpoint>,<CurrentSetpoint>,<SuperCapacitorVoltage>,<StasisSelector>,<StasisValve1Pressure>,<StasisValve2Pressure>
 ```
@@ -114,7 +129,7 @@ SPC,<FuelCellVoltage>,<FuelCellCurrent>,<FuelCellPower>,<EnergyConsumed>,<FuelCe
 
 ---
 
-## Configuration-Driven Behavior
+## 3. Configuration-Driven Behavior
 
 The driver's parsing and logging behavior is heavily influenced by compile-time constants defined in `Config/Config.hpp` under the `Config::Spectronik` namespace.
 

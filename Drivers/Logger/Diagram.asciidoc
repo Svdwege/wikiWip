@@ -1,0 +1,4 @@
+graph LR
+    Collector[Collector Driver] --> Logger[Logger Driver]
+    Logger --> OpenLog_Module[OpenLog Module]
+    OpenLog_Module --> SD_Card[SD Card]

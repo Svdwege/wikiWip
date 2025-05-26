@@ -1,1 +1,1 @@
-- [] Fix issue #22.
+- \[ \] Fix issue #22.

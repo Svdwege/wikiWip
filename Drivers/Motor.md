@@ -7,12 +7,13 @@ title: Motor
 
 
 
+
 # Motor Driver
 
 This document provides an in-depth overview of the C++ software components designed for interfacing with the GEMmotors G1.X motor controller via the CAN bus. The implementation is guided by the GEMmotors G1.X REV008 instruction manual and focuses on robust data handling and configurable logging.
 
 -   **Primary Manual (External PDF):** [GEMmotors-G1.X-REV008](https://hannl-my.sharepoint.com/personal/jaap_janssens_han_nl/_layouts/15/onedrive.aspx?CID=f663e4aa%2D0285%2D40f3%2Da3e6%2D5114972ff027&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FGEMMotors%2DG1%2EX%2DREV008%2Epdf&parent=%2Fpersonal%2Fjaap%5Fsens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation)
--   **Project CAN Definitions (GitLab Wiki):** [Motor Documentation (Tabs 2, 3, 4, 7, 8)](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Documentation/Motor)
+-   **Project CAN Definitions (GitLab Wiki):** [Motor Documentation](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Documentation/Motor)
 
 ---
 <!-- TOC -->

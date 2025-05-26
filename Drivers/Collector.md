@@ -62,23 +62,8 @@ This section provides an overview of the data flow within the SMART system and i
 
 The following diagram illustrates the various data sources and their path through processing units before being managed by the `Collector`.
 
-[mermaid]
-----
-graph LR
-    A[ADXL345] --> P1[Proc]
-    Sp[Spectronik controller]--> P2[processing]
+**Collector diagram**: [Click here to view diagram](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Drivers/Collector/Diagram)
 
-    cb[CanCallback] --> Can_Throttle
-    cb --> Can_Telemetry
-    cb --> Can_Motor
-
-    Can_Throttle -->Collect
-    Can_Telemetry -->Collect
-    Can_Motor -->Collect
-
-    P1 --> Collect[Collector]
-    P2[processing] --> Collect
-----
 
 ### 2.2 Data Identifiers Sent by Collector
 

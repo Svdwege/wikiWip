@@ -13,8 +13,8 @@ These notes may link to other pages. And should contain their own list of refere
 [mermaid]
 ----
 graph LR
-    ADXL[ADXL345] --> P1[Proc]
-    Spc[Spectronik controller]--> P2[processing]
+    ADXL[ADXL345] --> P1[Processing]
+    Spc[Spectronik controller]--> P2[Processing]
 
     cb[CanCallback] --> Can_Throttle
     cb --> Can_Telemetry

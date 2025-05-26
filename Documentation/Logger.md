@@ -1,9 +1,13 @@
 ---
 title: Logger
 ---
+
 # OpenLog Documentation
 
 The OpenLog is a dedicated serial data logger built around an **ATmega328 microcontroller (16MHz, Optiboot/Arduino Uno compatible)**. It's designed to efficiently store serial data to a microSD card, making it ideal for embedded applications.
+
+**Full information**: [Click here to view the full original website](https://learn.sparkfun.com/tutorials/openlog-hookup-guide)
+
 
 ---
 <!-- TOC -->

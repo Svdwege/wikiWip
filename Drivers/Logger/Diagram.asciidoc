@@ -1,48 +1,24 @@
 [mermaid]
 ----
-classDiagram
-    class Logger {
-        - UART_HandleTypeDef* _huart
-        - GPIO_TypeDef* GPIOx_openlog_reset
-        - uint16_t GPIO_pin_openlog_reset
-        - uint_fast32_t DataWritten
-        + Logger(UART_HandleTypeDef*, GPIO_TypeDef*, uint16_t)
-        + void init()
-        + void logData(const uint8_t* data, int length)
-        + void logData(uint8_t* data, int length)
-        + void logData(ILoggable &obj)
-        + void logData(std::string &str)
-        - uint8_t enter_cmd_mode() const
-        - void updateRecords(int len)
-        - static int extract_last_log(const char* buffer)
-        - void Reset_openlog() const
-    }
+graph LR
+    UserCode[Application using Logger] -->|logData(obj)| Logger
+    ILoggable -->|toString()| Logger
+    Logger -->|HAL_UART_Transmit| UART
+    Logger -->|Reset_openlog()| OpenLog_Reset_Pin
+    Logger -->|enter_cmd_mode()| OpenLog_Command
+    Logger -->|ls + extract_last_log| FileManager
+    FileManager -->|append LOGxxxx.TXT| OpenLog_Command
 
-    class ILoggable {
-        <<interface>>
-        + std::string toString()
-    }
+    subgraph STM32 Hardware
+        UART
+        OpenLog_Reset_Pin
+    end
 
-    Logger --> ILoggable : uses
+    subgraph OpenLog
+        OpenLog_Command
+    end
 
-    note for Logger::init
-      Calls Reset_openlog()
-      // Optionally listens for init response
-    end note
-
-    note for Logger::logData
-      Overloaded for:
-        - raw data buffer
-        - std::string
-        - ILoggable object
-    end note
-
-    note for Logger::updateRecords
-      Tracks total bytes written
-      If limit exceeded:
-        - enters command mode
-        - runs "ls"
-        - parses log filenames
-        - appends new log file
-    end note
+    subgraph Internals
+        FileManager[Log File Manager]
+    end
 ----

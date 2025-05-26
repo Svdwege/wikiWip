@@ -1,119 +1,48 @@
 [mermaid]
 ----
-graph TD
-    subgraph User Application
-        A[Application Code]
-    end
+classDiagram
+    class Logger {
+        - UART_HandleTypeDef* _huart
+        - GPIO_TypeDef* GPIOx_openlog_reset
+        - uint16_t GPIO_pin_openlog_reset
+        - uint_fast32_t DataWritten
+        + Logger(UART_HandleTypeDef*, GPIO_TypeDef*, uint16_t)
+        + void init()
+        + void logData(const uint8_t* data, int length)
+        + void logData(uint8_t* data, int length)
+        + void logData(ILoggable &obj)
+        + void logData(std::string &str)
+        - uint8_t enter_cmd_mode() const
+        - void updateRecords(int len)
+        - static int extract_last_log(const char* buffer)
+        - void Reset_openlog() const
+    }
 
-    subgraph Logger Driver (Logger.hpp/.cpp)
-        direction LR
+    class ILoggable {
+        <<interface>>
+        + std::string toString()
+    }
 
-        LOGGER_CLASS[Logger Class Instance]
+    Logger --> ILoggable : uses
 
-        LOGGER_INIT(Logger::init())
-        LOGGER_LOGDATA(Logger::logData(data))
-        LOGGER_UPDATE_RECORDS(Logger::updateRecords(len))
+    note for Logger::init
+      Calls Reset_openlog()
+      // Optionally listens for init response
+    end note
 
-        RESET_OPENLOG(Logger::Reset_openlog())
-        ENTER_CMD_MODE(Logger::enter_cmd_mode())
-        EXTRACT_LAST_LOG(static Logger::extract_last_log(buffer))
+    note for Logger::logData
+      Overloaded for:
+        - raw data buffer
+        - std::string
+        - ILoggable object
+    end note
 
-        %% Internal State
-        DATA_WRITTEN_CTR{DataWritten Counter: 0}
-        FILE_SIZE_LIMIT{FileSizeLim: 10 * 1024 bytes}
-
-        %% Inputs to logData
-        ILOGGABLE_OBJ{ILoggable Object}
-        STD_STRING_OBJ[std::string Object]
-        UINT8_BUFFER_OBJ[uint8_t* Buffer]
-
-        A -- "1. Calls init() (once)" --> LOGGER_INIT
-        A -- "2. Calls logData() (repeatedly)" --> LOGGER_LOGDATA
-
-        %% Init Flow
-        LOGGER_INIT --> RESET_OPENLOG
-        RESET_OPENLOG -- "Toggle GPIO_pin_openlog_reset (SET->RESET->SET)" --> HAL_GPIO_WRITE[HAL_GPIO_WritePin]
-        RESET_OPENLOG -- "Wait 1ms" --> HAL_DELAY[HAL_Delay]
-        RESET_OPENLOG -- "Receive 5 bytes (expect '<')" --> HAL_UART_RECEIVE[HAL_UART_Receive(_huart)]
-        HAL_UART_RECEIVE -- "Received Buffer" --> RESET_OPENLOG{Buffer check for '<'}
-        RESET_OPENLOG -- "If no '<', might Error_Handler()" --> APP
-
-        %% logData Flow
-        LOGGER_LOGDATA -->|a. If ILoggable| ILOGGABLE_OBJ
-        LOGGER_LOGDATA -->|b. If std::string| STD_STRING_OBJ
-        LOGGER_LOGDATA -->|c. If uint8_t*| UINT8_BUFFER_OBJ
-
-        ILOGGABLE_OBJ -- "obj.toString()" --> DATA_PREPARED[Data Prepared for UART TX (string/bytes)]
-        STD_STRING_OBJ --> DATA_PREPARED
-        UINT8_BUFFER_OBJ --> DATA_PREPARED
-
-        DATA_PREPARED -- "Transmits data" --> HAL_UART_TRANSMIT[HAL_UART_Transmit(_huart)]
-        HAL_UART_TRANSMIT -- "Transmit success/timeout" --> LOGGER_LOGDATA
-
-        LOGGER_LOGDATA -- "Notifies about 'length' of data sent" --> LOGGER_UPDATE_RECORDS
-
-        %% updateRecords Flow (File Rotation Logic)
-        LOGGER_UPDATE_RECORDS --> DATA_WRITTEN_CTR
-        DATA_WRITTEN_CTR -- "Increments by 'len'" --> LOGGER_UPDATE_RECORDS
-
-        LOGGER_UPDATE_RECORDS -- "IF DataWritten > FileSizeLim" --> ENTER_CMD_MODE
-        LOGGER_UPDATE_RECORDS -- "ELSE (no rotation needed)" --> DATA_WRITTEN_CTR
-
-        ENTER_CMD_MODE -- "Waits 1ms" --> HAL_DELAY
-        ENTER_CMD_MODE -- "Sends '26, 26, 26' bytes" --> HAL_UART_TRANSMIT
-        HAL_UART_TRANSMIT -- "Transmitted Bytes" --> ENTER_CMD_MODE
-        ENTER_CMD_MODE -- "Waits 1ms" --> HAL_DELAY
-        ENTER_CMD_MODE -- "Receives 3 bytes (expect '>')" --> HAL_UART_RECEIVE
-        HAL_UART_RECEIVE -- "Received Bytes" --> ENTER_CMD_MODE{Buffer check for '>'}
-        ENTER_CMD_MODE -- "Returns 0 (success) or 1 (fail)" --> LOGGER_UPDATE_RECORDS
-
-        LOGGER_UPDATE_RECORDS -- "IF enter_cmd_mode() == 0 (success)" --> SEND_LS_CMD[Send "ls\\r\\n" Command]
-        LOGGER_UPDATE_RECORDS -- "ELSE (cmd mode failed)" --> ERROR_PATH[Log error / exit]
-
-        SEND_LS_CMD -- "Transmit 'ls\\r\\n'" --> HAL_UART_TRANSMIT
-        HAL_UART_TRANSMIT -- "Transmitted Bytes" --> SEND_LS_CMD
-        SEND_LS_CMD -- "Receive up to 512 bytes (ls output)" --> HAL_UART_RECEIVE
-        HAL_UART_RECEIVE -- "Received Buffer (ls output)" --> EXTRACT_LAST_LOG
-
-        EXTRACT_LAST_LOG -- "Parses 'ls' output" --> LAST_LOG_NR_RESULT[Last Log Number (e.g., 5)]
-        LAST_LOG_NR_RESULT -- "lastlogNr + 1" --> CONSTRUCT_APPEND_CMD[Construct "append LOG%05d.TXT\\r\\n" Command]
-
-        CONSTRUCT_APPEND_CMD -- "Transmit command" --> HAL_UART_TRANSMIT
-        HAL_UART_TRANSMIT -- "Transmitted Bytes" --> CONSTRUCT_APPEND_CMD
-
-        CONSTRUCT_APPEND_CMD -- "Resets counter for new file" --> DATA_WRITTEN_CTR{DataWritten Counter: 0}
-
-    end
-
-    subgraph STM32 HAL Layer
-        HAL_UART_TRANSMIT
-        HAL_UART_RECEIVE
-        HAL_GPIO_WRITE
-        HAL_DELAY
-    end
-
-    subgraph STM32 Peripherals (On-Chip Hardware)
-        UART_TX_PIN[(UART Tx Pin)]
-        UART_RX_PIN[(UART Rx Pin)]
-        GPIO_OUT_PIN[(GPIO Output Pin)]
-    end
-
-    subgraph OpenLog Device (External Module)
-        OL_UART_RX_IF[OpenLog UART RX Interface]
-        OL_UART_TX_IF[OpenLog UART TX Interface]
-        OL_RST_PIN[OpenLog RST Pin]
-        OL_INTERNAL_LOGIC[OpenLog Internal Logic (Command Parser, SD Card Controller)]
-        OL_SD_CARD[SD Card (Log Files)]
-
-        %% Hardware Connections
-        HAL_UART_TRANSMIT --- UART_TX_PIN -- "UART TX Line" --> OL_UART_RX_IF
-        OL_UART_TX_IF -- "UART RX Line" --> UART_RX_PIN --- HAL_UART_RECEIVE
-        HAL_GPIO_WRITE --- GPIO_OUT_PIN -- "GPIO Control Line" --> OL_RST_PIN
-
-        %% Internal OpenLog Flow
-        OL_UART_RX_IF -- "Serial Data/Commands" --> OL_INTERNAL_LOGIC
-        OL_INTERNAL_LOGIC -- "Log File Data" --> OL_SD_CARD
-        OL_INTERNAL_LOGIC -- "Command Responses/Data" --> OL_UART_TX_IF
-        OL_RST_PIN -- "Reset Signal" --> OL_INTERNAL_LOGIC
-    end
+    note for Logger::updateRecords
+      Tracks total bytes written
+      If limit exceeded:
+        - enters command mode
+        - runs "ls"
+        - parses log filenames
+        - appends new log file
+    end note
 ----

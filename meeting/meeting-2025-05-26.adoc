@@ -1,0 +1,24 @@
+- Measure Cable length : PT
+- check for cables with ARLE: PT: 27-05-2025
+- Make 2 cables for each run of wire : PT : 27-05-2025
+- cat6 cable for Accelerometer : 
+- test Can Collection 28-05-2025: Vladimirs, Sjoerd: 
+- test SPC Collection 28-05-2025: Vladimirs, Sjoerd: 
+- test ACC Collection 28-05-2025: Sjoerd
+- Test connection to Can Chip 26-05-2025 : Vladimirs, Sjoerd
+- test RTC with battery 30-05-2025 : Sjoerd
+- make exporter local 9 june: Sjoerd
+- GNSS CRC parsing 27-05-2025 12:00 : Sjoerd, Remko
+- get new dataplan 29-05-2025: Julian
+- get second card for pitbox 04-06-2025 : Julian
+- test handover of mifi 04-06-2025: Julian, Remko
+- add realtime visualisation 9 june: Julian
+- TLM tokenizer    26-05-2025: Julian
+- TLM aggragation  26-05-2025: Julian
+- TLM transmission : Julian,Remko
+- Measure max operation current, Spikes   02-06-2025 : Vladimirs
+- Measure Short circuit current           02-06-2025 : Vladimirs, Thijs
+- provide spec sheets for current devices 02-06-2025 : Vladimirs
+
+
+

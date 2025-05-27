@@ -1,7 +1,6 @@
 ---
 title: Logger
 ---
-
 # Logger Driver
 This document describes the `Logger` driver, a C++ component designed for efficient and automated data logging to an **OpenLog serial data logger**.
 
@@ -25,8 +24,20 @@ The `Logger` driver acts as a **smart interface** between your microcontroller's
 
 The `Logger` class bridges your code with the OpenLog, which in turn writes to an SD card.
 
-**Logger diagram**: [Click here to view diagram](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Drivers/Logger/Diagram)
-## 3. Key Operations
+```
+      
++------------------------+      +--------------+      +--------------+
+|     Microcontroller    |      |    Logger    |      |    OpenLog   |
+|   (Your Application)   |      |  (C++ Class) |      |   (SD Card)  |
+|                        |      |              |      |              |
+| 1. Data to Log         +----->| 2. Processes |----->| 3. Stores    |
+|                        |      |   & Transmits|      |    Data      |
+|                        |      |              |      |              |
+|                        |      |  (via UART)  |      |              |
+|                        |      |              |      |              |
++------------------------+      +--------------+      +--------------+
+
+```
 
 The `Logger` handles three main phases:
 

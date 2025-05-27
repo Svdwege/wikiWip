@@ -1,5 +1,3 @@
-Collector/Diagram.asciidoc
-0 → 100644
 [mermaid]
 ----
 graph LR

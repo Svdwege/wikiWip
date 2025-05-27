@@ -1,7 +1,31 @@
 [mermaid]
 ----
-graph LR
-    UserCode[Application using Logger] --> Logger
+flowchart TD
+    A[Init Logger] --> B[Reset_openlog()]
+    B --> C[Check '<' in response]
+    C -- Yes --> D[Continue]
+    C -- No --> E[Error/Exit]
+
+    D --> F[logData(obj)]
+    F --> G[Convert to string]
+    G --> H[logData(str)]
+    H --> I[Send via UART]
+
+    D --> J[logData(data, length)]
+    J --> K[Send via UART]
+
+    I --> L[updateRecords(len)]
+    K --> L
+
+    L --> M{DataWritten > FileSizeLim?}
+    M -- No --> N[Return]
+    M -- Yes --> O[Enter command mode]
+    O --> P{Command mode entered?}
+    P -- No --> Q[Return]
+    P -- Yes --> R[List files]
+    R --> S[Extract last log index]
+    S --> T[Append new log file]
+    T --> N
 
 
 ----

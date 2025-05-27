@@ -1,29 +1,19 @@
+Collector/Diagram.asciidoc
+0 → 100644
 [mermaid]
 ----
-flowchart TD
-    A[Init Logger] --> B[Reset_openlog()]
-    B --> C[Check '<' in response]
-    C -- Yes --> D[Continue]
-    C -- No --> E[Error/Exit]
+graph LR
+    A[ADXL345] --> P1[Proc]
+    Sp[Spectronik controller]--> P2[processing]
 
-    D --> F[logData(obj)]
-    F --> G[Convert to string]
-    G --> H[logData(str)]
-    H --> I[Send via UART]
+    cb[CanCallback] --> Can_Throttle
+    cb --> Can_Telemetry
+    cb --> Can_Motor
 
-    D --> J[logData(data, length)]
-    J --> K[Send via UART]
+    Can_Throttle -->Collect
+    Can_Telemetry -->Collect
+    Can_Motor -->Collect
 
-    I --> L[updateRecords(len)]
-    K --> L
-
-    L --> M{DataWritten > FileSizeLim?}
-    M -- No --> N[Return]
-    M -- Yes --> O[Enter command mode]
-    O --> P{Command mode entered?}
-    P -- No --> Q[Return]
-    P -- Yes --> R[List files]
-    R --> S[Extract last log index]
-    S --> T[Append new log file]
-    T --> N
+    P1 --> Collect[Collector]
+    P2[processing] --> Collect
 ----

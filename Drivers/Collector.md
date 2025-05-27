@@ -113,10 +113,10 @@ The `update()` method operates in two distinct phases:
 
 ### 3.2 Output Formatting & Protocol
 
-*   **Timestamp String (`getSampletimeString()`):** This method provides a string representing the precise time at which the data sample was captured. This ensures that each logged entry can be accurately correlated with the time of its acquisition.
-    *   **Example Format:** `"hh:mm:ss,fff"` (e.g., `"23:17:42,099"`)
-*   **Data String (`toString()`):** This method provides a formatted string containing the actual processed data values. It includes a data identifier (as listed in Section 2.2) followed by the relevant data values, comma-separated.
-    *   **Example Format:** `"ID,Value1,Value2,...,ValueN"` (e.g., `"ACC,-109,32,-229"`)
+* **Timestamp String (`getSampletimeString()`):** This method provides a string representing the precise time at which the data sample was captured. This ensures that each logged entry can be accurately correlated with the time of its acquisition.
+  * **Example Format:** `"hh:mm:ss,fff"` (e.g., `"23:17:42,099"`)
+* **Data String (`toString()`):** This method provides a formatted string containing the actual processed data values. It includes a data identifier (as listed in Section 2.2) followed by the relevant data values, comma-separated.
+  * **Example Format:** `"ID,Value1,Value2,...,ValueN"` (e.g., `"ACC,-109,32,-229"`)
 
 The Collector constructs two types of output messages:
 
@@ -127,8 +127,9 @@ The Collector constructs two types of output messages:
   * A 16-bit CRC (`crc::calculateCRC16`) is applied for data integrity.
 * **Local Logging (`LOGbuffer`):**
   * Used for storing data locally (e.g., SD card) or debugging.
-  * Format: `[Timestamp][Data]\n`
+  * Format: `[Timestamp][Data]0x0D0A`
   * the CRLF sequence `0x0D0A` terminates each log entry.
+  * The format is compliant with [RFC4180](https://www.ietf.org/rfc/rfc4180.txt)
 
 ### 3.3 Example Output
 

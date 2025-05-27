@@ -31,10 +31,6 @@ Below you will find a list of available drivers. Click on the name or the "View 
 ### 5. Spectronik driver
 *   **Description:** This document outlines the C++ code for the Spectronik driver, which communicates with the Protium-1000/2500 system via UART.
 *   **[➡️ View Details for [Spectronik driver]](Drivers/Spectronik)**
-
-### 3. ADXL driver
-
-
 ---
 
 ## 🤝 Contributing & Maintaining Driver Documentation

@@ -2,6 +2,7 @@
 title: Logger
 ---
 
+
 # Logger Driver
 This document describes the `Logger` driver, a C++ component designed for efficient and automated data logging to an **OpenLog serial data logger**.
 
@@ -39,6 +40,7 @@ The `Logger` class bridges your code with the OpenLog, which in turn writes to a
 +------------------------+      +--------------+      +--------------+
 
 ```
+## 3. Key Operations
 
 The `Logger` handles three main phases:
 

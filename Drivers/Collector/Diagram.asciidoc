@@ -1,7 +1,7 @@
 [mermaid]
 ----
 graph LR
-    UserCode[Application using Logger] -->|logData(obj)| Logger
+    UserCode[Application using Logger] --> Logger
 
 
 ----

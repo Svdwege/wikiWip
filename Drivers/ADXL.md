@@ -2,6 +2,7 @@
 title: ADXL
 ---
 
+
 # ADXL345 Accelerometer Driver
 
 This document describes the `ADXL345` driver, a C++ component designed to interface with the ADXL345 3-axis accelerometer via SPI.
@@ -58,8 +59,8 @@ The driver manages the sensor through a few key stages:
 
 ### 3.3 Data Storage (`register_data()`)
 
-*   **Purpose:** Links the driver to where it should place the acquired data.
-*   **Action:** Connects the `ADXL345` driver to an `accelerometerData` object, ensuring the driver knows which memory location to update with the latest sensor readings.
+*   **Purpose:** Register a data object to write processed data to
+*   **Action:** Connects the `ADXL345` driver to an `accelerometerData` object.
 
 ## 4. Key Data Structure (`accelerometerData`)
 

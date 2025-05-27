@@ -1,12 +1,46 @@
 ---
 title: Logger
 ---
-# Driver
+# Logger Driver
+This document describes the `Logger` driver, a C++ component designed for efficient and automated data logging to an **OpenLog serial data logger**.
 
-The logging library currently accepts a u8 array or a object which inherits from `Ilogable_object`.
-This ensures that a `toString()` method is implemented for the data which needs to be logged.
-Then call the `logger.logData()` method with the object carrying the data.
+## 1. Core Purpose
 
-The loggable object can be made using the composite design pattern.
-However it might be overcomplicating it, so to keep it simple for the first prototype the loggable data will be a single object with all info as properties.
-Where `toString()` calls the subobjects to `toString()` functions to create a string representation of the composite object.
+The `Logger` driver acts as a **smart interface** between your microcontroller's application and an OpenLog device. Its main job is to **reliably write data to an SD card** without the application needing to worry about serial protocols, hardware resets, or managing individual log files.
+
+## 2. How it Works (System Overview)
+
+The `Logger` class bridges your code with the OpenLog, which in turn writes to an SD card.
+
+**Logger diagram**: [Click here to view diagram](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Drivers/Logger/Diagram)
+## 3. Key Operations
+
+The `Logger` handles three main phases:
+
+### 3.1 Initialization (`init()`)
+
+*   **Purpose:** Prepares the OpenLog for logging by ensuring it's in a known, active state.
+*   **Action:** Performs a hardware reset and waits for the OpenLog to signal its readiness.
+### 3.2 Sending Data (`logData()` Methods)
+
+*   **Purpose:** Provides flexible methods to send various data types to the OpenLog.
+*   **Action:** Can log:
+    *   **Direct Strings:** Simple text messages.
+    *   **Raw Bytes:** Binary data streams.
+    *   **ILoggable Objects:** Structured application data that can convert itself into a loggable string.
+
+### 3.3 Automatic File Management
+
+*   **Purpose:** Organizes log data into manageable files and prevents single files from growing indefinitely.
+*   **Action:**
+    1.  **Tracking:** Monitors the size of the current log file.
+    2.  **Rollover:** When a file reaches a set size limit (e.g., 10 KB), the driver **automatically**:
+        *   Switches the OpenLog to a command mode.
+        *   Determines the next sequential log file name.
+        *   Instructs the OpenLog to open and write to this new file.
+        *   Returns the OpenLog to data-logging mode.
+    *   **Benefit:** Seamless file creation and switching occur transparently, without application intervention.
+
+---
+## Contact
+sjoerd

@@ -1,17 +1,25 @@
 [mermaid]
 ----
 graph LR
-    A[ADXL345] --> P1[Proc]
-    Sp[Spectronik controller]--> P2[processing]
+    UserCode[Application using Logger] -->|logData(obj)| Logger
+    Logger -->|toString()| ILoggable
+    Logger -->|HAL_UART_Transmit| UART
+    Logger -->|Reset_openlog()| OpenLog_Reset_Pin
+    Logger -->|enter_cmd_mode()| OpenLog_Command
+    Logger -->|ls + extract_last_log| FileManager
+    FileManager -->|append LOGxxxx.TXT| OpenLog_Command
 
-    cb[CanCallback] --> Can_Throttle
-    cb --> Can_Telemetry
-    cb --> Can_Motor
+    subgraph STM32 Hardware
+        UART
+        OpenLog_Reset_Pin
+    end
 
-    Can_Throttle -->Collect
-    Can_Telemetry -->Collect
-    Can_Motor -->Collect
+    subgraph OpenLog
+        OpenLog_Command
+    end
 
-    P1 --> Collect[Collector]
-    P2[processing] --> Collect
+    subgraph Internals
+        FileManager[Log File Manager]
+    end
+
 ----

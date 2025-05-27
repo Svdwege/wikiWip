@@ -1,12 +1,12 @@
 [mermaid]
 ----
 graph LR
-    UserCode[Application using Logger] -->|logData(obj)| Logger
-    ILoggable -->|toString()| Logger
-    Logger -->|HAL_UART_Transmit| UART
-    Logger -->|Reset_openlog()| OpenLog_Reset_Pin
-    Logger -->|enter_cmd_mode()| OpenLog_Command
-    Logger -->|ls + extract_last_log| FileManager
-    FileManager -->|append LOGxxxx.TXT| OpenLog_Command
+    A[Microcontroller <br> (Your Application)] -->|1. Data to Log<br>(e.g., "Temp:25C")| B[Logger <br> (C++ Class)]
+    B -->|2. Processes & Transmits<br>(via UART & GPIO Reset)| C[OpenLog <br> (SD Card)]
+    C -->|3. Stores Data| D(SD Card File)
 
+    style A fill:#e0f7fa,stroke:#00796b,stroke-width:2px
+    style B fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    style C fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style D fill:#f0f4c3,stroke:#afb42b,stroke-width:2px
 ----

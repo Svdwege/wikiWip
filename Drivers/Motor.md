@@ -8,6 +8,7 @@ title: Motor
 
 
 
+
 # Motor Driver
 
 This document provides an in-depth overview of the C++ software components designed for interfacing with the GEMmotors G1.X motor controller via the CAN bus. The implementation is guided by the GEMmotors G1.X REV008 instruction manual and focuses on robust data handling and configurable logging.
@@ -37,6 +38,10 @@ This document provides an in-depth overview of the C++ software components desig
 * [Contact](#contact)
 <!-- TOC -->
 ## 1. Core Architecture: Event-Driven & Configurable
+
+The diagram illustrates the event-driven architecture of the Motor Driver, showing how CAN messages from the GEMmotors controller are received, dispatched, processed, and stored into structured data objects.
+
+**Motor diagram**: [Click here to view diagram](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Drivers/Motor/Diagram)
 
 The driver employs a flexible architecture centered around a `CanDispatcher` and specialized message handlers.
 

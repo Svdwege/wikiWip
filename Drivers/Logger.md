@@ -1,8 +1,21 @@
 ---
 title: Logger
 ---
+
 # Logger Driver
 This document describes the `Logger` driver, a C++ component designed for efficient and automated data logging to an **OpenLog serial data logger**.
+
+---
+<!-- TOC -->
+* [1. Core Purpose](#1-core-purpose)
+* [2. How it Works (System Overview)](#2-how-it-works-system-overview)
+* [3. Key Operations](#3-key-operations)
+  * [3.1 Initialization (`init()`)](#31-initialization-init)
+  * [3.2 Sending Data (`logData()` Methods)](#32-sending-data-logdata-methods)
+  * [3.3 Automatic File Management](#33-automatic-file-management)
+* [Contact](#contact)
+<!-- TOC -->
+---
 
 ## 1. Core Purpose
 

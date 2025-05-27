@@ -13,8 +13,8 @@
 Navigate to the relevant section below to find the information you need.
 
 *   **[Spectronik](Documentation/Spectronik)**: This document outlines the UART communication protocol for the Protium-1000/2500 system.
-*   **[ADXL](Documentation/ADXL)**: This documents outline the technical specification of Sparkfun OpenLog
-*   **[Logger](Documentation/Logger)**: Detailed functionality of logger.
+*   **[ADXL](Documentation/ADXL)**: This documents outline the technical specification of ADXL345
+*   **[Logger](Documentation/Logger)**: Detailed specification on Sparkfun OpenLog.
 *   **[Motor](Documentation/Motor)**: This document contains extracted information from the GEMmotors G1.X Instruction manual.
 
 ---

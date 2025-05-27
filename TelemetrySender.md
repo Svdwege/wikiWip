@@ -17,6 +17,9 @@ All of these parts need to work in collaboration to function successfully. The m
   * [Prerequisites](#prerequisites)
     * [Links to install these prerequisites](#links-to-install-these-prerequisites)
   * [First time working with the Telemetry Sending Unit software](#first-time-working-with-the-telemetry-sending-unit-software)
+* [Configuration](#configuration)
+  * [Pin configuration and usage](#pin-configuration-and-usage)
+  * [UART Configuration](#uart-configuration)
 * [The dataflow](#the-dataflow)
   * [Dataflow in the Telemetry Sending Unit](#dataflow-in-the-telemetry-sending-unit)
     * [Overview of the expected data](#overview-of-the-expected-data)
@@ -96,6 +99,38 @@ Getting started and further developing the Telemetry Sending Unit software is st
 Now, the PlatformIO plugin will initialize, and the build targets and configuration will be loaded.
 
 
+# Configuration
+
+In this section of the wiki can you find the configuration of the Telemetry sending Unit. Here you can find the used Hardware pins, UARTS with their respected speeds.
+
+## Pin configuration and usage
+
+In _Table 1_ you can see all the used pins and their pin configuration.
+
+_Table 1: shows the pin configuration and usage for all the pins used._
+
+| Pin | PinMode |              Usage               |
+|:---:|:-------:|:--------------------------------:|
+|  4  | Output  |         Wi-Fi status LED         |
+|  5  | Output  |         MQTT status LED          |
+|  6  | Output  |         Spare status LED         |
+|  9  |   RxD   |        RxD UART2 (Debug)         |
+| 10  |   TxD   |        TxD UART2 (Debug)         |
+| 17  |   TxD   | TxD UART1 (Data Collection Unit) |
+| 18  |   RxD   | RxD UART1 (Data Collection Unit) |
+
+## UART Configuration
+
+This unit uses multiple UARTs. Table 2 provides the important information about these.
+
+_Table 2: UART configurations_
+
+| UART |          Description           | TxD pin | RxD pin | Baud   | UART configuation | 
+|:----:|:------------------------------:|---------|---------|--------|:-----------------:|
+|  1   | Telemetry Data Collection Unit | 17      | 18      | 460800 |    SERIAL_8N1     |
+|  2   |        Debugging  UART         | 10      | 9       | 115200 |    SERIAL_8N1     |
+
+
 # The dataflow
 
 Since this is the second part in the Telemetry chain, it only needs to handle one data source: the _Data Collection Unit_.
@@ -162,10 +197,10 @@ The messages are structured in CSV format as shown in **Figure 3**.
 ```CSV
 <HH:MM:SS,sss,ID,token_1,token_2,etc>
 ```
-_**Figure 3:** The used CSV format to send data over the UART. See **Table 1** for an explanation of the format._
+_**Figure 3:** The used CSV format to send data over the UART. See **Table 3** for an explanation of the format._
 
 
-_**Table 1**: Explanation of the CSV Format_
+_**Table 3**: Explanation of the CSV Format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
@@ -176,9 +211,9 @@ _**Table 1**: Explanation of the CSV Format_
 |  token_2  |                    second actual data                     |
 
 
-As stated before, there are a total of five different messages sent over the UART, each containing different parts of information about the vehicle. These messages are identifiable by the ID present in the message. In **Table 2**, you can see all the possible IDs.
+As stated before, there are a total of five different messages sent over the UART, each containing different parts of information about the vehicle. These messages are identifiable by the ID present in the message. In **Table 4**, you can see all the possible IDs.
 
-_**Table 2**: All the Identifiers that are used to collect and send data._
+_**Table 4**: All the Identifiers that are used to collect and send data._
 
 | Identifier |         Description         |
 |:----------:|:---------------------------:|
@@ -199,7 +234,7 @@ The accelerometer data follows the format shown in **Figure 4**.
 _**Figure 4**: The format of the accelerometer message._
 
 
-_**Table 3**: Explanation of the Accelerometer data format_
+_**Table 5**: Explanation of the Accelerometer data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
@@ -220,7 +255,7 @@ The Motor Telemetry data follows the format shown in **Figure 5**.
 ````
 _**Figure 5**: The format of the  Motor Telemetry message._
 
-_**Table 4**: Explanation of the  Motor Telemetry data format_
+_**Table 6**: Explanation of the  Motor Telemetry data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
@@ -240,7 +275,7 @@ The Motor Power data follows the format shown in **Figure 6**.
 ````
 _**Figure 6**: The format of the  Motor Power message._
 
-_**Table 5**: Explanation of the  Motor Power data format_
+_**Table 7**: Explanation of the  Motor Power data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
@@ -259,7 +294,7 @@ The Spectronik data follows the format shown in **Figure 7**.
 ````
 _**Figure 7**: The format of the  Spectronik message._
 
-_**Table 6**: Explanation of the  Spectronik data format_
+_**Table 8**: Explanation of the  Spectronik data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
@@ -282,7 +317,7 @@ The Throttle data follows the format shown in **Figure 8**.
 ````
 _**Figure 8**: The format of the  Throttle message._
 
-_**Table 7**: Explanation of the  Throttle data format_
+_**Table 9**: Explanation of the  Throttle data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
@@ -320,9 +355,9 @@ The raw format of the accelerometer data follows the format shown in **Figure 10
 ```String
 \x0100:33:58,334,ACC,-251,74,36\xB2\xA4\x18
 ```
-_**Figure 10**: The raw data string of the accelerometer message, including CRC and start and stop bytes. See **Table 8** for more information about the data types._
+_**Figure 10**: The raw data string of the accelerometer message, including CRC and start and stop bytes. See **Table 10** for more information about the data types._
 
-_**Table 8**: Explanation of the Raw Accelerometer Data Format._
+_**Table 10**: Explanation of the Raw Accelerometer Data Format._
 
 | Component |                Description                |
 |:---------:|:-----------------------------------------:|
@@ -345,9 +380,9 @@ The raw format of the Motor Telemetry data follows the format shown in **Figure 
 ```String
 \x0100:33:47,024,MTL,0,0\x85\xA3\x18
 ```
-_**Figure 11**: The raw data string of the Motor Telemetry message, including CRC and start and stop bytes. See **Table 9* for more information about the data types._
+_**Figure 11**: The raw data string of the Motor Telemetry message, including CRC and start and stop bytes. See **Table 11* for more information about the data types._
 
-_**Table 9**: Explanation of the Raw  Motor Telemetry Data Format._
+_**Table 11**: Explanation of the Raw  Motor Telemetry Data Format._
 
 | Component |                Description                |
 |:---------:|:-----------------------------------------:|
@@ -369,9 +404,9 @@ The raw format of the Motor Power data follows the format shown in **Figure 12**
 ```String
 \x0100:47:35,934,MPW,0\x8C\x05\x18
 ```
-_**Figure 12**: The raw data string of the Motor Power message, including CRC and start and stop bytes. See **Table 11** for more information about the data types._
+_**Figure 12**: The raw data string of the Motor Power message, including CRC and start and stop bytes. See **Table 12** for more information about the data types._
 
-_**Table 10**: Explanation of the Raw  Motor Power Data Format._
+_**Table 12*: Explanation of the Raw  Motor Power Data Format._
 
 | Component |                Description                |
 |:---------:|:-----------------------------------------:|
@@ -392,9 +427,9 @@ The raw format of the Spectronik data follows the format shown in **Figure 13**.
 ```String
 \x0100:47:32,199,SPC,100,7.22,0.00,0.02,0.0\xF2\xCF\x18
 ```
-_**Figure 13**: The raw data string of the Spectronik message, including CRC and start and stop bytes. See **Table 11** for more information about the data types._
+_**Figure 13**: The raw data string of the Spectronik message, including CRC and start and stop bytes. See **Table 13** for more information about the data types._
 
-_**Table 11**: Explanation of the Raw  Spectronik Data Format._
+_**Table 13**: Explanation of the Raw  Spectronik Data Format._
 
 | Component |                Description                |
 |:---------:|:-----------------------------------------:|
@@ -419,9 +454,9 @@ The raw format of the Throttle data follows the format shown in **Figure 14**.
 ```String
 \x0100:47:36,181,THR,0\xAB\xBA\x18
 ```
-_**Figure 14**: The raw data string of the Throttle message, including CRC and start and stop bytes. See **Table 12** for more information about the data types._
+_**Figure 14**: The raw data string of the Throttle message, including CRC and start and stop bytes. See **Table 14** for more information about the data types._
 
-_**Table 12**: Explanation of the Raw  Throttle Data Format._
+_**Table 14**: Explanation of the Raw  Throttle Data Format._
 
 | Component |                Description                |
 |:---------:|:-----------------------------------------:|
@@ -490,7 +525,7 @@ The JSON blocks are constructed in the following groups:
 - Motor data
 - Spectronik data
 
-The data identification is kept as short as possible to reduce the data footprint since it is being sent over a cellular network. In **Figure 15**, the stringified JSON is viewable, which is unfortunately not very readable. In **Figure 16**, you can see the beautified JSON object. In **Table 13**, you can see the abbreviations.
+The data identification is kept as short as possible to reduce the data footprint since it is being sent over a cellular network. In **Figure 15**, the stringified JSON is viewable, which is unfortunately not very readable. In **Figure 16**, you can see the beautified JSON object. In **Table 15**, you can see the abbreviations.
 
 ```JSON
 {"seq":4,"tim":"17:30:20.000","vhl":{"accX":90,"accY":26,"accZ":-197,"thr":45},"mtr":{"pwr":250,"rpm":200,"trq":55},"spc":{"vsc":55.32,"tankP":250.3,"fan":30,"h2P1":0.52,"h2P2":0.63}}
@@ -523,7 +558,7 @@ _**Figure 15**: The stringified JSON that will be created and uploaded to the MQ
 ````
 _**Figure 16**: The beautified JSON object. This is more readable._
 
-_**Table 13**: All the abbreviations that are present in the JSON object._
+_**Table 15**: All the abbreviations that are present in the JSON object._
 
 | Component | JSON block |                        Description                        |
 |:---------:|:----------:|:---------------------------------------------------------:|

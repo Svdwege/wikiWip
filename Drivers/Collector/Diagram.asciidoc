@@ -26,6 +26,4 @@ flowchart TD
     R --> S[Extract last log index]
     S --> T[Append new log file]
     T --> N
-
-
 ----

@@ -9,16 +9,4 @@ graph LR
     Logger -->|ls + extract_last_log| FileManager
     FileManager -->|append LOGxxxx.TXT| OpenLog_Command
 
-    subgraph STM32 Hardware
-        UART
-        OpenLog_Reset_Pin
-    end
-
-    subgraph OpenLog
-        OpenLog_Command
-    end
-
-    subgraph Internals
-        FileManager[Log File Manager]
-    end
 ----

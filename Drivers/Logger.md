@@ -1,6 +1,7 @@
 ---
 title: Logger
 ---
+
 # Logger Driver
 This document describes the `Logger` driver, a C++ component designed for efficient and automated data logging to an **OpenLog serial data logger**.
 
@@ -28,7 +29,7 @@ The `Logger` class bridges your code with the OpenLog, which in turn writes to a
       
 +------------------------+      +--------------+      +--------------+
 |     Microcontroller    |      |    Logger    |      |    OpenLog   |
-|   (Your Application)   |      |  (C++ Class) |      |   (SD Card)  |
+|                        |      |  (C++ Class) |      |   (SD Card)  |
 |                        |      |              |      |              |
 | 1. Data to Log         +----->| 2. Processes |----->| 3. Stores    |
 |                        |      |   & Transmits|      |    Data      |

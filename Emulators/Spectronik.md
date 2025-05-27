@@ -5,6 +5,7 @@ title: Spectronik
 
 
 
+
 ### Spectronik Emulator Detailed Documentation
 
 👋 **Welcome to the Spectronik Emulator Documentation!** This guide provides detailed information about the emulator's hardware setup, software functionality, and communication protocols.
@@ -77,13 +78,11 @@ The schematic outlines the connections between the FRDM-KL25Z development board,
 
 ##### 2.2.2. PCB Layout
 ![pro](uploads/f2dc1447cc3c144e0405e2da8668c102/pro.png){width=615 height=432}
-    *Figure 2: Spektronic Emulator PCB Layout*
-    ```
+*Figure 2: Spektronic Emulator PCB Layout*
 
 ##### 2.2.3. 3D Model
 ![3d](uploads/af7c435671dc748743c433a74965cc3c/3d.jpg)
-    *Figure 3: Spektronic Emulator PCB 3D Model*
-    ```
+*Figure 3: Spektronic Emulator PCB 3D Model*
 
 ---
 

@@ -40,7 +40,7 @@ All of these parts need to work in collaboration to function successfully. The m
 
 # Location to find information
 
-- For installing a filesystem and upload code, [please see installation](/wikis/home/Sending-unit/Installation).
+- For installing a filesystem and upload code, [please see installation](/wikis/home/Sending-unit/Installation.md).
 
 # Configuration
 

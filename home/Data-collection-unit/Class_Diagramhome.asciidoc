@@ -1,3 +1,6 @@
+---
+title: Homepage
+---
 = Home
 Sjoerd van de Wege <s.vandewege@student.han.nl>
 

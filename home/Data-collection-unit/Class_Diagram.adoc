@@ -7,7 +7,6 @@ title: Diagrams
 ----
 include::class_diagram.puml[]
 ----
-----
 
 == Full architecture
 

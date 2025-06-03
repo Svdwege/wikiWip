@@ -1,9 +1,6 @@
 ---
 title: Home
 ---
-
-# Home
-
 ## Welcome to the `2425-AcquisitionModule-dev` Project Wiki!✨
 
 We're thrilled to have you here! This wiki is your comprehensive guide to the 2425-AcquisitionModule-dev project, serving as a central hub for all technical documentation, design insights, and operational details.

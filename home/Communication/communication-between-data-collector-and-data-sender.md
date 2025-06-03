@@ -1,4 +1,28 @@
-### Overview of the expected data
+Welcome to the Communication page, which details the communication between the Telemetry Data Collection Unit and the Telemetry Sending Unit.
+
+
+## Table of contents
+<!-- TOC -->
+  * [Table of contents](#table-of-contents)
+  * [Overview of the expected data](#overview-of-the-expected-data)
+      * [Format of Accelerometer data](#format-of-accelerometer-data)
+      * [Format of Motor Telemetry data](#format-of-motor-telemetry-data)
+      * [Format of Motor Power data](#format-of-motor-power-data)
+      * [Format of Spectronik data](#format-of-spectronik-data)
+      * [Format of Throttle data](#format-of-throttle-data)
+    * [Overview of the raw expected data](#overview-of-the-raw-expected-data)
+      * [Raw format of the Accelerometer](#raw-format-of-the-accelerometer)
+      * [Raw format of the Motor Telemetry](#raw-format-of-the-motor-telemetry)
+      * [Raw format of the Motor Power](#raw-format-of-the-motor-power)
+      * [Raw format of the Spectronik](#raw-format-of-the-spectronik)
+      * [Raw format of the Throttle](#raw-format-of-the-throttle)
+  * [Dataflow to the server](#dataflow-to-the-server)
+    * [The used protocol to send data to the server](#the-used-protocol-to-send-data-to-the-server)
+      * [Used topics](#used-topics)
+    * [The dataformat for sending to the server](#the-dataformat-for-sending-to-the-server)
+<!-- TOC -->
+
+## Overview of the expected data
 
 From the _Telemetry Data Collection Unit_, we receive asynchronous data from a Universal Asynchronous Receiver-Transmitter (UART) databus.
 

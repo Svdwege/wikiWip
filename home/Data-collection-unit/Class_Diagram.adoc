@@ -1,7 +1,8 @@
 ---
 title: Diagrams
 ---
-==Class Diagram
+
+== Class Diagram
 
 [plantuml, format="png", id="myDiagram"]
 ----

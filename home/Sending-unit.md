@@ -39,8 +39,8 @@ All of these parts need to work in collaboration to function successfully. The m
 | JSON | JavaScript Object Notation |
 
 # Location to find information
-
-- For installing a filesystem and upload code, [please see installation](/wikis/home/Sending-unit/Installation.md).
+- Information about the configuration of the ESP32-S3, [please see the configuration](/ESP32-S3-configuration.md)
+- For installing a file system and upload code, [please see installation](/wikis/home/Sending-unit/Installation.md).
 
 # Configuration
 

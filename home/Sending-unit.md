@@ -8,21 +8,6 @@ The _Telemetry Unit_ consists of three major parts:
 
 All of these parts need to work in collaboration to function successfully. The main role of the _Telemetry Sending Unit_ is to collect and aggregate data from the _Telemetry Data Collection Unit_ and send it via a protocol to the _Telemetry Receiving Unit_.
 
-# Table of contents
-
-<!--TOC-->
-
-* [Table of contents](#table-of-contents)
-* [List of abbreviations](#list-of-abbreviations)
-* [Location to find information](#location-to-find-information)
-* [Configuration](#configuration)
-  * [Pin configuration and usage](#pin-configuration-and-usage)
-  * [UART Configuration](#uart-configuration)
-* [The dataflow](#the-dataflow)
-  * [Dataflow in the Telemetry Sending Unit](#dataflow-in-the-telemetry-sending-unit)
-
-<!--TOC-->
-
 # List of abbreviations
 
 | abbreviations | Definition |

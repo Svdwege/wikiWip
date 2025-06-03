@@ -21,3 +21,4 @@ notes/Server/Installing Hydromotive VPN: Server/Installing-Hydromotive-VPN
 notes/TelemetrySender/The Telemetry Sending Unit: notes/TelemetrySender/TelemetrySender
 home/Sending-unit/Installation: home/Sending-unit/ESP32-S3-Installation
 home/Communication/communication-between-Data_collection-and-sender: home/Communication/communication-between-data-collector-and-data-sender
+home/Data-collection-unit/Documentation/Documentation: home/Data-collection-unit/Documentation

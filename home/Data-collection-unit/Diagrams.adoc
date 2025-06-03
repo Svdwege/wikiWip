@@ -1,6 +1,7 @@
 ---
 title: Diagrams
 ---
+
 Sjoerd van de Wege <s.vandewege@student.han.nl>
 
 == Class Diagram

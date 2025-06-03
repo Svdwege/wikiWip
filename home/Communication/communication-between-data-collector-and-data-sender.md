@@ -16,10 +16,6 @@ Welcome to the Communication page, which details the communication between the T
       * [Raw format of the Motor Power](#raw-format-of-the-motor-power)
       * [Raw format of the Spectronik](#raw-format-of-the-spectronik)
       * [Raw format of the Throttle](#raw-format-of-the-throttle)
-  * [Dataflow to the server](#dataflow-to-the-server)
-    * [The used protocol to send data to the server](#the-used-protocol-to-send-data-to-the-server)
-      * [Used topics](#used-topics)
-    * [The dataformat for sending to the server](#the-dataformat-for-sending-to-the-server)
 <!-- TOC -->
 
 ## Overview of the expected data

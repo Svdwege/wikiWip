@@ -1,4 +1,0 @@
-[plantuml, format="png", id="myDiagram"]
-----
-include::class_diagram.puml[]
-----

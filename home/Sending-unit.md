@@ -24,6 +24,6 @@ All of these parts need to work in collaboration to function successfully. The m
 | JSON | JavaScript Object Notation |
 
 # Location to find information
-- Information about the configuration of the ESP32-S3, [please see the configuration](/wikis/home/Sending-unit/ESP32-S3-configuration)
+- Information about the configuration of the ESP32-S3, [please see the configuration](/wikis/home/Sending-unit/ESP32-S3-configuration).
 - For installing a file system and upload code, [please see installation](/wikis/home/Sending-unit/Installation.md).
 - For information about the data flow of the ESP32-S3, [please see the dataflow](/wikis/home/Sending-unit/ESP32-S3-dataflow)

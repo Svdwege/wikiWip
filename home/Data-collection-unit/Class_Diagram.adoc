@@ -2,13 +2,14 @@
 title: Diagrams
 ---
 
+
 == Class Diagram
 
 [plantuml, format="png", id="myDiagram"]
 ----
 include::class_diagram.puml[]
-----
 
+----
 == Full architecture
 
 [mermaid]

@@ -1,0 +1,180 @@
+@startuml
+ 
+Interface ILoggable {
+    + void updateTimestamp() 
+    + bool isValid() const
+    + std::string getSampletimeString() const
+    {abstract} + std::string toString()
+
+}
+
+class accelerometerData implements ILoggable {
+    + std::string toString() override
+    + int16_t Xaccel
+    + int16_t Yaccel
+    + int16_t Zaccel
+}
+
+class MotorCtrlCommand implements ILoggable {
+    + std::string toString() override
+    + uint8_t control_value
+    + uint8_t control_mode
+    + uint8_t motor_mode
+    + uint8_t sw_enable 
+    + uint8_t debug_mode 
+}
+
+class MotorPower implements ILoggable {
+    + std::string toString() override
+    + uint16_t inv_peak_cur
+    + uint16_t motor_power
+}
+
+class MotorTelemetry implements ILoggable {
+    + std::string toString() override
+    + int16_t control_value
+    + uint8_t control_mode
+    + uint8_t motor_mode
+    + uint8_t sw_enable
+    + uint8_t motor_state
+    + int16_t motor_torque
+    + int16_t motor_rpm
+    + int8_t  motor_temp
+}
+class Protium implements ILoggable {
+    + std::string toString() override
+    + float FuelCellVoltage
+    + float FuelCellCurrent
+    + float FuelCellPower
+    + float EnergyConsumed
+    + float FuelCellTemperature1
+    + uint8_t FanPercentage
+    + uint16_t NumberOfCells
+    + float H2PressureSensor1
+    + float H2PressureSensor2
+    + float H2TankPressure
+    + float H2TankTemperature
+    + float VoltageSetpoint
+    + float CurrentSetpoint
+    + float SuperCapacitorVoltage
+    + uint8_t StasisSelector
+    + float StasisValve1Pressure
+    + float StasisValve2Pressure
+
+}
+
+Interface IProcess {
+    # ILoggable *Data
+    {abstract} + void init();
+    {abstract} + void update();
+    {abstract} + void register_data(ILoggable *data);
+}
+
+
+class ADXL345 implements IProcess {
+    + init() override;
+    + update() override;
+    + register_data(ILoggable *data) override;
+    + readRegister(uint8_t reg);
+    + writeRegister(uint8_t reg,uint8_t value) const;
+    + getAxis() const;
+    + processIRQ() const;
+}
+
+class Spectronik implements IProcess {
+    + uartRxEventCallback(UART_HandleTypeDef *huart, uint16_t Size);
+    + gpioExtiCallback();
+    + sendStart();
+    + sendEnd();
+    - parseProtiumData(const char *long_string);
+}
+
+class Collector {
+    + RegisterProcess(IProcess *p)
+    + RegisterData(ILoggable *l)
+    + update();
+    - IProcess *process[DATA_SOURCE_COUNT]{};
+    - ILoggable *loggable[DATA_SOURCE_COUNT]{};
+}
+
+class TimeSource {
+    + {static} systemTime_t GetTime()
+    + volatile {static} systemTime_t time;
+    + {static} void update_msTick()
+    + {static} void update_fromGNSS(const int_fast8_t , const int_fast8_t , const int_fast8_t , const int_fast16_t ) 
+}
+
+enum Status {
+    ADXL345_PWR_ON = 0,
+    ADXL345_CONFIGURED,
+    ADXL345_OK,
+    COUNT,
+    INVALID
+
+}
+
+enum Error {
+    ADXL345_NO_DATA_OBJ,
+    COUNT,
+    INVALID
+}
+
+enum Peripheral {
+    ADXL345 = 0,
+    LOGGER,
+    CAN,
+    SPECTRONIK,
+    PERIPHERAL_COUNT_,
+}
+
+class StatusManager<int N>{
+    + void add_Pin(Peripheral, GPIO)
+    + void add_SparePin(const GPIO)
+    + void set_status(const Status)
+    + void set_bin_status(const Error)
+    + Status get_status()
+    + Error get_bin_status()
+    - Status status_
+    - Error bin_status
+    - std::array<GPIO,N> status_gpios
+    - GPIO Spare_gpio
+}   
+
+class CanDispatcher {
+    + void init();
+    + void registerHandler(uint32_t id, ICanMessageHandler *handler);
+    + void dispatch(uint32_t id, uint8_t len, const uint8_t *data);
+    - std:map<uint32_t,ICanMessageHandler*> handlers
+    - CAN_HandleTypeDef* hcan;
+
+}
+
+Interface ICanMessageHandler {
+    {abstract} + void handlerawData(uint32_t, uint8_t, const uint8_t*);
+}
+
+class CanTelemetryHandler implements ICanMessageHandler, IProcess {
+    - void decodeData() 
+
+}
+
+class CanPowerHandler implements ICanMessageHandler, IProcess {
+    - void decodeData() 
+
+}
+class CanControlCommandHandler implements ICanMessageHandler, IProcess {
+    - void decodeData() 
+
+}
+
+
+
+StatusManager --> Peripheral
+StatusManager --> Error
+StatusManager --> Status
+
+Collector <-- IProcess
+Collector <-- ILoggable
+TimeSource -> ILoggable
+
+@enduml

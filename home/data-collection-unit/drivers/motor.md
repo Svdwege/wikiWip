@@ -8,6 +8,7 @@ title: Motor
 
 
 
+
 # Motor Driver
 
 This document provides an in-depth overview of the C++ software components designed for interfacing with the GEMmotors G1.X motor controller via the CAN bus. The implementation is guided by the GEMmotors G1.X REV008 instruction manual and focuses on robust data handling and configurable logging.

@@ -50,3 +50,4 @@ home/data-collection-unit/drivers/Logger: home/data-collection-unit/drivers/Logg
 home/Sending-unit/PlatfromIO-unit-testing: home/Sending-unit/PlatformIO-unit-testing
 home/data-collection-unit/drivers/Logger2: home/data-collection-unit/drivers/logger
 home/data-collection-unit/drivers/logger/Diagram: home/data-collection-unit/drivers/logger/Diagram2
+home/data-collection-unit/utils/DebugLogging: home/data-collection-unit/utils/debug-logging

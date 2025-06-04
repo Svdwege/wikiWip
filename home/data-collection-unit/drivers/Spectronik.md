@@ -9,7 +9,7 @@ title: Spectronik
 
 This document outlines the C++ driver for the Spectronik Protium-1000/2500 fuel cell system, facilitating communication via UART. It adheres to the Protium UART Specification.
 
-For the comprehensive Protium UART Specification, please consult the project's documentation: [Protium UART Specification](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/Documentation/Spectronik/).
+For the comprehensive Protium UART Specification, please consult the project's documentation: [Protium UART Specification](home/data-collection-unit/documentation/spectronik).
 
 ---
 <!-- TOC -->

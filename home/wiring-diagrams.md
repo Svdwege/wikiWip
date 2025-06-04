@@ -1,0 +1,13 @@
+---
+title: Wiring diagrams
+---
+
+= Wiring diagram
+
+
+
+
+image::wiring.png["Wiring diagram made with wireviz"]
+
+
+

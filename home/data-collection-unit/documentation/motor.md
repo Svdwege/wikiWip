@@ -1,6 +1,7 @@
 ---
 title: Motor
 ---
+
 # GEMmotors G1.X Instruction Manual – Extracted Information
 
 _Revision 008, date: 8.9.2021_

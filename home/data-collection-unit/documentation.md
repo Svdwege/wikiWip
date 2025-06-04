@@ -1,3 +1,6 @@
+---
+title: Documentation
+---
 # 📚 Project Documentation Hub
 
 👋 **Welcome to the Hydromotive Project Documentation Hub!**

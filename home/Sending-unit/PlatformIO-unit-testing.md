@@ -35,6 +35,9 @@ _**Figure 1:** Basic infrastructure of a unit test_
 For more information about testing and PlatformIO, visit [testing and PlatfromIO](https://docs.platformio.org/en/stable/advanced/unit-testing/structure/hierarchy.html)
 
 
+
+### how to run the unit tests
+
 ### Prerequisites
 
 - All tests are in the `test/` folder
@@ -42,8 +45,6 @@ For more information about testing and PlatformIO, visit [testing and PlatfromIO
 - Every test file contains `int main()`
 - Have the enviroment setup in `platformio.ini`
 
-
-### how to run the unit tests
 
 To execute you need to have a terminal available and have the plaform defined in the `platformio.ini` file.
 Example:

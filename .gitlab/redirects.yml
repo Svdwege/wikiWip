@@ -58,3 +58,4 @@ home/data-collection-unit/drivers/Motor2: home/data-collection-unit/drivers/moto
 home/data-collection-unit/drivers/Collector: home/data-collection-unit/drivers/Collector2
 home/data-collection-unit/drivers/Collector2: home/data-collection-unit/drivers/collector
 home/data-collection-unit/drivers/collector/Diagram: home/data-collection-unit/drivers/collector/Diagram2
+home/data-collection-unit/drivers/collector/Diagram2: home/data-collection-unit/drivers/collector/diagram

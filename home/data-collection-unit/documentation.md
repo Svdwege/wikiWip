@@ -2,6 +2,7 @@
 title: Documentation
 ---
 
+
 # 📚 Project Documentation Hub
 
 👋 **Welcome to the Hydromotive Project Documentation Hub!**
@@ -20,7 +21,6 @@ Navigate to the relevant section below to find the information you need.
 *   **[ADXL](documentation/ADXL)**: Detailed documentation about ADXL345 accelerometer
 *   **[Logger](documentation/logger)**: Detailed functionality of logger.
 *   **[Motor](documentation/motor)**: This document contains extracted information from the GEMmotors G1.X Instruction manual.
-* 
 
 ---
 

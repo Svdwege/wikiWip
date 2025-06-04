@@ -2,6 +2,7 @@
 title: Data Collection unit
 ---
 
+
 ## Welcome to the Data Collection Unit (DCU) Wiki Section! 📦
 
 This section is dedicated entirely to the **Data Collection Unit**, providing detailed insights into its architecture, sub-components, documentation, and drivers.

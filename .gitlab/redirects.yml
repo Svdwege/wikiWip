@@ -30,3 +30,4 @@ home/Data-Collection-unit: home/Data-Collection-unit2
 home/Data-Collection-unit2: home/data-collection-unit
 home/data-collection-unit/Documentation: home/data-collection-unit/Documentation2
 home/data-collection-unit/Documentation2: home/data-collection-unit/documentation
+home/data-collection-unit/Diagrams: home/data-collection-unit/Diagrams2

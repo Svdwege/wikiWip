@@ -1,6 +1,7 @@
 ---
 title: 'Collector <---> Data Sender '
 ---
+
 Welcome to the Communication page, which details the communication between the Telemetry Data Collection Unit and the Telemetry Sending Unit.
 
 
@@ -27,7 +28,7 @@ From the _Telemetry Data Collection Unit_, we receive asynchronous data from a U
 
 The messages are structured in CSV format as shown in **Figure 3**.
 ```CSV
-<HH:MM:SS,sss,ID,token_1,token_2,etc>
+<hh:mm:ss,fff,ID,token_1,token_2,etc>
 ```
 _**Figure 3:** The used CSV format to send data over the UART. See **Table 3** for an explanation of the format._
 
@@ -36,8 +37,8 @@ _**Table 3**: Explanation of the CSV Format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
-| HH:MM:SS  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
-|    sss    |              time in milliseconds, e.g. 350               |
+| hh:mm:ss  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
+|    fff    |              time in milliseconds, e.g. 350               |
 |    ID     |             The identification of the message             |
 |  token_1  |                     first actual data                     |
 |  token_2  |                    second actual data                     |
@@ -61,7 +62,7 @@ _**Table 4**: All the Identifiers that are used to collect and send data._
 The accelerometer data follows the format shown in **Figure 4**.
 
 ````CSV
-<HH:MM:SS,sss,ACC,axis-X,axis-Y,axis-Z>
+<hh:mm:ss,fff,ACC,axis-X,axis-Y,axis-Z>
 ````
 _**Figure 4**: The format of the accelerometer message._
 
@@ -70,8 +71,8 @@ _**Table 5**: Explanation of the Accelerometer data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
-| HH:MM:SS  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
-|    sss    |              time in milliseconds, e.g. 350               |
+| hh:mm:ss  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
+|    fff    |              time in milliseconds, e.g. 350               |
 |    ACC    |             The identification of the message             |
 |  axis-X   |                Acceleration in the X-axis                 |
 |  axis-Y   |                Acceleration in the Y-axis                 |
@@ -83,7 +84,7 @@ _**Table 5**: Explanation of the Accelerometer data format_
 The Motor Telemetry data follows the format shown in **Figure 5**.
 
 ````CSV
-<HH:MM:SS,sss,MTL,rpm,trq>
+<hh:mm:ss,fff,MTL,rpm,trq>
 ````
 _**Figure 5**: The format of the  Motor Telemetry message._
 
@@ -91,8 +92,8 @@ _**Table 6**: Explanation of the  Motor Telemetry data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
-| HH:MM:SS  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
-|    sss    |              time in milliseconds, e.g. 350               |
+| hh:mm:ss  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
+|    fff    |              time in milliseconds, e.g. 350               |
 |    MTL    |             The identification of the message             |
 |    rpm    |       Revolutions per minute (RPM) of the Hub-motor       |
 |    trq    |         Torque in Newton Meters of the Hub-motor          |
@@ -103,7 +104,7 @@ _**Table 6**: Explanation of the  Motor Telemetry data format_
 The Motor Power data follows the format shown in **Figure 6**.
 
 ````CSV
-<HH:MM:SS,sss,MPW,pwr>
+<hh:mm:ss,fff,MPW,pwr>
 ````
 _**Figure 6**: The format of the  Motor Power message._
 
@@ -111,8 +112,8 @@ _**Table 7**: Explanation of the  Motor Power data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
-| HH:MM:SS  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
-|    sss    |              time in milliseconds, e.g. 350               |
+| hh:mm:ss  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
+|    fff    |              time in milliseconds, e.g. 350               |
 |    MPW    |             The identification of the message             |
 |    pwr    |             Power of the Hub-motor, in Watts              |
 
@@ -122,7 +123,7 @@ _**Table 7**: Explanation of the  Motor Power data format_
 The Spectronik data follows the format shown in **Figure 7**.
 
 ````CSV
-<HH:MM:SS,sss,SPC,fan,H2P1,H2P2,TankP,vsc>
+<hh:mm:ss,fff,SPC,fan,H2P1,H2P2,TankP,vsc>
 ````
 _**Figure 7**: The format of the  Spectronik message._
 
@@ -130,8 +131,8 @@ _**Table 8**: Explanation of the  Spectronik data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
-| HH:MM:SS  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
-|    sss    |              time in milliseconds, e.g. 350               |
+| hh:mm:ss  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
+|    fff    |              time in milliseconds, e.g. 350               |
 |    SPC    |             The identification of the message             |
 |    fan    |                   Fanspeed of fuel cell                   |
 |   H2P1    |                Hydrogen pressure sensor 1                 |
@@ -145,7 +146,7 @@ _**Table 8**: Explanation of the  Spectronik data format_
 The Throttle data follows the format shown in **Figure 8**.
 
 ````CSV
-<HH:MM:SS,sss,THR,thr>
+<hh:mm:ss,fff,THR,thr>
 ````
 _**Figure 8**: The format of the  Throttle message._
 
@@ -153,8 +154,8 @@ _**Table 9**: Explanation of the  Throttle data format_
 
 | Component |                        Description                        |
 |:---------:|:---------------------------------------------------------:|
-| HH:MM:SS  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
-|    sss    |              time in milliseconds, e.g. 350               |
+| hh:mm:ss  | Timestamp in format Hour:Minutes: seconds, e.g., 12:15:30 |
+|    fff    |              time in milliseconds, e.g. 350               |
 |    THR    |             The identification of the message             |
 |    thr    |                     Throttle position                     |
 

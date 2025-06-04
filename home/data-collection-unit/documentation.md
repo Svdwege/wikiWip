@@ -4,6 +4,7 @@ title: Documentation
 
 
 
+
 # 📚 Project Documentation Hub
 
 👋 **Welcome to the Hydromotive Project Documentation Hub!**
@@ -18,10 +19,10 @@ title: Documentation
 
 Navigate to the relevant section below to find the information you need.
 
-*   **[Spectronik](documentation/spectronik)**: This document outlines the UART communication protocol for the Protium-1000/2500 system.
-*   **[ADXL](documentation/ADXL)**: Detailed documentation about ADXL345 accelerometer
-*   **[Logger](documentation/logger)**: Detailed functionality of logger.
-*   **[Motor](documentation/motor)**: This document contains extracted information from the GEMmotors G1.X Instruction manual.
+*   **[Spectronik](home/data-collection-unit/documentation/spectronik)**: This document outlines the UART communication protocol for the Protium-1000/2500 system.
+*   **[ADXL](home/data-collection-unit/documentation/ADXL)**: Detailed documentation about ADXL345 accelerometer
+*   **[Logger](home/data-collection-unit/documentation/logger)**: Detailed functionality of logger.
+*   **[Motor](home/data-collection-unit/documentation/motor)**: This document contains extracted information from the GEMmotors G1.X Instruction manual.
 
 ---
 

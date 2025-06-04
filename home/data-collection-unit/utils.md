@@ -1,6 +1,7 @@
 ---
 title: Utils
 ---
+
 # 🛠️ Utils Hub
 
 👋 **Welcome to the Utils Hub!**
@@ -14,6 +15,9 @@ title: Utils
 ## 🧰 Available Utilities
 
 Click on the name or "View Details" link to navigate to its documentation.
+
+### 1. Debug Logging
+*   **[➡️ View Details for [Debug Logging]](home/data-collection-unit/utils/debug-logging)**
 
 ---
 

@@ -48,3 +48,4 @@ home/data-collection-unit/drivers/ADXL: home/data-collection-unit/drivers/ADXL2
 home/data-collection-unit/drivers/ADXL2: home/data-collection-unit/drivers/adxl
 home/data-collection-unit/drivers/Logger: home/data-collection-unit/drivers/Logger2
 home/Sending-unit/PlatfromIO-unit-testing: home/Sending-unit/PlatformIO-unit-testing
+home/data-collection-unit/drivers/Logger2: home/data-collection-unit/drivers/logger

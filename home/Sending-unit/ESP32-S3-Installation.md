@@ -3,6 +3,7 @@ title: Installation of ESP32-S3 software
 ---
 
 
+
 # Installation
 
 **The Telemetry Sending Unit software** is fully developed in PlatformIO. The software is developed in CLion 2025 using the PlatformIO plugin, primarily due to personal preference. However, any other supported Integrated Development Environment (IDE) should work as well.
@@ -71,7 +72,7 @@ pio run --target uploadfs
 
 ### Upload code to ESP32-S3
 
-> "**Note: ** The Telemetry Sending software only works then the filesystem is uploaded to the ESP32-S3!"
+> "**Note:** The Telemetry Sending software only works then the filesystem is uploaded to the ESP32-S3!"
 
 1. Connect the ESP32-S3 Via a USB-C cable to your laptop. Use the UART labeled USB-C connector
 2. Compile the software with PlatformIO

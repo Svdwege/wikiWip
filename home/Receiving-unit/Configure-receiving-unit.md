@@ -39,8 +39,9 @@ _**Figure 1:** the contents template of the `appConfig.json` file_
 ## Copy file into the Docker container
 
 Docker has a build-in command to copy files. This command can be used to copy the configuration file.
-The name of the Docker container `telemetry_receiving_unit`
+The name of the Docker container `telemetry_receiving_unit`.
 
+With the following command you can copy the `appConfig.json` to `telemetry_receiving_unit`.
 ```bash
 sudo docker cp appConfig.json telemetry_receiving_unit:/app
 ```

@@ -1,14 +1,7 @@
 ---
 title: Wiring diagrams
 ---
-
-
-= Wiring diagram
-
-
-
-
-image::wiring.png["Wiring diagram made with wireviz"]
+Here you can find all wiring diagrams
 
 
 

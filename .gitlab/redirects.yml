@@ -53,3 +53,4 @@ home/data-collection-unit/drivers/logger/Diagram: home/data-collection-unit/driv
 home/data-collection-unit/utils/DebugLogging: home/data-collection-unit/utils/debug-logging
 home/Emulators/Spectronik: home/Emulators/Spectronik2
 home/Emulators/Spectronik2: home/emulators/spectronik
+home/data-collection-unit/drivers/Motor: home/data-collection-unit/drivers/Motor2

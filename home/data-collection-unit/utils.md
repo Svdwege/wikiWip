@@ -1,3 +1,6 @@
+---
+title: Utils
+---
 # 🛠️ Utils Hub
 
 👋 **Welcome to the Utils Hub!**

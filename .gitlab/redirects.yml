@@ -61,3 +61,4 @@ home/data-collection-unit/drivers/collector/Diagram: home/data-collection-unit/d
 home/data-collection-unit/drivers/collector/Diagram2: home/data-collection-unit/drivers/collector/diagram
 home/data-collection-unit/drivers/motor/Diagram: home/data-collection-unit/drivers/motor/Diagram2
 home/data-collection-unit/drivers/motor/Diagram2: home/data-collection-unit/drivers/motor/diagram
+home/data-collection-unit/drivers/Spectronik: home/data-collection-unit/drivers/Spectronik2

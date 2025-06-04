@@ -51,3 +51,4 @@ home/Sending-unit/PlatfromIO-unit-testing: home/Sending-unit/PlatformIO-unit-tes
 home/data-collection-unit/drivers/Logger2: home/data-collection-unit/drivers/logger
 home/data-collection-unit/drivers/logger/Diagram: home/data-collection-unit/drivers/logger/Diagram2
 home/data-collection-unit/utils/DebugLogging: home/data-collection-unit/utils/debug-logging
+home/Emulators/Spectronik: home/Emulators/Spectronik2

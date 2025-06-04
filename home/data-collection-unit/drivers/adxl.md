@@ -2,6 +2,7 @@
 title: ADXL
 ---
 
+
 # ADXL345 Accelerometer Driver
 
 This document describes the `ADXL345` driver, a C++ component designed to interface with the ADXL345 3-axis accelerometer via SPI.

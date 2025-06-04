@@ -1,6 +1,7 @@
 ---
 title: Home
 ---
+
 ### Welcome to the Hydromotive 2425 Acquisition Module Wiki! ✨
 
 This wiki serves as the central knowledge hub for the **Hydromotive 2425 Acquisition Module** development project, providing detailed insights into its architecture, sub-components, documentation, and various functionalities.
@@ -15,7 +16,7 @@ For easier navigation, here are the main sections and key pages available for th
 
 *   **[Home](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/home)** 🏠 - You are now here. 
 *   **[Communication](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/home/communication)** 💬 - Guidelines, protocols, and channels for effective team communication within the project.
-*   **[Data collection unit](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/home/data-collection-unit)** 📦 - Detailed information on the data acquisition process, sensors, and hardware components of the DCU.
+*   **[Data collection unit](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/home/Data-Collection-unit2)** 📦 - Detailed information on the data acquisition process, sensors, and hardware components of the DCU.
 *   **[Emulators](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/home/emulators)** 🖥️ - Instructions for setting up and using software emulators for testing and development environments.
 *   **[Sending unit](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/home/sending-unit)** 🚀 - Documentation related to data transmission, protocols, and the hardware interface for sending data.
 *   **[Server](https://gitlab.com/hydromotive/2425-acquistionmodule-dev/-/wikis/home/server)** ☁️ - Information about the backend server, API endpoints, data storage, and integration with the module.

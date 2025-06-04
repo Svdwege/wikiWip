@@ -1,4 +1,5 @@
 ---
-title: Data Collection Unit
+title: Data collection unit
 ---
+
 general

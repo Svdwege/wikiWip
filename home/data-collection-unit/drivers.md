@@ -15,17 +15,25 @@ title: Drivers
 
 Below you will find a list of available drivers. Click on the name or the "View Details" link to navigate to its dedicated documentation page.
 
-### 1. Motor driver
-*   **Description:** This document describes the C++ classes and functions used for handling and decoding CAN messages related to the GEMmotors G1.X motor driver
-*   **[➡️ View Details for [Motor driver]](Drivers/Motor)**
+### 1. ADXL driver
+*   **Description:** This document outlines the C++ driver for reading and processing accelerometer data from ADXL sensors.
+*   **[➡️ View Details for [ADXL driver]](home/data-collection-unit/drivers/adxl)**
 
-### 2. Spectronik driver
+### 2. Collector driver
+*   **Description:** This document details the `Collector` component, which orchestrates data processing from various drivers and prepares it for logging and transmission.
+*   **[➡️ View Details for [Collector driver]](home/data-collection-unit/drivers/collector)**
+
+### 3. Logger driver
+*   **Description:** This document describes the `Logger` driver, responsible for writing data to an OpenLog serial data logger, including automatic file management.
+*   **[➡️ View Details for [Logger driver]](home/data-collection-unit/drivers/logger)**
+
+### 4. Motor driver
+*   **Description:** This document describes the C++ classes and functions used for handling and decoding CAN messages related to the GEMmotors G1.X motor driver.
+*   **[➡️ View Details for [Motor driver]](home/data-collection-unit/drivers/motor)**
+
+### 5. Spectronik driver
 *   **Description:** This document outlines the C++ code for the Spectronik driver, which communicates with the Protium-1000/2500 system via UART.
-*   **[➡️ View Details for [Spectronik driver]](Drivers/Spectronik)**
-
-### 3. ADXL driver
-
-
+*   **[➡️ View Details for [Spectronik driver]](home/data-collection-unit/drivers/spectronik)**
 ---
 
 ## 🤝 Contributing & Maintaining Driver Documentation

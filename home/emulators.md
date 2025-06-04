@@ -1,3 +1,6 @@
+---
+title: Emulators
+---
 # 🎮 Emulators Hub
 
 👋 **Welcome to the Emulators Hub!**

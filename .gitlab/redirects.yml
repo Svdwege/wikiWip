@@ -55,3 +55,4 @@ home/Emulators/Spectronik: home/Emulators/Spectronik2
 home/Emulators/Spectronik2: home/emulators/spectronik
 home/data-collection-unit/drivers/Motor: home/data-collection-unit/drivers/Motor2
 home/data-collection-unit/drivers/Motor2: home/data-collection-unit/drivers/motor
+home/data-collection-unit/drivers/Collector: home/data-collection-unit/drivers/Collector2

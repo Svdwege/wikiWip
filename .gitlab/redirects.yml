@@ -59,3 +59,4 @@ home/data-collection-unit/drivers/Collector: home/data-collection-unit/drivers/C
 home/data-collection-unit/drivers/Collector2: home/data-collection-unit/drivers/collector
 home/data-collection-unit/drivers/collector/Diagram: home/data-collection-unit/drivers/collector/Diagram2
 home/data-collection-unit/drivers/collector/Diagram2: home/data-collection-unit/drivers/collector/diagram
+home/data-collection-unit/drivers/motor/Diagram: home/data-collection-unit/drivers/motor/Diagram2

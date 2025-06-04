@@ -1,8 +1,6 @@
 ---
 title: Home
 ---
-
-# Home🏠
 ### Welcome to the Hydromotive 2425 Acquisition Module Wiki! ✨
 
 This wiki serves as the central knowledge hub for the **Hydromotive 2425 Acquisition Module** development project, providing detailed insights into its architecture, sub-components, documentation, and various functionalities.

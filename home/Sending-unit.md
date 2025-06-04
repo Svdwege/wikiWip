@@ -28,4 +28,4 @@ All of these parts need to work in collaboration to function successfully. The m
 - For installing a file system and upload code, [please see Installation of ESP32-S3 software](/home/Sending-unit/ESP32-S3-Installation).
 - For information about the data flow of the ESP32-S3, [please see the ESP32-S3-dataflow](/home/Sending-unit/ESP32-S3-dataflow)
 - For information about the communication between data collection unit and Sending unit, [please see the comm between collector <---> data sender](/home/home/communication/collector-data-sender)
-- Information about the communication between the sending <---> server, [please see communication between sender-server](/home/communication/sender-server)
+- Information about the communication between the sending and the server, [please see communication between sender-server](/home/communication/sender-server)

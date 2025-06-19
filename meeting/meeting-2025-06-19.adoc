@@ -1,0 +1,45 @@
+= Meeting S3 Meet and Greet
+
+== Docs 
+
+Documentation for grade: consideration for weighting
+
+populate chapters
+make things findable
+
+Be more descriptive
+describe purpose, min-max
+
+fun -> global -> detail
+
+update Readme
+
+If i start from scratch can i find everything to do so.
+
+architecture and dataflow diagrams and paragraph
+
+use S2 lessons as reference for level of knowledge 
+
+grade from oral exam if docs are good
+
+== S3 meet and greet
+
+standing table 
+
+. bring Telemery module with all cables and plastic
+. ask about banner from hydromotive / Promotional materials
+. pictures of the car/ videos  on a display
+. Team polo
+
+Hydromotive S3+S4 all year long
+Team Spirit
+a lot of extra curicular time will hit 40 hour a week if not more
+not just ownership for their own stuff but for whole project.
+end of S3 final prototype for testing.
+plan for next year
+
+2 students
+
+. flash storage unit + a way to get it off
+. esp + mifi -> 4g module
+

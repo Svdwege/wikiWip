@@ -1,0 +1,66 @@
+= Home
+
+This is the wiki describing the components from which the Telemetry system is constructed.
+
+There are 3 distinct parts to the Telemetry system.
+
+. Data Collector
+. Data Transmission
+. Data Reception
+
+.General data flow through the system
+[mermaid]
+----
+graph LR
+
+    Collector --> Transmission
+    Transmission --> Reception
+----
+
+== Data Collector
+
+The data collector collects and converts the sensor data to a string format.
+This data is then either logged to the microSD card and/or send to the Data Transmission
+
+
+== Data Transmission
+The Data transmission unit takes the ascii string of data and converts it into structs where it takes the average of the values over a second.
+These average values are then converted into JSON and transfered over wifi through a mifi unit to the server where the Data reception occurs
+
+
+== Data Reception
+
+The data receiver takes the data in json form and constructs a database insertion query from it and inserts the data into the database
+Next to this program there is a mysql database and a graphana dashboard for storage and visualisation 
+
+== Full architecture
+
+[mermaid]
+----
+graph LR
+
+    ADXL[ADXL345] --> P1[Processing]
+    Spc[Spectronik controller]--> P2[Processing]
+
+    cb[CanCallback] --> Can_Throttle_Processing
+    cb[CanCallback] --> Can_Telemetry_Processing
+    cb[CanCallback] --> Can_Motor_Processing
+
+    Can_Throttle_Processing  --> Collect
+    Can_Telemetry_Processing --> Collect
+    Can_Motor_Processing     --> Collect
+
+    P1 --> Collect[Collector]
+    P2 --> Collect
+
+    Collect --> ESP32
+    Collect --> Openlog
+
+    Openlog --> microSD
+
+    ESP32 --> MQTT
+    MQTT --> Server
+    Server --> Database
+    Database --> Dashboard
+
+----

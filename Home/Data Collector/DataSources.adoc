@@ -1,0 +1,14 @@
+= Data sources 
+
+== processing
+The collector operates on data sources. This means they are all constructed in the same manner.
+The collection of the raw data is done depending on where it comes from,
+but the one thing constant in all collection points is that as close to interrupt as possible the time stamp needs to be updated.
+After the data is collected from the source it goes through a processing block. These are defined using a interface. 
+This means all all the collector has to do is to use the interface which decouples the collecting and processing from the message construction logic. 
+
+== Post processing
+After the data is processed a object implementing the logable interface is declared valid by the processing.
+This valid object can then be turned in to a string representation and be placed in to the message buffer to be transmitted to the logging system and Transmission unit.
+
+

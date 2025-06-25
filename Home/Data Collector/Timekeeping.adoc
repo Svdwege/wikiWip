@@ -6,8 +6,6 @@ This time data is used for timestamping the incoming data from the sensors.
 
 NOTE: All times stored and transmitted by the data collection unit are in UTC. 
 
-
-
 == RTC
 
 This RTC is connected using i2c and is read on boot after which it is left alone. 

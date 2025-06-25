@@ -7,7 +7,7 @@ As well as the Protocol used by the GPS system built by Remko Welling.
 
 
 == ESP protocol info
-the data going to the ESP from data collection system uses a start and stop character. These are 0x01 and 0x18 respectively.
+The data going to the ESP from data collection system is surrounded by a start and a stop character, 0x01 and 0x18 respectively.
 For verification of the data integrity a 16 bit CRC is used. 
 In the specification there is also a 16 bit CRC which.
 If the start or stop character appear in the CRC there is an escape character (0x10) added.

@@ -1,0 +1,21 @@
+= Config header
+
+.Exerpt from Config.hpp
+[source,cpp]
+----
+/// this file should contain config values in the following format
+/// these values should be namespaced per component with general global config
+/// keys in the Config namespace. `constexpr bool key = value`
+/// these keys can then be used with` if constexpr(key){}` for conditional code
+/// which is then resolved at compile time
+----
+
+The config header hold a number of keys in a structured manner using nested namespaces an compile-time known constants to configure the unit. 
+This means that the code needs to be reflashed if the configuration needs to be changed,
+however this is simpler implementation than a runtime changeable configuration which would require external inputs
+
+The nested namespaces produce a tree like structure where the top level entry is `Config`.
+Under which there is a namespace for each component of the system which needs some form of configuration.
+
+Namespaces can easily be added for any new kind of component, for which the currently existing configuration keys can be used as a reference for implementation.
+

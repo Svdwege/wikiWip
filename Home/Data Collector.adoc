@@ -1,0 +1,31 @@
+= Data Collector
+
+The data emitted by the collector is documented in the Protocol Specification
+
+.Data collector data flow Diagram
+[mermaid]
+----
+graph LR
+
+    ADXL[ADXL345] --> P1[Processing]
+    Spc[Spectronik controller]--> P2[Processing]
+
+    cb[CanCallback] --> Can_Throttle_Processing
+    cb[CanCallback] --> Can_Telemetry_Processing
+    cb[CanCallback] --> Can_Motor_Processing
+
+    P1 --> Collect[Collector]
+    P2 --> Collect
+
+    Can_Throttle_Processing  --> Collect
+    Can_Telemetry_Processing --> Collect
+    Can_Motor_Processing     --> Collect
+
+    Collect --> ESP[Data Transmission Unit]
+    Collect --> Openlog
+----
+
+All data flow starts with the drivers. These drivers collect data from the sensors and peripherals.
+This data is then processed by a processing block which takes the raw data and converts the correct format
+The processed data is then collected and converted to Ascii data and transmitted to the OpenLog and Data Transmission Unit
+

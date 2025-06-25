@@ -1,0 +1,10 @@
+---
+title: "GNSS message frame"
+---
+packet-beta
+
+0-7: "Start character(0x01)"
+8-191: "Time stamp(yyyy-MM-dd hh:mm:ss.fff)"
+192-207: "CRC (can be up to 32 bits)"
+208-215: "End character(0x18)"
+

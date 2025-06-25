@@ -3,12 +3,6 @@ title: Motor
 ---
 
 
-
-
-
-
-
-
 # Motor Driver
 
 This document provides an in-depth overview of the C++ software components designed for interfacing with the GEMmotors G1.X motor controller via the CAN bus. The implementation is guided by the GEMmotors G1.X REV008 instruction manual and focuses on robust data handling and configurable logging.
@@ -103,6 +97,7 @@ A key feature of this driver is its highly configurable logging output. Each dat
 *   Prefix: `"MTL"`
 *   Conditionally includes: `control_value`, `control_mode`, `motor_mode`, `sw_enable`, `motor_state`, `motor_torque`, `motor_rpm`, `motor_temp`.
 *   Example (if all `Config::CAN::Telemetry::PARSE_MTL_...` flags are true):
+
 ```c++
 MTL,<control_value>,<control_mode>,<motor_mode>,<sw_enable>,<motor_state>,<motor_torque>,<motor_rpm>,<motor_temp>
 ```
@@ -111,6 +106,7 @@ MTL,<control_value>,<control_mode>,<motor_mode>,<sw_enable>,<motor_state>,<motor
 *   Prefix: `"MPW"`
 *   Conditionally includes: `motor_power`, `inv_peak_cur`.
 *   Example (if all `Config::CAN::Power::PARSE_MPW_...` flags are true):
+
 ```c++
 MPW,<motor_power>,<inv_peak_cur>
 ```
@@ -119,6 +115,7 @@ MPW,<motor_power>,<inv_peak_cur>
 *   Prefix: `"THR"`
 *   Conditionally includes: `control_value`, `control_mode`, `motor_mode`, `sw_enable`, `debug_mode`.
 *   Example (if all `Config::CAN::ControlCommand::PARSE_THR_...` flags are true):
+
 ```c++
 THR,<control_value>,<control_mode>,<motor_mode>,<sw_enable>,<debug_mode>
 ```
@@ -147,7 +144,8 @@ Parses the 8-byte payload into `pMotorTelemetry`:
 Parses the 4-byte payload (or more, uses first 4) into `pMotorPowerData`:
 *   `inv_peak_cur` (int16_t): `(latestRawData[0] << 8) | latestRawData[1]` (if `PARSE_MPW_INV_PEAK_CUR`)
 *   `motor_power` (int16_t): `(latestRawData[2] << 8) | latestRawData[3]` (if `PARSE_MPW_MOTOR_POWER`)
-    Sets `pMotorPowerData->valid = true` after parsing.
+    
+Sets `pMotorPowerData->valid = true` after parsing.
 
 ### 4.3 `CanControlCommandHandler::decodeData()` (for CAN ID `0x045`)
 Parses payload (assumed to be at least 4 bytes if all fields are enabled) into `pMotorCtrlCommand`:

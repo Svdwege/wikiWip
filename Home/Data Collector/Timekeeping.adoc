@@ -1,0 +1,25 @@
+= Time keeping
+
+The Data collection unit has a RTC on board for time data on boot and for when the time data from the GPS is unavailable.
+
+NOTE: All times stored and transmitted by the data collection unit are in UTC. 
+
+
+== RTC
+
+This RTC is connected using i2c and is read on boot after which it is left alone. 
+The RTC emits a 32.768kHz square wave which is used to drive a timer for a millisecond interrupt where the time info is updated.
+Upon overflow of any of the time fields the next field is incremented as well meaning if the 1000th millisecond hits, 
+the counter gets set to 0 and the seconds field gets incremented by 1.
+
+NOTE: The 32kHz output requires a pull up resistor to work, currently the internal pull-up on the stm32 is used.
+
+== GPS
+
+The GPS system build into the frame and provided by Remko Welling sends time data every 100ms after it starts receiving GPS data. 
+This time info is currently parsed and used to overwrite the current stored time. 
+
+The protocol can be found on the Protocol specification page 
+
+
+

@@ -74,4 +74,4 @@ The `accelerometerData` class (defined in `Data/Accelerometer.hpp`) is the stand
 
 ## Contact
 
-sjoerd
+Sjoerd

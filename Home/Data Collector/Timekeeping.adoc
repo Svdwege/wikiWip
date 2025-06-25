@@ -1,8 +1,11 @@
 = Time keeping
 
 The Data collection unit has a RTC on board for time data on boot and for when the time data from the GPS is unavailable.
+This time data is used for timestamping the incoming data from the sensors.
+
 
 NOTE: All times stored and transmitted by the data collection unit are in UTC. 
+
 
 
 == RTC

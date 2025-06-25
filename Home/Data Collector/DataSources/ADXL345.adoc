@@ -1,0 +1,8 @@
+= ADXL345 
+
+The ADXL345 is used to collect acceleration data from the vehicle and needs to be mounted in a way that all that's measured is the vehicles acceleration.
+The driver uses 4 wire SPI. This is combined with a interrupt line, power and ground makes it a 7 wire cable.
+
+The driver is configured using hardcoded binary numbers these would need some refactoring to allow the use of the Config.hpp to configure the accelerometers' data rate.
+
+

@@ -5,4 +5,13 @@ The driver uses 4 wire SPI. This is combined with a interrupt line, power and gr
 
 The driver is configured using hardcoded binary numbers these would need some refactoring to allow the use of the Config.hpp to configure the accelerometers' data rate.
 
+settings:
+- Output data rate: 100 hz 
+- measurement mode: true
+- dataready interrupt
+- interrupts on pin: int0
+- fullres 
+- 16g range
+
+
 

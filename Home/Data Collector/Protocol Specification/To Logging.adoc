@@ -1,1 +1,0 @@
-for logging there is a \n added at the end of each converted data object. This is to put all the log lines on their own line as specified by link:https://www.ietf.org/rfc/rfc4180.txt[RFC-4180]

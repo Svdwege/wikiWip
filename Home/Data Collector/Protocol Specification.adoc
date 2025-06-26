@@ -3,8 +3,12 @@
 This document contains the common parts of the Protocol specification from the collection unit to the transmission unit and to the Logger.
 As well as the Protocol used by the GPS system built by Remko Welling.
 
-== Logging protocol info 
+The data transmitted from the Data Collection unit are based on RFC 4180 but not conform to the specification.
+To be conform there would need to be an equal amount of fields on each line and lines should be ended with `CRLF`
 
+== Logging protocol info 
+The data that's logged to file post fixed with a `\n` character to place all data on their own line.
+This allows the data to be stored as it came into the system. This data is 
 
 == ESP protocol info
 The data going to the ESP from data collection system is surrounded by a start and a stop character, 0x01 and 0x18 respectively.

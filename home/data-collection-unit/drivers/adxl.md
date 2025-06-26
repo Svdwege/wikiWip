@@ -28,7 +28,8 @@ For more details see [ADXL354 documentation](https://www.analog.com/media/en/tec
 
 ## 1. Core Purpose
 
-The `ADXL345` driver provides a simple, robust way to **read 3-axis acceleration data** from the ADXL345 sensor. It handles all sensor configuration and communication, making raw acceleration values available for logging or further processing.
+The `ADXL345` driver provides a simple, robust way to **read 3-axis acceleration data** from the ADXL345 sensor. 
+It handles all sensor configuration and communication, making raw acceleration values available for logging or further processing.
 
 ## 2. System Overview Diagram
 
@@ -59,7 +60,8 @@ The driver manages the sensor through a few key stages:
 ### 3.2 Data Ready & Processing (`processIRQ()`)
 
 * **Purpose:** Efficiently captures new acceleration data.
-* **Action:** This method is called when new data is available via a hardware interrupt. It quickly reads the latest X, Y, and Z acceleration values over SPI and stores them in a dedicated data object.
+* **Action:** This method is called when new data is available via a hardware interrupt. 
+It quickly reads the latest X, Y, and Z acceleration values over SPI and stores them in a dedicated data object.
 
 ### 3.3 Data Storage (`register_data()`)
 
@@ -68,7 +70,9 @@ The driver manages the sensor through a few key stages:
 
 ## 4. Key Data Structure (`accelerometerData`)
 
-The `accelerometerData` class (defined in `Data/Accelerometer.hpp`) is the standard container for the sensor's output. It holds the X, Y, and Z acceleration values, along with a timestamp and a validity flag. Being an `ILoggable` object, it can easily convert its data into a formatted string (e.g., `"ACC,X,Y,Z"`) for logging or telemetry.
+The `accelerometerData` class (defined in `Data/Accelerometer.hpp`) is the standard container for the sensor's output.
+It holds the X, Y, and Z acceleration values, along with a timestamp and a validity flag. 
+Being an `ILoggable` object, it can easily convert its data into a formatted string (e.g., `"ACC,X,Y,Z"`) for logging or telemetry.
 
 ---
 

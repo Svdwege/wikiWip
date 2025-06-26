@@ -12,3 +12,12 @@ After the data is processed a object implementing the logable interface is decla
 This valid object can then be turned in to a string representation and be placed in to the message buffer to be transmitted to the logging system and Transmission unit.
 
 
+[mermaid]
+----
+graph LR
+
+Driver -> Memory
+Memory -> Processing
+Processing -> ProcessedDataObject
+ProcessedDataObject -> TransmitBuffer
+----

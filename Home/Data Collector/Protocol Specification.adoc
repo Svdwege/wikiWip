@@ -16,8 +16,6 @@ For verification of the data integrity a 16 bit CRC is used.
 In the specification there is also a 16 bit CRC which.
 If the start or stop character appear in the CRC there is an escape character (0x10) added.
 
-NOTE: The information above does not apply to the data going into the OpenLog.
-
 == GPS Time Info
 
 The information from the GNSS unit is send to the collection unit with a variable length frame.
@@ -28,5 +26,3 @@ The following image show the data send by the GNSS unit in bytes
 
 .GPS Protocol in bytes
 image::timekeeping.bytes.png["GPS Protocol in bytes"]
-
-

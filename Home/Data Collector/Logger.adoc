@@ -6,3 +6,4 @@ This is because closing and opening a new file took too long (\~15ms).
 It has a number of methods which write data to the Openlog.
 These take either Strings, raw bytes, or any object conforming to the Iloggable interface
 
+This allows the underlying functionality and technology to be swapped out when updating or upgrading it.

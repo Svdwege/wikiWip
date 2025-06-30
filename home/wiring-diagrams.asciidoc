@@ -1,7 +1,0 @@
----
-title: Wiring diagrams
----
-Here you can find all wiring diagrams
-
-
-

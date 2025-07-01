@@ -1,0 +1,117 @@
+= Protocol Specification Data Transmission Unit
+
+The Data Transmission Unit has, besides the communication between the Data Collection Unit, also communication with a remote server hosted at the HAN.
+
+To send data to the server, it needs to be in a format that is understood by both programs.
+
+The communication channel goes via MQTT. The MQTT server (also known as the MQTT Broker) is also hosted on the same server as the program.
+
+
+== Topic specfication
+
+During use and development, there are many topics used. In this section, there will be a specification on how to configure the topics. During the race, the used topic should look like this:
+
+During the race, the used topic should look like this:
+
+.Structure of the MQTT topic:
+[source, MQTT topic specification]
+----
+hm25/*
+----
+
+The name works as follows: hm25 is the naming of the racecar. It means Hydromotive 2025. Every year this name changes, so for the coming year, it should be hm26/*.
+
+The * are the subcategories. The subcategories that should be used are:
+
+- telemetry
+- metadata
+- error
+- configuration
+
+With these subcategories, there will be an understanding of the performance of the whole telemetry unit. The "configuration" specification is unique. This is for remotely configuring the (Spectronik) fuel cell and should be closely collaborated with Powertrain.
+
+Currently, there is only one subcategory: Telemetry. The topic looks like the following:
+
+.Telemetry MQTT topic for 2025 Hydromotive racecar:
+[source, MQTT topic specification]
+----
+hm25/telemetry
+----
+
+
+== Data Structure Specification for Telemetry
+
+The format used for sending the data is a stringified JavaScript Object Notation (JSON) object. This format is chosen for the following reasons:
+
+- Low data overhead
+- Low chance of transmission-breaking characters
+- Human-readable
+- Easy to construct and deconstruct
+- Consistent with the configuration files
+
+
+.All the abbreviations that are present in the JSON object:
+|===
+| Component | JSON block | Description
+| seq | None | sequence number of message, is used to track the messages
+| tim | None | Shows the timestamp of the latest datacollection
+| vhl | - | Vehicle data block
+| accX | vhl | Acceleration in X-axis
+| accY | vhl | Acceleration in Y-axis
+| accZ | vhl | Acceleration in Z-axis
+| mtr | - | Information related to the Hub-motor
+| pwr | mtr | Power of Hub-motor
+| rpm | mtr | RPM of Hub-motor
+| trq | mtr | RPM of Hub-motor
+| trq | mtr | RPM of Hub-motor
+| spc | - | Information related to the Spectronik fuel cell
+| vsc | spc | Super capacitor voltage
+| tankP | spc | Hydrogen tank pressure
+| fan | spc | Fan speed of the fuel cell
+| H2P1 | spc | Hydrogen pressure sensor 1
+| H2P2 | spc | Hydrogen pressure sensor 2
+|===
+
+The JSON blocks are constructed in the following groups:
+
+- Vehicle data
+- Motor data
+- Spectronik data
+
+The data identification is kept as short as possible to reduce the data footprint since it is being sent over a cellular network. In Figure 1, the stringified JSON is viewable, which is unfortunately not very readable.
+
+Stringified JSON, this is an example of the format in which it is transmitted:
+[source,JSON]
+----
+{"seq":4,"tim":"17:30:20.000","vhl":{"accX":90,"accY":26,"accZ":-197,"thr":45},"mtr":{"pwr":250,"rpm":200,"trq":55},"spc":{"vsc":55.32,"tankP":250.3,"fan":30,"h2P1":0.52,"h2P2":0.63}}
+----
+
+In Figure 2, you can see the beautified JSON object. In Table 1, you can see the abbreviations.
+
+Beautified JSON object. This object holds the same values as the stringified JSON object and is more human-readable:
+[source,JSON]
+----
+{
+  "seq":4,
+  "tim":"17:30:20.000",
+  "vhl":{
+    "accX":90,
+    "accY":26,
+    "accZ":-197,
+    "thr":45
+  },
+  "mtr":{
+    "pwr":250,
+    "rpm":200,
+    "trq":55
+  },
+  "spc":{
+    "vsc":55.32,
+    "tankP":250.3,
+    "fan":30,
+    "h2P1":0.52,
+    "h2P2":0.63
+  }
+}
+----
+

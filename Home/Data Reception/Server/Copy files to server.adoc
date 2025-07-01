@@ -1,0 +1,55 @@
+= Copy files to server
+
+This is a how-to guide that will walk you through the process of copying files to the server. This guide utilizes the program https://www.chiark.greenend.org.[PuTTY],  which is required for this process. You can download PuTTY https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html[here].
+
+
+== Prerequisites
+
+Before starting with these instructions, ensure you have the following:
+
+- PuTTY installed
+- A remote terminal connection to the server via PuTTY
+- A `*.ppk` key _(PuTTy Private Key)_
+- `pscp` _(a command-line tool, often installed alongside PuTTY)_
+- The file you want to upload or download
+
+
+== The shell command
+
+The `pscp` command will be used. it is  similar to the `scp` command but uses a `.ppk` key instead of an OpenSSH key like `.pem`.
+
+NOTE: If your path contains spaces, enclose it in double quotes (").
+
+.Basic syntax of the `pscp` command:
+[source,bash]
+----
+pscp source user@hosname:path/to/location
+----
+
+
+=== Used parameters
+
+- `p:` 		Preserve the attributes (e.g., permissions, date of file creation, date of last time edited, etc.)
+- `C:`		Enable compression
+- `scp:`	Force the SCP protocol (Secure Copy Protocol)
+
+
+== Commands for Hydromotive server
+
+To send files to the Hydromotive server, use this command:
+
+NOTE: If you don't define the path (i.e., you only specify `username@hostname:`), the files will be uploaded to the home directory of the user.
+
+.The used syntax to copy a file to the Hydromotive server:
+[source,bash]
+----
+pscp -p -C -scp -i Your_PuTTY_key.ppk source user@hosname:path/to/location/
+----
+
+It is also possible to receive files from the Hydromotive server. This is done using the following syntax:
+
+.The syntax that could be used to download a file from the Hydromotive server:
+[source,bash]
+----
+pscp -p -C -scp -i Your_PuTTY_key.ppk user@hosname:path/of/the/to/be/send/file destination_on_your_system
+----

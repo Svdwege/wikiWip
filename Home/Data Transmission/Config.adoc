@@ -1,0 +1,63 @@
+= Configuration of ESP32-S3
+
+In this section of the Wiki will discuss the configuration of the ESP32-S3 in terms of hardware and software.
+
+Here will also discuss on how to set up the software for the first time
+
+
+== Hardware configuration
+
+First lets start with the pins that are used on the ESP32-S3.
+
+.Configuration and the used pins on the ESP32-S3
+|===
+| Pin | Pin Mode | Usage | Description
+
+| 4
+| Output
+| Wi-Fi status LED
+| Indicates the status of the Wi-Fi connection
+
+| 5
+| Output
+| MQTT status LED
+| Indicates the status of the MQTT connection
+
+| 6
+| Output
+| Spare status LED
+| Spare LED for additional status indications
+
+| 9
+| RxD
+| RxD UART2 (Debug)
+| Receive data for UART2, used for debugging
+
+| 10
+| TxD
+| TxD UART2 (Debug)
+| Transmit data for UART2, used for debugging
+
+| 17
+| TxD
+| TxD UART1 (Data Collection Unit)
+| Transmit data for UART1, used for data collection
+
+| 18
+| RxD
+| RxD UART1 (Data Collection Unit)
+| Receive data for UART1, used for data collection
+|===
+
+=== UART Configuration
+
+Table 1 shows that there are two UARTS used, One is used for the datasharing between the Data Collection Unit and the Data Transmission Unit.
+
+.UART configuration
+|===
+| UART | Description | TxD pin | RxD pin | Baud | UART Configuration
+
+| 1 | Telemetry Data Collection Unit | 17 | 18 | 460800 | SERIAL_8N1
+| 2 | Debugging UART | 10 | 9 | 115200 | SERIAL_8N1
+|===
+

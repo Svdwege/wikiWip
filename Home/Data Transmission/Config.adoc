@@ -1,13 +1,11 @@
 = Configuration of ESP32-S3
 
-In this section of the Wiki will discuss the configuration of the ESP32-S3 in terms of hardware and software.
-
-Here will also discuss on how to set up the software for the first time
+This section of the Wiki discusses the configuration of the ESP32-S3 in terms of hardware and software. It also covers the initial software setup.
 
 
 == Hardware configuration
 
-First lets start with the pins that are used on the ESP32-S3.
+Let's start with the pins used on the ESP32-S3.
 
 .Configuration and the used pins on the ESP32-S3
 |===
@@ -51,7 +49,7 @@ First lets start with the pins that are used on the ESP32-S3.
 
 === UART Configuration
 
-Table 1 shows that there are two UARTS used, One is used for the datasharing between the Data Collection Unit and the Data Transmission Unit.
+There are two UARTs used on the ESP32-S3. One is used for data sharing between the Data Collection Unit and the Data Transmission Unit.
 
 .UART configuration
 |===
@@ -61,3 +59,86 @@ Table 1 shows that there are two UARTS used, One is used for the datasharing bet
 | 2 | Debugging UART | 10 | 9 | 115200 | SERIAL_8N1
 |===
 
+
+== Software Configuration
+
+This section will go in-depth on how to configure the development environment on your PC and how to configure the ESP32-S3 for first-time usage.
+
+The ESP32-S3 uses a `config.json` file to configure general settings like Wi-Fi credentials and MQTT connection settings. A template is present in `ESP32-S3 config`.
+
+
+The Telemetry Sending Unit software is fully developed in PlatformIO. The software is developed in CLion 2025 using the PlatformIO plugin, primarily due to personal preference. However, any other supported Integrated Development Environment (IDE) should work as well.
+
+PlatformIO is a plugin for popular C++ IDEs such as Visual Studio Code, Eclipse, and CLion. It supports a wide range of microcontrollers from various brands, including Espressif, AVR, NXP, STM32, and many more.
+
+The primary reason for choosing PlatformIO is its extensive support for easily switching between microcontrollers using the `platformio.ini` file, as well as its wide range of community libraries.
+
+=== Prerequisites
+
+- PlatformIO Plugin
+- PlatformIO Core, CLI tool (Optional)
+- Visual Studio Code / CLion (or any other supported IDE for PlatformIO)
+
+==== Links to Install These Prerequisites
+
+- https://platformio.org/[Download page of PlatformIO]
+- https://docs.platformio.org/en/latest/core/index.html[PlatformIO Core (CLI tool, optional)]
+- https://platformio.org/install/integration[Full List of Supported IDEs for PlatformIO]
+- https://code.visualstudio.com/[Visual Studio Code download page]
+- https://www.jetbrains.com/clion/[CLion download page]
+
+=== First Time Working with the Telemetry Sending Unit Software
+
+Getting started and further developing the Telemetry Sending Unit software is straightforward. Follow these steps:
+
+1. https://gitlab.com/hydromotive/2425-acquisitionmodule-dev[Clone the repository, if you haven't already].
+
+2. Open your favorite (and supported) IDE with the PlatformIO plugin installed.
+3. Click on _Open..._ (in CLion, the shortcut is: `CTRL + O`).
+4. Navigate to `<root of repository folder>/telemetry-unit/`.
+5. Open the folder `telemetry-sending`.
+
+Now, the PlatformIO plugin will initialize, and the build targets and configuration will be loaded.
+
+=== How to upload the code to ESP32-S3
+
+Connect the ESP32 S3 to your laptop via a USB-C cable, using the UART labeled port.
+
+==== Upload Filesystem to ESP32-S3
+
+> **Note:** It is not necessary to upload the filesystem every time after a software update unless the JSON structure has changed.
+
+1. Create a folder within the project named `data` (it should look like `ROOT_OF_PROJECT/data`).
+2. Copy the `config.json` from `data_template` to the `data` folder.
+3. Configure the `config.json`.
+
+4. Upload the file system via the terminal by using:
+
+[bash]
+----
+pio run --target uploadfs
+----
+
+.The project structure should look like this
+[text]
+--------------
+telemetry-sending
+├── data
+│   ├── test.config
+--------------
+
+==== Upload code to ESP32-S3
+
+> "**Note:** The Telemetry Sending software only works then the filesystem is uploaded to the ESP32-S3!"
+
+1. Connect the ESP32-S3 Via a USB-C cable to your laptop. Use the UART labeled USB-C connector
+2. Compile the software with PlatformIO
+You can use the following command:
+
+
+    pio.exe run -e lolin_s3
+
+3. Upload the compiled software to the ESP32-S3
+You can use the following command:
+
+    pio.exe run -t upload -e lolin_s3

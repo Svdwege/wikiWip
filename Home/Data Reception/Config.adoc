@@ -1,0 +1,57 @@
+= Configuration of the Data Reception unit
+
+To make the software as flexible as possible, without having to recompile and deploy the software every time a change has to be made (such as changing the MQTT topic or database table), it is optimal to use a JSON configuration file.
+
+This file contains important configuration parameters such as IP addresses of the MQTT broker and database, database name, and tables.
+
+
+== The Configuration file
+
+n Figure 1, you can see the contents of the configuration file. On the first startup of the `telemetry_receiving_unit` container, it will create this file at the expected location. The location where the `appConfig.json` is expected is `/app`.
+
+.Template of the `appConfig.json` file
+[source,JSON]
+----
+{
+    "json_configured": false,
+    "mqtt_subscriber": {
+        "ip_address": "127.0.0.1",
+        "port": 1883,
+        "client_id": "not_configured_client",
+        "topic": "test/topic",
+        "clean_session": true,
+        "QoS": 0,
+        "keep_alive": 60,
+        "username": "username",
+        "password": "password"
+    },
+    "database": {
+        "ip_address": "127.0.0.1",
+        "port": "3306",
+        "name": "test_db",
+        "table": "table",
+        "username": "username",
+        "password": "password"
+    }
+}
+----
+
+
+== Copy configuration file to program
+
+The Data Reception Unit is developed as a Docker image. On the server, it runs as a standalone Docker container. Docker has many built-in commands for using images and containers. With the following command, it is possible to copy the configuration file into this container:
+
+The name of the Docker container is `telemetry_receiving_unit`. With the following command, you can copy the `appConfig.json` to `telemetry_receiving_unit`:
+
+Command to copy the configuration file into the container:
+[source,bash]
+----
+sudo docker cp appConfig.json telemetry_receiving_unit:/app
+----
+
+
+.Template of the command:
+[source,bash]
+----
+docker cp <sourcefile> <Docker_Container>:/location/
+----

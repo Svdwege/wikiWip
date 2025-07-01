@@ -8,11 +8,11 @@ The protocol used for data transmission is documented in the "Protocol Specifica
 [mermaid]
 ----
 graph LR
-    Data_Collector[Data Collection Unit] --> Processing_Storing[Processing & Storing]
+    data_collector[Data Collection Unit] --> processing_storing[Processing & Storing]
+    processing_storing --> aggregation[Aggregation]
 
-    Processing_Storing --> Aggregation[Aggregation]
-
-    Aggregation --> Publish_MQTT[Publish on MQTT]
+    aggregation --> createjson[Create JSON structure]
+    createjson --> Publish_mqtt[Publish on MQTT]
 ----
 
 The specification for publishing data to the MQTT broker is documented in the Protocol Specification located at `/Home/Data Transmission/Protocol Specification.adoc.`

@@ -1,0 +1,78 @@
+= PlatformIO Unit-testing
+
+Within Embedded Systems, testing is crucial for developing hardware and code. This project is no exception to testing and saw many different methods of testing.
+
+To ease the testing methodology in terms of unit testing, research was done on the implementation of testing with PlatformIO.
+
+Within the project, there are a couple of unit tests written that could act as a visual guide on how to implement this. This section will go in-depth on how the testing methodology works in collaboration with PlatformIO.
+
+
+== General information
+PlatformIO has created an infrastructure to test code natively on the development machine and on embedded devices.
+
+The PlatformIO testing framework works as follows: All tests need to be in the test folder. Within this folder, you can place your tests. It is a good practice to separate tests by platform, as shown in Figure 1.
+
+.Basic and valid infrastructure of using the testing framework within a PlatformIO project:
+[source, text]
+----
+test
+├── native
+│   ├─ test_function_test1
+│   │  ├─ source files e.g., foo.h
+│   │  └─ source files e.g., bar.cpp
+│   │
+│   └─ test_function_test2
+│      ├─ source files e.g., foo.h
+│      └─ source files e.g., bar.cpp
+│
+└── embedded
+    ├─ test_function_test1
+    │  ├─ source files e.g., foo.h
+    │  └─ source files e.g., bar.cpp
+    │
+    └─ test_function_test2
+       ├─ source files e.g., foo.h
+       └─ source files e.g., bar.cpp
+
+----
+
+For more information about testing and PlatformIO, visit https://docs.platformio.org/en/stable/advanced/unit-testing/structure/hierarchy.html[testing and PlatfromIO]
+
+
+== Running the tests
+
+As shown in Figure 1, there are a few conditions that need to be met to work with the testing framework.
+
+
+=== Prerequisites
+
+- All tests are in the `test/` folder.
+- Every test is present in a folder starting with `test_`.
+- Every test contains `int main()`.
+- Have the enviroment setup in `platformio.ini`.
+
+To execute you need to have a terminal available and have the plaform defined in the `platformio.ini` file.
+
+.Example on the configuration within the `platformio.ini`:
+[source, ini]
+----
+[env:native]
+platform = native
+----
+
+
+==== executing tests
+
+After all the prerequisites are met, the tests can be executed. To run all the tests, use the following command:
+
+[source,bash]
+----
+pio test e native -vvv
+----
+
+If you want to run only one test and you have the structure like Figure 1, then use the following command:
+
+[source,bash]
+----
+pio test e native --filter="native/test_function_test1" -vvv
+----

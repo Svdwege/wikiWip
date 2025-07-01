@@ -64,7 +64,7 @@ There are two UARTs used on the ESP32-S3. One is used for data sharing between t
 
 This section will go in-depth on how to configure the development environment on your PC and how to configure the ESP32-S3 for first-time usage.
 
-The ESP32-S3 uses a `config.json` file to configure general settings like Wi-Fi credentials and MQTT connection settings. A template is present in `ESP32-S3 config`.
+The ESP32-S3 uses a `config.json` file to configure general settings like Wi-Fi credentials and MQTT connection settings. A template is present in `ESP32-S3 config specification`.
 
 
 The Telemetry Sending Unit software is fully developed in PlatformIO. The software is developed in CLion 2025 using the PlatformIO plugin, primarily due to personal preference. However, any other supported Integrated Development Environment (IDE) should work as well.

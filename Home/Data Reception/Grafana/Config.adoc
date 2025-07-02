@@ -13,7 +13,7 @@ As shown in Figure 1, there is another organisation, named `Hydromotive`. This i
 Before creating visualization or datastructure, make sure that your on this organisation.
 
 .Available organisations in Grafana
-image::Available organisations in Grafana.png[Figure 1: Available organisations in Grafana]
+image::images/Available organisations in Grafana.png[Figure 1: Available organisations in Grafana]
 
 
 Under the tab (left side of screen) _Dashboards_ is there an folder created named _Hydromotive_. Under this folder you can find all the visualizations.

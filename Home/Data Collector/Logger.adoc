@@ -1,4 +1,5 @@
 = Logger
+Sjoerd van de Wege <s.vandewege@student.han.nl>
 
 The Logger class functions as a simple wrapper around the STM32 HAL. 
 This is because closing and opening a new file took too long (\~15ms).
@@ -7,3 +8,6 @@ It has a number of methods which write data to the Openlog.
 These take either Strings, raw bytes, or any object conforming to the Iloggable interface
 
 This allows the underlying functionality and technology to be swapped out when updating or upgrading it.
+
+Due to the current implementation this class is fully blocking, and waits for the write to be completed before continueing execution
+

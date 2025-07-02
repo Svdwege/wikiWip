@@ -1,4 +1,5 @@
 = Data Collector
+Sjoerd van de Wege <s.vandewege@student.han.nl>
 
 The data emitted by the collector is documented in the Protocol Specification
 
@@ -27,5 +28,8 @@ graph LR
 
 All data flow starts with the drivers. These drivers collect data from the sensors and peripherals.
 This data is then processed by a processing block which takes the raw data and converts the correct format
-The processed data is then collected and converted to Ascii data and transmitted to the OpenLog and Data Transmission Unit
+The processed data is then collected and converted to Ascii data to be transmitted to the OpenLog and Data Transmission Unit
+
+
+
 

@@ -55,3 +55,50 @@ sudo docker cp appConfig.json telemetry_receiving_unit:/app
 ----
 docker cp <sourcefile> <Docker_Container>:/location/
 ----
+
+
+== Instruction on Changing the Parameters of the Telemetry Receiving Unit
+
+This guide provides step-by-step instructions to change the parameters of the telemetry receiving unit by modifying the `appConfig.json` file and updating the Docker container.
+
+=== Prerequisites
+
+- PuTTY installed on your local machine.
+- Appropriate access permissions to the server.
+- Basic knowledge of using the command line and a text editor like nano.
+
+
+=== Steps
+
+1. *Log on to the server*
+    - Open PuTTY and log in to the server using your credentials.
+
+
+2. *Modify the configuration File*
+    - Open the `appConfig.json` file using a file editor, e.g., nano:
+
+        nano appConfig.json
+
+    - Change the required parameters in the file. Ensure you maintain valid JSON format.
+    - Save and exit nano by pressing CTRL+O, then Enter, and CTRL+X.
+
+
+3. *Copy the configuration File to the Docker Container*
+
+   -  Use the following command to copy the modified `appConfig.json` into the Docker container:
+
+        sudo docker cp appConfig.json telemetry_receiving_unit:/app
+
+4. *Restart the Docker Container*
+
+    - Restart the Docker container to apply the changes:
+
+     sudo docker restart telemetry_receiving_unit
+
+5. *Verify the Changes*
+
+    - Check the logs of the Docker container to verify that the changes have been applied successfully:
+
+    sudo docker logs telemetry_receiving_unit
+
+    - Look for log entries that confirm the new configuration is loaded.

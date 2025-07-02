@@ -1,0 +1,63 @@
+[source, sql]
+----
+##################################################################
+ # @file    Create_database_and_table.sql
+ #
+ # @brief   This script is used to create the Hydromotive database,
+ #          and the table.
+ #
+ #          This script could be used as a template to create new
+ #          tables.
+ #
+ # @version  3.0.0
+ #
+ # @author  Julian Janssen
+ # @date    2-7-2025
+ #
+ # @copyright Copyright (c) 2025 Julian Janssen. All rights reserved.
+ ##################################################################
+
+-- Set variables for database and table names
+SET @database_name = 'hydromotive_2026';
+SET @table_name = 'test_data';
+
+
+################################################################
+#                     END OF CONFIGURATION                     #
+#           DO NOT CHANGE ANYTHING BEYOND THIS POINT           #
+################################################################
+
+
+-- Create a database if it does not exist using a prepared statement
+SET @create_db_sql = CONCAT('CREATE DATABASE IF NOT EXISTS `', @database_name, '`');
+PREPARE create_db_stmt FROM @create_db_sql;
+EXECUTE create_db_stmt;
+DEALLOCATE PREPARE create_db_stmt;
+
+-- Create the table if it does not exist using a prepared statement
+SET @create_table_sql = CONCAT('
+CREATE TABLE IF NOT EXISTS `', @table_name, '` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `seq_num` int DEFAULT NULL,
+  `timestamp` datetime(3) DEFAULT NULL COMMENT \'Example format: "2025-04-13 10:29:30.100"\',
+  `acc_x` smallint DEFAULT NULL COMMENT \'From JSON vehicle, 16 bit signed integer\',
+  `acc_y` smallint DEFAULT NULL COMMENT \'From JSON vehicle, 16 bit signed integer\',
+  `acc_z` smallint DEFAULT NULL COMMENT \'From JSON vehicle, 16 bit signed integer\',
+  `thr_paddle` tinyint unsigned DEFAULT NULL COMMENT \'From JSON vehicle, Range 0 to 100 [%]\',
+  `mot_power` smallint DEFAULT NULL COMMENT \'From JSON motor, Range -1000 to 1000 [w]\',
+  `mot_rpm` smallint DEFAULT NULL COMMENT \'From JSON motor, Range -10000 to +10000 [rpm]\',
+  `mot_torque` smallint DEFAULT NULL COMMENT \'From JSON motor, Range -100 to +100 [nm]\',
+  `supcap_volt` decimal(5, 1) DEFAULT NULL COMMENT \'From JSON spectronik, Range 0,0 to 100,0 [v], 1 decimal\',
+  `tank_press` decimal(6, 2) DEFAULT NULL COMMENT \'From JSON spectronik, Range 0,00 to 500,00 [bar], 2 decimals\',
+  `fan` tinyint unsigned DEFAULT NULL COMMENT \'From JSON spectronik, Range 0 to 100 [%]\',
+  `h2_sens_p1` decimal(3, 2) DEFAULT NULL COMMENT \'From JSON spectronik, Range 0,00 to 1,00 [bar], typical 0.5 bar, 2 decimals\',
+  `h2_sens_p2` decimal(3, 2) DEFAULT NULL COMMENT \'From JSON spectronik, Range 0,00 to 1,00 [bar], typical 0.5 bar, 2 decimals\',
+  PRIMARY KEY (`id`),
+  KEY `seq_num` (`seq_num`),
+  KEY `timestamp` (`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci');
+
+PREPARE create_table_stmt FROM @create_table_sql;
+EXECUTE create_table_stmt;
+DEALLOCATE PREPARE create_table_stmt;
+----

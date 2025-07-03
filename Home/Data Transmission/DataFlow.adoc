@@ -1,0 +1,30 @@
+= Data Flow within Data Transmission Unit
+
+This section of the wiki page explains the data flow within the Data Transmission Unit.
+
+The data comes in from the UART from the Data Collection Unit.
+[mermaid]
+----
+graph LR
+
+    UART[Incoming data] --> capture[Capturing data]
+    capture --> crc[CRC validation]
+
+    crc --> |Valid| process[Data processing]
+    crc --> |Invalid| stop[Wait for new data]
+
+    process --> tokenize_storage[Tokenization and Storage]
+----
+
+In parallel with the data collection within this unit, there is also a timer running that publishes data every second. It publishes data even if no new data has been captured.
+
+[mermaid]
+----
+graph LR
+
+  timer[Every 1 second] --> aggregation[Aggregate the captured data]
+ aggregation --> createJSON[Create JSON structure]
+
+  createJSON --> publish[Publish JSON structure on MQTT]
+
+----

@@ -1,0 +1,39 @@
+---
+title: Diagram
+---
+
+
+[mermaid]
+----
+flowchart TD
+    A[CAN Bus: GEMmotors ] -->|Raw CAN Messages: ID, Data, DLC| B(CanDispatcher: Routes Messages)
+    B --> C(CAN ID: 0x064)
+    B --> D(CAN ID: 0x065)
+    B --> E(CAN ID: 0x045)
+    C --> F(CanTelemetryHandler 
+     - Registers Filter
+     - Handles Raw Data
+     - Decodes)
+
+    D --> G(CanPowerHandler 
+     - Registers Filter
+     - Handles Raw Data
+     - Decodes)
+
+        E --> H(CanControlCommandHandler 
+     - Registers Filter
+     - Handles Raw Data
+     - Decodes)
+
+F-->|Updates based on Config.hpp| R[MotorTelemetry
+ILoggable Data
+CAN ID 0x064 Data]
+
+G-->|Updates based on Config.hpp| K[MotorPower
+ILoggable Data
+CAN ID 0x065 Data]
+
+H-->|Updates based on Config.hpp| L[MotorCtrlCommand
+ILoggable Data
+CAN ID 0x045 Data]
+----

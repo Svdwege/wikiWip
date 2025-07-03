@@ -1,0 +1,293 @@
+= Commonly Used Docker Commands
+
+In this section of the wiki, we will discuss the commands that were commonly used during the development of the Data Reception Unit. The primary goal of this section is to assist future teams with the commands that were used and how they might be useful for them.
+
+
+== Build Docker Containers
+
+[source,bash]
+----
+docker build [OPTIONS]
+----
+
+Often used parameters:
+
+- `-t`: Give tags to the Docker image, helpful to distinguish multiple images.
+- `-f`: Specifies the Dockerfile that will be used.
+- `.`: Specifies the location of the Dockerfile. Dot "." means the current working directory.
+
+Example:
+[source,bash]
+----
+docker build -t hello_docker -f Dockerfile .
+----
+
+This example builds a Docker image using the tag `hello_docker` and creates the image from the Dockerfile.
+
+If you want to specify a revision version (e.g., 0.5.2) to the image, use the following format:
+[source,bash]
+----
+docker build -t hello_docker:0.5.2 -f Dockerfile .
+----
+
+
+== Run Docker Containers
+=== Run Command
+
+The `docker run` command is used to create and start a *new* container from a specified image. This command is versatile and includes many options to customize the container's behavior.
+
+[source,bash]
+----
+docker run [OPTIONS] IMAGE
+----
+
+Often used parameters:
+
+- `--name`: Give the container a name, helpful to distinguish multiple containers.
+- `-d`: Run the container in detached mode. The container will run in the background.
+
+Example:
+[source,bash]
+----
+docker run -d --name=HelloDocker hello_docker
+----
+
+This command will create and start a new container named `HelloDocker` from the image `hello_docker`, running it in detached mode.
+
+
+=== Start Command
+
+The `docker start` command is used to start one or more stopped containers. *This command does not create a new container*; it simply starts an existing container that has been stopped.
+
+[source,bash]
+----
+docker start [OPTIONS] CONTAINER
+----
+
+Example:
+[source,bash]
+----
+docker start HelloDocker
+----
+
+This command will start the container named `HelloDocker`.
+
+
+== Stop Container from Running
+
+The `docker stop` command is used to stop one or more running containers. This command sends a `SIGTERM` signal to the main process inside the container, allowing it to gracefully shut down.
+
+[source,bash]
+----
+docker stop [OPTIONS] CONTAINER
+----
+
+
+== See Log File of Container
+
+Sometimes the Docker container prints info to a terminal. This is viewable with the `logs` command:
+
+[source,bash]
+----
+docker logs [CONTAINERNAME / CONTAINER_ID]
+----
+
+Sometimes you want to see live updates, then use the `-f` flag:
+
+[source,bash]
+----
+docker logs -f [CONTAINERNAME / CONTAINER_ID]
+----
+
+
+== Execute Commands in Container
+=== Prerequisites
+- Docker container is up and running (e.g., use `docker run` or `docker start`).
+
+=== Command
+
+Depending on the configuration, you may execute commands within the Docker container as root. Keep that in mind!
+
+From https://kodekloud.com/blog/docker-exec/[kodekloud]:
+
+[source,bash]
+----
+docker exec -it <container-name-or-id> <shell-executable>
+----
+
+Often used parameters:
+
+- `-i`: Run with interactive mode enabled.
+- `-t`: Allocate pseudo-TTY, allowing you to execute commands and receive their output.
+- `sh`: Used in place of `<shell-executable>`. Using the shell, bash is also possible using `/bin/bash`.
+
+Example:
+[source,bash]
+----
+docker exec -it HelloDocker sh
+----
+
+This command executes a fully interactive terminal session within the Docker container, using the Shell.
+
+
+== See Docker Images [[see-docker-images]]
+
+To see all the images that are present on the current machine, use the following command:
+
+[source,bash]
+----
+docker images
+----
+
+
+== See Docker Containers [[see-docker-containers]]
+
+To see all the **running** Docker containers, use the following command:
+
+[source,bash]
+----
+docker container ls
+----
+
+If you want to see all the Docker containers on the system, use the `-a` parameter.
+
+Example:
+[source,bash]
+----
+docker container ls -a
+----
+
+
+== Save and Load Docker Images
+=== Save Docker Images
+
+Sometimes you want to copy a built image from your machine to another; this is possible by using the `docker save` command. By default, Docker will write the image to STDOUT instead of a file. Use `-o FILENAME.tar` to save the image as a file:
+
+[source,bash]
+----
+docker save -o myimage.tar myimage:tag
+----
+
+
+=== Load Docker Images
+
+After a Docker image is created and transferred to another machine, you may want to load it. This is possible with the built-in command:
+
+By default, Docker will load the image from STDIN. Use `-i [/LOCATION/OF/TARFILE/]` to read from an archive (`.tar`) file.
+
+[source,bash]
+----
+docker load -i /path/on/remote/server/myimage.tar
+----
+
+
+== Inspect Docker Container
+
+There is also a possibility to inspect the Docker container. Here you can find information about the container like the container state, hostname, IP address, working directory, etc.
+
+[source,bash]
+----
+docker inspect <container-name-or-id>
+----
+
+
+== Cleanup Images and Containers
+
+After some experimenting or simply updating containers, you may want to clean up the operating system. This is possible by using the following commands.
+
+
+== Remove Docker Image
+
+Before executing the remove command, it's wise to check that you select the right image. See <<see-docker-images>> on how to do that.
+
+[NOTE]
+====
+*THIS COMMAND WILL REMOVE THE IMAGE.*
+====
+
+[NOTE]
+====
+The deletion only works if the image is not used by a container.
+====
+
+[source,bash]
+----
+docker rmi <image-name-or-id>
+----
+
+== Remove Docker Container
+
+To remove a Docker container, you can use the following command.
+
+[NOTE]
+====
+Before executing this command, it is wise to check that you selected the right container. See <<see-docker-containers>> on how this is possible.
+====
+
+[source,bash]
+----
+docker rm <container-name-or-id>
+----
+
+== Copying Files into a Docker Container
+
+Sometimes it is necessary to copy files into the Docker container. This is also needed for the Data Reception Unit as it relies on a configuration file to set some important program parameters. Docker has a built-in command for handling this, named the `cp` command. The command prototype works as follows:
+
+[source,bash]
+----
+docker cp <source> <Docker_ID or container name>:<destination>
+----
+
+For the Data Reception Unit, the command is as follows:
+
+[source,bash]
+----
+sudo docker cp appConfig.json telemetry_receiving_unit:/app
+----
+
+== Docker Image and GitLab
+
+GitLab has a possibility to store ready-made images. This enables automation of updating to the newest version and prevents the developer from having to rebuild the image on the deployment machine. If configured correctly, you can simply download the latest images from GitLab without having to use commands like `scp` to copy the image over to the deployment machine.
+
+
+== Build Images for GitLab [[build-images-for-gitlab]]
+
+There are prerequisites for building an image. The name of the Docker image must contain the location on GitLab, which in our case is `registry.gitlab.com/hydromotive/2425-acquisitionmodule-dev/<IMAGE-NAME>`. By using the `/<IMAGENAME>`, it enables having multiple different Docker images in one repository.
+
+[source,bash]
+----
+docker build -t registry.gitlab.com/hydromotive/2425-acquisitionmodule-dev/telemetry_receiving_unit:0.1.2 .
+----
+
+
+== Upload the Built Docker Image to GitLab
+
+After building a Docker image as described in <<build-images-for-gitlab>>, it is almost time to upload it to GitLab. Before you can do this, you have to be logged in with Docker. You can use the following command to log in via the terminal with Docker:
+
+[source,bash]
+----
+docker login
+----
+
+For uploading images to an online repository, use the following command:
+
+[source,bash]
+----
+docker push <REMOTE_LOCATION>/<IMAGENAME>:<VERSION>
+----
+
+NOTE: `<IMAGENAME>` and `<VERSION>` are optional.
+
+For uploading to our GitLab repository, you can use the following:
+
+[source,bash]
+----
+docker push registry.gitlab.com/hydromotive/2425-acquisitionmodule-dev/telemetry_receiving_unit:0.1.2
+----
+
+
+== Contact
+
+Julian Janssen - https://gitlab.com/GhostJulian[@GhostJulian]  - mailto:jwr.janssen@student.han.nl[jwr.janssen@student.han.nl]
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

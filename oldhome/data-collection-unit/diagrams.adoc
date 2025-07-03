@@ -1,0 +1,44 @@
+---
+title: Diagrams
+---
+
+
+
+Sjoerd van de Wege <s.vandewege@student.han.nl>
+
+== Class Diagram
+
+[plantuml, format="png", id="myDiagram"]
+----
+include::class_diagram.puml[]
+
+----
+== Full architecture
+
+[mermaid]
+----
+graph LR
+    ADXL[ADXL345] --> P1[Processing]
+    Spc[Spectronik controller]--> P2[Processing]
+
+    cb[CanCallback] --> Can_Throttle
+    cb --> Can_Telemetry
+    cb --> Can_Motor
+
+    Can_Throttle -->Collect
+    Can_Telemetry -->Collect
+    Can_Motor -->Collect
+
+    P1 --> Collect[Collector]
+    P2[processing] --> Collect
+
+    Collect --> ESP32
+    Collect --> openlogger
+
+    openlogger --> microSD
+
+    ESP32 --> MQTT
+    MQTT --> Server
+    Server --> Database
+    Database --> Dashboard
+----

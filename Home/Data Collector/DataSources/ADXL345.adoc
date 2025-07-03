@@ -1,0 +1,21 @@
+= ADXL345 
+
+The ADXL345 is a 3 axis accelerometer.
+With a range of -16g to +16g at a resolution of 13 bits with a 3.9mg Least Significant bit value
+
+The ADXL345 is used to collect acceleration data from the vehicle and needs to be mounted in a way that all that's measured is the vehicles acceleration.
+The driver uses 4 wire SPI. This is combined with a interrupt line, power and ground makes it a 7 wire cable.
+
+The driver is configured using hardcoded binary numbers these would need some refactoring to allow the use of the Config.hpp to configure for example the accelerometers' data rate.
+
+.ADXL345 configuration
+* Output data rate: 100 Hz 
+* measurement mode: true
+* data-ready interrupt
+* interrupts on pin: int0
+* full-resolution (13 bit) 
+* 16g range
+
+The ADXL345 uses an external interrupt from a input pin which triggers the data collection from the accelerometer.
+After collection the data is passed to the processing block which is empty as the data coming out of the accelerometer is already processed. 
+

@@ -1,0 +1,25 @@
+= ESP32-S3 config specification
+
+As described on the configuration page, this template can be used to configure the ESP32-S3 filesystem.
+
+Without this file and the filesystem, the ESP32-S3 will not function properly.
+
+For guidelines on installing the filesystem and this configuration file, refer to the configuration instructions within this folder.
+
+.JSON structure within the config.json
+[json]
+----
+{
+    "wifi": {
+        "ssid": "ssid",
+        "password": "wifi_password"
+    },
+    "mqtt": {
+        "broker": "broker",
+        "port": 1883,
+        "topic": "mqtt-topic",
+        "user": "mqtt_user",
+        "passwd": "mqtt_user_password"
+    }
+}
+----

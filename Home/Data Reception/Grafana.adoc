@@ -1,0 +1,20 @@
+= Grafana
+
+This project uses Grafana to visualize the vehicle data. The data is read from the MySQL database. In Grafana, there are two visualizations developed: one for showing historical data and one for showing incoming data. The main goal of these visualizations is to aid the powertrain in making the racecar as efficient as possible.
+
+== General Dataflow for Visualizing the Data
+
+[mermaid]
+----
+graph LR
+    database[Database] --> grafana[Grafana]
+    grafana --> history[Historical Visualization]
+    grafana --> live[Live Data Visualization]
+----
+
+[NOTE]
+====
+The data is not live; it is updated at intervals of one second.
+====
+
+In the link:Grafana/Config.adoc[Config] page, we delve into how Grafana is configured and how to create new users.

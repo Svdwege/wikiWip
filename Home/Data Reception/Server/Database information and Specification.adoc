@@ -1,0 +1,100 @@
+= Database Information and Specification
+
+After an MQTT message is successfully parsed, it will be inserted into the database. The database operates on the HAN server, co-located with the Data Reception unit. The database is accessible via phpMyAdmin.
+
+
+== Database Specification
+
+Data separation is crucial for the database structure. Each new team year should have its own database. For example, the database for next year should be named `hydromotive_2026`.
+
+
+=== Data Separation by Event Type
+
+To differentiate data between test days and race days, the following formats should be used:
+
+*Test Days:*
+[source, text]
+----
+testday_LOCATION_DD_MONTH
+----
+- `LOCATION` is optional but must be consistent with other tables.
+- Example: For a test day at Assen on the 10th of March, the format would be `testday_Assen_10_March`.
+
+*Race Days:*
+[source, text]
+----
+COUNTRY_race_DD_MONTH
+----
+- `COUNTRY` is optional but must be consistent with other tables.
+- Example: For a race in Germany on the 15th of June, the format would be `Germany_race_15_Junjule`.
+
+*Database Testing:*
+[source, text]
+----
+test_data or test_table
+----
+- *ONLY* For testing purposes, ensure you use `test_data` or `test_table` to avoid affecting real data.
+
+
+=== Database and Table Creation
+
+For the creation of database tables, use the script template located in "Create_database_and_table". This script has also been utilized for creating tables in the database `hydromotive_2025`.
+
+NOTE: There are two scripts available for use: Version 2.1.0 and Version 3.0.0. Both versions function similarly, but Version 3.0.0 uses variables to set the database name and table, while Version 2.1.0 has these names hardcoded. Version 3.0.0 may be easier to use since the values that need to be changed are located at the top of the script.
+
+
+==== Creating New Tables
+
+NOTE: *Before executing the script, ensure you have changed the database names and the table name to avoid any conflicts or errors.*
+
+1. *Log-in to phpMyAdmin*
+- Ensure that the VPN connection is established.
+
+2. *Open SQL Terminal*
+- Open the SQL terminal, located on the home screen at the top center of the screen.
+
+3. *Copy and Paste the Script*
+- Copy the entire script and modify the database and table names as needed.
+
+4. *Execute the Script*
+- Run the script in the SQL terminal to create the database and tables.
+
+5. *Verify Database and/or Table Creation*
+- Under the "Databases" section, you should find the newly created database.
+- Within the selected database, there should be a new table.
+
+
+== Database Users
+
+For secure and efficient handling of data in and out of the database, specific user accounts are required. For security reasons, it has been decided to create two distinct accounts: one for the receiving unit and one for viewing the data. This setup ensures that each program has only the necessary permissions for its specific tasks and operates within its designated network or IP address.
+
+
+=== Purpose of Separate Accounts
+
+    - *Minimizing Permissions*: Why would the telemetry inserter need permission to view or create databases? Conversely, why would a data visualization program need rights to modify or delete data?
+
+    - *Network Access Control*: Why should the inserter code have permission to access the database globally when it operates locally, right next to the database?
+
+
+=== User Roles and Permissions
+==== Telemetry Receiver User
+- *Role*: This user is responsible for inserting data into the database.
+- *Permissions*: The "telemetry_receiver" user has only the rights to INSERT into the database.
+- *Access Scope*: To aid future teams, wildcards are used. This user has access to every database that starts with "hydromotive_".
+
+==== Grafana User
+- *Role*: This user is designated for data visualization purposes.
+- *Permissions*: The "Grafana" user has only SELECT rights to the database.
+- *Access Scope*: Similar to the telemetry receiver, wildcards are used. This user has access only to databases that start with "hydromotive_".
+
+=== Security Benefits
+
+- *Principle of The Least Privilege*: By assigning the minimum necessary permissions, the risk of accidental or intentional misuse is significantly reduced.
+- *Network Restrictions*: Limiting database access to specific IP addresses or networks enhances security by reducing exposure to potential attacks.
+
+
+== Contact
+
+Julian Janssen - https://gitlab.com/GhostJulian[@GhostJulian]  - mailto:jwr.janssen@student.han.nl[jwr.janssen@student.han.nl]
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

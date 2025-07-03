@@ -1,0 +1,19 @@
+= Debug logging
+the code in TinyPrintf.cpp and the corresponding header was adapted to c++ from http://www.sparetimelabs.com/tinyprintf/tinyprintf.php[here]
+
+the ITM sending logic and function was adapted from the internet however the source was lost but the code is similar to the function found in core_cm3.h of the CMSIS
+
+The libary uses multiple logging levels which are the following the level number and the channel number are the same
+These do need to be reordened as the trace should be below info and debug
+
+- level 0:Test
+- level 1:Error
+- level 2:Warn
+- level 3:Trace
+- level 4:Info
+- level 5:Debug
+
+
+== References
+
+https://medium.com/@g.bharathraj19/getting-started-with-instrumentation-trace-macrocell-in-stm32cubeide-4af179eb0034[how to getstarted and use the ITM]

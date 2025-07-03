@@ -1,0 +1,120 @@
+= Spectronik Driver
+
+This document outlines the C++ driver for the Spectronik Protium fuel cell system, which communicates via UART.
+
+* *Primary Manual:* link:home/data-collection-unit/documentation/spectronik[Protium UART Specification]
+
+== ProtiumData: The Data Hub
+The `ProtiumData` class holds all parsed values from the fuel cell. It inherits from `ILoggable` for standardized logging.
+
+|===
+| Field | Type | Source Key | Unit
+
+| `FuelCellVoltage`
+| `float`
+| `FC_V`
+| V
+
+| `FuelCellCurrent`
+| `float`
+| `FC_A`
+| A
+
+| `FuelCellPower`
+| `float`
+| `FC_W`
+| W
+
+| `EnergyConsumed`
+| `float`
+| `Energy`
+| Wh
+
+| `FuelCellTemperature1`
+| `float`
+| `FCT1`
+| °C
+
+| `FanPercentage`
+| `uint8_t`
+| `FAN`
+| %
+
+| `NumberOfCells`
+| `uint16_t`
+| `Number_of_cell`
+| -
+
+| `H2PressureSensor1`
+| `float`
+| `H2P1`
+| Bar
+
+| `H2PressureSensor2`
+| `float`
+| `H2P2`
+| Bar
+
+| `H2TankPressure`
+| `float`
+| `Tank-P`
+| Bar
+
+| `H2TankTemperature`
+| `float`
+| `Tank-T`
+| °C
+
+| `VoltageSetpoint`
+| `float`
+| `V_Set`
+| V
+
+| `CurrentSetpoint`
+| `float`
+| `I_Set`
+| A
+
+| `SuperCapacitorVoltage`
+| `float`
+| `UCB_V`
+| V
+
+| `StasisSelector`
+| `uint8_t`
+| `Stasis_selector`
+| -
+
+| `StasisValve1Pressure`
+| `float`
+| `STASIS_V1`
+| Bar
+
+| `StasisValve2Pressure`
+| `float`
+| `STASIS_V2`
+| Bar
+|===
+
+== Logging Output
+The `toString()` method generates a log string with the prefix *SPC*. The fields included in the output are determined by the configuration settings.
+
+.Example Output (all flags enabled)
+[source,text]
+----
+SPC,<FuelCellVoltage>,<FuelCellCurrent>,<FuelCellPower>,<EnergyConsumed>,<FuelCellTemperature1>,<FanPercentage>,<NumberOfCells>,<H2PressureSensor1>,<H2PressureSensor2>,<H2TankPressure>,<H2TankTemperature>,<VoltageSetpoint>,<CurrentSetpoint>,<SuperCapacitorVoltage>,<StasisSelector>,<StasisValve1Pressure>,<StasisValve2Pressure>
+----
+
+== Configuration
+The driver's behavior is controlled by compile-time constants in `Config/Config.hpp` under the `Config::Spectronik` namespace.
+
+*   `startString[]` & `endString[]`: Define the commands to start and stop the fuel cell (e.g., `"start\r"`).
+*   `PARSE_...` flags: These boolean `constexpr` flags (e.g., `PARSE_FANPERCENTAGE`) control everything. Setting a flag to `true` enables both:
+** The parsing of that value from the incoming UART string.
+** Its inclusion in the final logged `toString()` output.
+*   A `static_assert` ensures at least one `PARSE_...` flag is enabled to prevent an empty configuration.
+
+== Contact
+Vladimirs Jurcenoks - link:https://gitlab.com/Vladimir-create[@Vladimir-create] - mailto:v.jurcenoks@student.han.nl[v.jurcenoks@student.han.nl]
+
+link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev[Project Link]

@@ -1,0 +1,18 @@
+= 🎮 Emulators
+
+Emulators are software components designed to replicate the behavior and communication protocols of physical hardware devices.
+
+== 📖 Available Emulators
+The following emulators are available for use within the project.
+
+|===
+| Emulator | Description | Documentation
+
+| Spectronik Emulator
+| Simulates the behavior of the Spectronik fuel cell.
+| link:home/emulators/spectronik[View Details]
+
+|===
+
+== ✍️ Maintenance
+When a new emulator is created, it must be added to the table in this document.

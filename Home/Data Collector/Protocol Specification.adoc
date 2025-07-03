@@ -8,13 +8,32 @@ The data transmitted from the Data Collection unit are based on RFC 4180 but not
 To be conform there would need to be an equal amount of fields on each line and lines should be ended with `CRLF`
 
 == Logging protocol info 
+
 The data that's logged to file post fixed with a `\n` character to place all data on their own line.
-This allows the data to be stored as it came into the system. This data is 
+This allows the data to be stored as it came into the system. 
+This result in the following format: `[Timestamp][Data]\n`
+Where Timestamp and Data are filled in by the collector
 
 == ESP protocol info
 The data going to the ESP from data collection system is surrounded by a start and a stop character, 0x01 and 0x18 respectively.
 For verification of the data integrity a 16 bit CRC is used. 
 If the start or stop character appears in the CRC there is an escape character (0x10) added.
+This result in the following format: `[START_BYTE][Timestamp][Data][CRC_HIGH][CRC_LOW][STOP_BYTE]`
+Where Timestamp and Data are filled in by the collector
+
+Assuming an object implementing `ILoggable` has a sample time of `23:17:42.099` and data of x: `-109` y: `32` z: `-229`  and a ID of: `ACC`
+
+.Example ESP Protocol message 
+----
+Byte Stream: 0x01 '2' '3' ':' '1' '7' ':' '4' '2' ',' '0' '9' '9' | 'A' 'C' 'C' ',' '-' '1' '0' '9' ',' '3' '2' ',' '-' '2' '2' '9' 0xD0 0x32 0x18
+Interpretation: [START][Timestamp String][Data String][CRC_H][CRC_L][STOP]
+----
+
+.Example LOG Protocol message 
+----
+Byte Stream: '2' '3' ':' '1' '7' ':' '4' '2' ',' '0' '9' '9' | 'A' 'C' 'C' ',' '-' '1' '0' '9' ',' '3' '2' ',' '-' '2' '2' '9' 0x0A
+Interpretation: [Timestamp String][Data String][STOP]
+----
 
 == GPS Time Info
 
@@ -26,3 +45,8 @@ The following image shows the data send by the GNSS unit in bytes
 
 .GPS Protocol in bytes
 image::timekeeping.bytes.png["GPS Protocol in bytes"]
+
+== Configuration
+The Protocol uses compile-time constants defined in `Config/Config.hpp` to determine the start, stop and escape characters .
+*   `Config::GNSS::START_BYTE`: The start delimiter byte for UART transmissions.
+*   `Config::GNSS::STOP_BYTE`: The stop delimiter byte for UART transmissions.

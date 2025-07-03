@@ -3,7 +3,7 @@ Sjoerd van de Wege <s.vandewege@student.han.nl>
 
 The data emitted by the collector is documented in the Protocol Specification
 
-.Data collector data flow Diagram
+.Data collector data flow diagram
 [mermaid]
 ----
 graph LR

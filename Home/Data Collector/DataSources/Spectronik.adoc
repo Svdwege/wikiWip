@@ -1,0 +1,157 @@
+= Spectronik 
+
+This document outlines the C++ driver for the Spectronik Protium fuel cell system, which communicates via UART at 57600 8N1.
+
+Data sheet for the controller: link:https://hannl-my.sharepoint.com/shared?listurl=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments&id=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation%2FProtium%201000%2D2500%20UART%20Specification%20%2D%2023%2E03%2E15%20%281%29%2Epdf&parent=%2Fpersonal%2Fjaap%5Fjanssens%5Fhan%5Fnl%2FDocuments%2FHAN%20Hydromotive%2F2024%2D2025%2FPowertrain%2Ftelemetry%2Dunit%2FTelemetry%20unit%202024%2Fhardware%2Fdocumentation[Protium UART Specification]
+
+The Spectronik controller has a 4 pin Molex PicoBlade connector (pre made cable #:0151340403).
+And has the following pin out:
+
+.UART Pinout
+. +5V
+. Protium Tx
+. Protium Rx
+. GND
+
+.UART parameters
+|===
+| Parameter | Value |
+| Baud Rate     | 57600 bps     |
+| Data Bits     | 8             |
+| Parity Bit    | None          |
+| Stop Bits     | 1             |
+| Flow Control  | None          |
+| Logic Level   | 5V HIGH, 0V LOW |
+|===
+
+The data send from the Spectronic is as follows:
+
+.Spectronik Data 
+----
+|FC_V : 71.17 V | FCT1: 30.90 C | H2P1 : 0.61 B | DCDCV: XX.X V |
+FC_A : 10.21 A | FCT2: 28.46 C | H2P2 : 0.59 B | DCDCA: XX.X A |
+FC_W : 726.6 W | FAN : 89 % | Tank-P: 117.0 B | DCDCW: XXXX.X W |
+Energy: 298 Wh| BLW : 21 % | Tank-T: 25.08 C | BattV: 23.49 V |
+!
+----
+in which the vertical bar (`|`, ASCII: 0x7c) is used as start character and delimiter.
+And the transmission is terminated using a exclamation mark (`!`, ASCII: 0x21).
+
+
+== Data Class: ProtiumData
+
+The `ProtiumData` class holds all parsed values from the fuel cell.
+It inherits from `ILoggable` for standardized logging.
+
+|===
+| Field | Type | Source Key | Unit
+
+| `FuelCellVoltage`
+| `float`
+| `FC_V`
+| V
+
+| `FuelCellCurrent`
+| `float`
+| `FC_A`
+| A
+
+| `FuelCellPower`
+| `float`
+| `FC_W`
+| W
+
+| `EnergyConsumed`
+| `float`
+| `Energy`
+| Wh
+
+| `FuelCellTemperature1`
+| `float`
+| `FCT1`
+| °C
+
+| `FanPercentage`
+| `uint8_t`
+| `FAN`
+| %
+
+| `NumberOfCells`
+| `uint16_t`
+| `Number_of_cell`
+| -
+
+| `H2PressureSensor1`
+| `float`
+| `H2P1`
+| Bar
+
+| `H2PressureSensor2`
+| `float`
+| `H2P2`
+| Bar
+
+| `H2TankPressure`
+| `float`
+| `Tank-P`
+| Bar
+
+| `H2TankTemperature`
+| `float`
+| `Tank-T`
+| °C
+
+| `VoltageSetpoint`
+| `float`
+| `V_Set`
+| V
+
+| `CurrentSetpoint`
+| `float`
+| `I_Set`
+| A
+
+| `SuperCapacitorVoltage`
+| `float`
+| `UCB_V`
+| V
+
+| `StasisSelector`
+| `uint8_t`
+| `Stasis_selector`
+| -
+
+| `StasisValve1Pressure`
+| `float`
+| `STASIS_V1`
+| Bar
+
+| `StasisValve2Pressure`
+| `float`
+| `STASIS_V2`
+| Bar
+|===
+
+== Logging Output
+The `toString()` method generates a log string with the prefix *SPC*.
+The fields included in the output are determined by the configuration settings.
+
+.Output format(with all flags enabled)
+[source,text]
+----
+SPC,<FuelCellVoltage>,<FuelCellCurrent>,<FuelCellPower>,<EnergyConsumed>,<FuelCellTemperature1>,<FanPercentage>,<NumberOfCells>,<H2PressureSensor1>,<H2PressureSensor2>,<H2TankPressure>,<H2TankTemperature>,<VoltageSetpoint>,<CurrentSetpoint>,<SuperCapacitorVoltage>,<StasisSelector>,<StasisValve1Pressure>,<StasisValve2Pressure>
+----
+
+== Configuration
+The driver's behavior is controlled by compile-time constants in `Config/Config.hpp` under the `Config::Spectronik` namespace.
+
+*   `startString[]` & `endString[]`: Define the commands to start and stop the fuel cell (e.g., `"start\r"`).
+*   `PARSE_...` flags: These boolean `constexpr` flags (e.g., `PARSE_FANPERCENTAGE`) control everything. Setting a flag to `true` enables both:
+** The parsing of that value from the incoming UART string.
+** Its inclusion in the final logged `toString()` output.
+*   A `static_assert` ensures at least one `PARSE_...` flag is enabled to prevent an empty configuration.
+
+== Contact
+Vladimirs Jurcenoks - link:https://gitlab.com/Vladimir-create[@Vladimir-create] - mailto:v.jurcenoks@student.han.nl[v.jurcenoks@student.han.nl]
+
+link:https://gitlab.com/hydromotive/2425-acquistionmodule-dev[Project Link]

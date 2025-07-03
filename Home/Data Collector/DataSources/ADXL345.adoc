@@ -21,3 +21,4 @@ The ADXL345 uses an external interrupt from a input pin which triggers the data 
 After collection the data is passed to the processing block which is empty as the data coming out of the accelerometer is already processed. 
 this processing is the reconstruction of a 16-bit value from 2 8-bit values.
 
+For more details see [ADXL354 documentation](https://www.analog.com/media/en/technical-documentation/data-sheets/adxl345.pdf)

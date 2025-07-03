@@ -29,9 +29,9 @@ pscp source user@hosname:path/to/location
 
 === Used parameters
 
-- `p:` 		Preserve the attributes (e.g., permissions, date of file creation, date of last time edited, etc.)
-- `C:`		Enable compression
-- `scp:`	Force the SCP protocol (Secure Copy Protocol)
+- `p`: 		Preserve the attributes (e.g., permissions, date of file creation, date of last time edited, etc.)
+- `C`:		Enable compression
+- `scp`:	Force the SCP protocol (Secure Copy Protocol)
 
 
 == Commands for Hydromotive server

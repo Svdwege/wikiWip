@@ -98,7 +98,7 @@ Grafana generates an invalid hostname address (localhost:3000); this needs to be
 
 == Adding new data sources
 
-Grafana has a lot of options to retrief data from different sources, take a look at their https://grafana.com/grafana/plugins/data-source-plugins/[datadsources plugin site].
+Grafana has a lot of options to retrief data from different sources, take a look at their https://grafana.com/grafana/plugins/data-source-plugins/[data sources plugin site].
 
 1. *Log in as Admin*
 - Ensure that the VPN connection is established.

@@ -15,43 +15,45 @@ Holds comprehensive telemetry from the motor controller.
 
 | `control_value`
 | `int16_t`
-| Current control level reported by the motor.
-| 0-1
+| Current control level -10000 ... 10000
+Units depend on selected motor control mode (in
+% of torque or RPM*10)
+| 1, 2
 
 | `control_mode`
 | `uint8_t`
 | Current control mode.
-| 2 (Bit 0)
+| 3 (Bits 1..0)
 
 | `motor_mode`
 | `uint8_t`
 | Current motor operational mode.
-| 2 (Bits 1-3)
+| 3 (Bits 4..2)
 
 | `sw_enable`
 | `uint8_t`
 | Software enable status.
-| 2 (Bit 4)
+| 3 (Bit 5)
 
 | `motor_state`
 | `uint8_t`
 | Current motor operational state.
-| 2 (Bits 6-7)
+| 3 (Bits 7..6)
 
 | `motor_torque`
 | `int16_t`
 | Measured motor torque (Nm).
-| 3-4
+| 4, 5
 
 | `motor_rpm`
 | `int16_t`
 | Measured motor speed (0.1 RPM resolution).
-| 5-6
+| 6, 7
 
 | `motor_temp`
 | `int8_t`
 | Maximum inverter temperature (°C).
-| 7
+| 8
 |===
 
 === MotorPower (CAN ID: `0x065`)
@@ -63,12 +65,12 @@ Holds power and current data.
 | `inv_peak_cur`
 | `int16_t`
 | Maximum PEAK current of all inverters (A).
-| 0-1
+| 1, 2
 
 | `motor_power`
 | `int16_t`
 | Current motor power (W).
-| 2-3
+| 3, 4
 |===
 
 === MotorCtrlCommand (CAN ID: `0x045`)
@@ -79,18 +81,19 @@ Represents status/feedback related to motor control commands.
 
 | `control_value`
 | `uint8_t`
-| Control value status/feedback.
-| 1
+| Input control level for torque or speed regulation. -100 .. 100 for TORQUE control mode (in % of
+maximum torque)
+| 1,2
 
 | `control_mode`
 | `uint8_t`
 | Control mode status.
-| 3 (Bits 0-1)
+| 3 (Bits 1..0)
 
 | `motor_mode`
 | `uint8_t`
 | Motor mode status.
-| 3 (Bits 2-4)
+| 3 (Bits 4..2)
 
 | `sw_enable`
 | `uint8_t`

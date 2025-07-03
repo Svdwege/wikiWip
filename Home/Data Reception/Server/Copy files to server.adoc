@@ -53,3 +53,10 @@ It is also possible to receive files from the Hydromotive server. This is done u
 ----
 pscp -p -C -scp -i Your_PuTTY_key.ppk user@hosname:path/of/the/to/be/send/file destination_on_your_system
 ----
+
+
+== Contact
+
+Julian Janssen - https://gitlab.com/GhostJulian[@GhostJulian]  - mailto:jwr.janssen@student.han.nl[jwr.janssen@student.han.nl]
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

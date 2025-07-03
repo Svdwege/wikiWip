@@ -135,3 +135,9 @@ Grafana's experience can be enhanced by using plugins. For example, you can add 
 
 Now you can use the plugin in Grafana.
 
+
+== Contact
+
+Julian Janssen - https://gitlab.com/GhostJulian[@GhostJulian]  - mailto:jwr.janssen@student.han.nl[jwr.janssen@student.han.nl]
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

@@ -76,3 +76,9 @@ If you want to run only one test and you have the structure like Figure 1, then 
 ----
 pio test e native --filter="native/test_function_test1" -vvv
 ----
+
+== Contact
+
+Julian Janssen - https://gitlab.com/GhostJulian[@GhostJulian]  - mailto:jwr.janssen@student.han.nl[jwr.janssen@student.han.nl]
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

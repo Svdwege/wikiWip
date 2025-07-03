@@ -62,3 +62,9 @@ Time selector, used when you want to see data on the dashboards:
 image::images/Data selection on time basis.png[Data selector that works with time]
 
 Lastly, the time selector might be the most important feature of all. With this, you can select the dates between which you want to view the data. This is, by itself, a powerful mechanism and helps in displaying only the data you want to see. It can also act as a zoom functionality.
+
+== Contact
+
+Julian Janssen - https://gitlab.com/GhostJulian[@GhostJulian]  - mailto:jwr.janssen@student.han.nl[jwr.janssen@student.han.nl]
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

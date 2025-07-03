@@ -91,3 +91,10 @@ For secure and efficient handling of data in and out of the database, specific u
 
 - *Principle of The Least Privilege*: By assigning the minimum necessary permissions, the risk of accidental or intentional misuse is significantly reduced.
 - *Network Restrictions*: Limiting database access to specific IP addresses or networks enhances security by reducing exposure to potential attacks.
+
+
+== Contact
+
+Julian Janssen - https://gitlab.com/GhostJulian[@GhostJulian]  - mailto:jwr.janssen@student.han.nl[jwr.janssen@student.han.nl]
+
+Project Link: https://gitlab.com/hydromotive/2425-acquistionmodule-dev

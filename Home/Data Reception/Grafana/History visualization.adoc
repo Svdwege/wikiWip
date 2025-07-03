@@ -22,6 +22,7 @@ image::images/configuration of History visualization.png[Visualization for showi
 Zoomed in on the top row with specific means of configuring the current visualization:
 
 From left to right in Figure 2:
+
 - The database selector
 - Table selector
 - Data selection on a time basis
@@ -55,7 +56,7 @@ For the visualization developer: This is a variable linked to this specific visu
 ====
 
 
-== Data Selection on a time basis
+=== Data Selection on a time basis
 
 Time selector, used when you want to see data on the dashboards:
 

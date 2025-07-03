@@ -15,7 +15,6 @@ This document outlines the UART communication protocol for the Protium-1000/2500
 * [1. Protium-1000/2500 UART Communication Specification](#1-protium-10002500-uart-communication-specification)
     * [1.1 UART Specification](#11-uart-specification)
     * [1.2 UART Connector Specification](#12-uart-connector-specification)
-    * [1.3 Serial Communication with PLC](#13-serial-communication-with-plc)
 * [2. Message Output from the Protium-1000/2500](#2-message-output-from-the-protium-10002500)
     * [2.1 Example Running Phase Message:](#21-example-running-phase-message)
 * [3. Parsing Algorithm:](#3-parsing-algorithm)
@@ -55,16 +54,6 @@ The Protium-1000/2500 uses a 4-pin Molex PicoBlade connector. A premade cable as
 2. PLC Rx (Protium Tx)
 3. PLC Tx (Protium Rx)
 4. GND
-
----
-
-## 1.3 Serial Communication with PLC
-
-Serial communication with a PLC (RS232/RS485 capable) is possible with the following considerations:
-
-- Use an **RS232/RS485 to TTL converter** (Protium uses 5V TTL logic).
-- TTL cable length should be **< 1 meter**.
-- **Full duplex** connection is required (separate Rx and Tx lines).
 
 ---
 

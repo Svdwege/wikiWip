@@ -68,11 +68,11 @@ graph LR
     subgraph Transmission
         Collect --> ESP32
         ESP32 --> MQTT
-        MQTT --> Server
     end
 
 
     subgraph Reception
+        MQTT --> Server
         Server --> Database
         Database --> Dashboard
     end

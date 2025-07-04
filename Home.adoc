@@ -4,14 +4,16 @@ This is the wiki describing the components from which the Telemetry system is co
 
 There are 3 distinct parts to the Telemetry system.
 
-. Data Collector
-. Data Transmission
-. Data Reception
+.Telemetry System Components
+* Data Collector
+* Data Transmission
+* Data Reception
 
-.General data flow through the system
+.High level data flow through the system
 [mermaid]
 ----
 graph LR
+
     Collector --> Transmission
     Transmission --> Reception
 ----
@@ -34,32 +36,44 @@ Next to this program there is a mysql database and a graphana dashboard for stor
 
 == Full architecture
 
+The full architecture of the Telemetry system is shown below. 
+This shows the data paths and flow through the system
+
+.Telemetry System Full Architecture
 [mermaid]
 ----
+
 graph LR
+    
+    subgraph Collection
+        ADXL[ADXL345] --> P1[Processing]
+        Spc[Spectronik controller]--> P2[Processing]
 
-    ADXL[ADXL345] --> P1[Processing]
-    Spc[Spectronik controller]--> P2[Processing]
+        cb[CanCallback] --> Can_Throttle_Processing
+        cb[CanCallback] --> Can_Telemetry_Processing
+        cb[CanCallback] --> Can_Motor_Processing
 
-    cb[CanCallback] --> Can_Throttle_Processing
-    cb[CanCallback] --> Can_Telemetry_Processing
-    cb[CanCallback] --> Can_Motor_Processing
+        Can_Throttle_Processing  --> Collect
+        Can_Telemetry_Processing --> Collect
+        Can_Motor_Processing     --> Collect
 
-    Can_Throttle_Processing  --> Collect
-    Can_Telemetry_Processing --> Collect
-    Can_Motor_Processing     --> Collect
+        P1 --> Collect[Collector]
+        P2 --> Collect
 
-    P1 --> Collect[Collector]
-    P2 --> Collect
 
-    Collect --> ESP32
+    end
     Collect --> Openlog
-
     Openlog --> microSD
 
-    ESP32 --> MQTT
-    MQTT --> Server
-    Server --> Database
-    Database --> Dashboard
+    subgraph Transmission
+        Collect --> ESP32
+        ESP32 --> MQTT
+        MQTT --> Server
+    end
 
+
+    subgraph Reception
+        Server --> Database
+        Database --> Dashboard
+    end
 ----

@@ -1,4 +1,6 @@
 = Config header
+Sjoerd van de Wege <s.vandewege@student.han.nl>
+:listing-caption:
 
 .Exerpt from Config.hpp
 [source,cpp]

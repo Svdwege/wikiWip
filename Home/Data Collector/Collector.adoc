@@ -1,0 +1,53 @@
+= Collector Driver
+Sjoerd van de Wege <s.vandewege@student.han.nl>
+
+This document details the `Collector` component, which manages the flow from `Driver`s to output for logging and transmission.
+
+== Design
+The Collector is based on The observer pattern, where the `Collector` is the observer and the `Driver` classes are the subjects.
+This is achieved by using interfaces (`ILoggable` and `IProcess`).
+The `IProcess` interface (`IProcess.hpp`) defines a standardized system for processing raw data pulled in by a low-level Driver.
+The `ILoggable` interface (`ILoggable.hpp`) defines standardized methods for getting data out of the class instance.
+
+
+[mermaid]
+----
+graph LR
+    Driver --> Processing
+    Processing --> Collector
+----
+
+
+== Output Formatting & Protocol
+
+
+The `Collector` fill two distinct output buffers, these being the buffer going to the local storage and the buffer going to the transmission unit.
+These buffers have a slightly different format as specified in the Protocol Specification document. However the Timestamp and Data transmitted is still the same.
+
+=== Collector Example Output
+
+Assuming an object implementing `ILoggable` has a sample time of `23:17:42.099` and data of x: `-109` y: `32` z: `-229`  and a ID of: `ACC`
+
+.Example output 
+----
+23:17:42,099,ACC,-109,32,-229
+----
+
+=== Data Identifiers
+
+The `Collector` concatenates and logs/transmits processed data.
+Each distinct data type is identified by a prefix prepended by its `toString()` method. 
+The following identifiers are sent by the system:
+
+* `ACC`: Accelerometer data.
+* `SPC`: Spectronik fuel cell data.
+* `MPW`: Motor Power data.
+* `MTL`: Motor Telemetry data.
+* `THR`: Throttle position.
+
+
+== Configuration
+The Collectors behavior is influenced by compile-time constants, primarily defined in `Config/Config.hpp`.
+*   `Config::collector::buffer_size`: Defines the maximum size of the `ESPbuffer` and `LOGbuffer`.
+*   `DATA_SOURCE_COUNT`: A `constexpr` in `collector.hpp` limiting the number of registered `IProcess` and `ILoggable` objects.
+

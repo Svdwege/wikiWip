@@ -1,4 +1,6 @@
 = Data sources 
+Sjoerd van de Wege <s.vandewege@student.han.nl>
+:listing-caption:
 
 == processing
 The collector operates on data sources. This requires that they are all constructed in the same manner. For this a Interface is used.
@@ -13,12 +15,13 @@ After the data is processed a object implementing the loggable interface is decl
 This valid object can then be turned in to a string representation and be placed in to the message buffer to be transmitted to the logging system and Transmission unit.
 
 
-[mermaid]
+.High level data flow
+[mermaid, caption="Figure {counter:figures:1}: "]
 ----
 graph LR
 
-Driver -> Memory
-Memory -> Processing
-Processing -> ProcessedDataObject
-ProcessedDataObject -> TransmitBuffer
+    Driver -> Memory
+    Memory -> Processing
+    Processing -> ProcessedDataObject
+    ProcessedDataObject -> TransmitBuffer
 ----

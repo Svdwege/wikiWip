@@ -1,4 +1,5 @@
 = Logger
+Sjoerd van de Wege <s.vandewege@student.han.nl>
 
 The Logger class functions as a simple wrapper around the STM32 HAL. 
 This is because closing and opening a new file took too long (\~15ms).
@@ -7,3 +8,91 @@ It has a number of methods which write data to the Openlog.
 These take either Strings, raw bytes, or any object conforming to the Iloggable interface
 
 This allows the underlying functionality and technology to be swapped out when updating or upgrading it.
+
+Due to the current implementation this class is fully blocking, and waits for the write to be completed before continueing execution
+
+== Operating Modes & Entry
+
+The OpenLog has two primary operational modes:
+When OpenLog initializes, it defaults to the Logging Mode (<). 
+In this mode, OpenLog sends a < character to indicate it's ready to receive and log incoming serial data. 
+All data received through the serial connection is bufferd and then written to the microSD card.
+
+OpenLog's Command Mode (indicated by a > character) is for configuring settings, managing files, and controlling the system.
+To enter this mode, send the ASCII character 0x1A (Control-Z) three times in a row.
+OpenLog will respond with > (usually within 15 milliseconds) to confirm it has entered Command Mode.
+You can exit Command Mode and return to Logging Mode either by sending specific system mode commands or by power cycling the device.
+
+
+== Power Characteristics
+
+* VCC Input: 3.3V - 12V (Recommended: 3.3V - 5V)
+* RXI Input (Receive): 2.0V - 3.8V
+* TXO Output (Transmit): 3.3V
+* Current Draw (typical with microSD):
+** Idle: \~5mA - 6mA
+** Active Writing: \~20mA - 23mA (can vary with microSD card and baud rate)
+
+== MicroSD Card
+
+* Supported Sizes: 64MB to 64GB
+* Supported Formats: FAT16 or FAT32
+* Performance Note: Card response time can vary significantly based on manufacturer, class, and existing data. For optimal performance, use a newly formatted card (Class 4 or higher recommended for 9600bps, Class 6+ for higher baud rates).
+
+== Interfaces
+
+The OpenLog features several hardware interfaces for communication and advanced use.
+The Serial UART (FTDI Header) serves as the primary communication interface.
+It's important to note a connection warning: because of pin compatibility with the Arduino Pro/Mini, you can't plug directly into an FTDI breakout board. You'll need to cross the connections, specifically connecting TXO (OpenLog) to RXI (FTDI) and RXI (OpenLog) to TXO (FTDI).
+
+For advanced users, SPI Test Points are available, allowing you to reprogram the ATmega328 bootloader.
+Beyond just storage, the MicroSD Card plays a crucial role in direct configuration updates via the config.txt file located on the card.
+
+
+== Status LEDs
+
+Two LEDs provide critical operational feedback:
+
+* STAT1 (Blue): Toggles with each character received, indicating active serial communication.
+* STAT2 (Green): Blinks when the SPI interface is active, specifically when 512 bytes are written to the microSD card.
+
+== OpenLog Firmware Versions
+
+Different firmware versions optimize for specific use cases:
+
+*  OpenLog: Standard firmware. Ships by default. Includes full menu and command mode. Use `?` command to check the loaded version.
+*  OpenLog_Light: Designed for high-speed logging. Removes the menu and command mode to increase the receive buffer size.
+*  OpenLog_Minimal: Achieves the highest logging speed. Requires baud rate to be hard-coded and uploaded. Recommended for experienced users prioritizing maximum throughput.
+
+== Configuration File (`config.txt`)
+
+For firmware v1.6+, most system settings can be updated by modifying the `config.txt` file on the microSD card (using a card reader and text editor).
+
+.Settings (comma-separated):
+* `baud`: Communication baud rate (e.g., 9600, 115200).
+* `escape`: ASCII decimal value of the escape character (default: 26 for Ctrl+Z).
+* `esc#`: Number of escape characters required to enter command mode (default: 3).
+* `mode`: System boot-up mode (0=New Log, 1=Sequential Log, 2=Command Mode).
+* `verb`: Verbose error messages (1=On, 0=Off; `!` for errors if Off).
+* `echo`: Echo received characters in command mode (1=On, 0=Off).
+* `ignoreRX`: Disables emergency reset via RX pin (1=On, 0=Off).
+
+File Behavior: If `config.txt` is not found, OpenLog creates it with current settings.
+It prioritizes `config.txt` settings over internal EEPROM at power-up.
+
+== Common Troubleshooting & Solutions
+
+.  STAT LED Blinks:
+ *   3 Blinks (STAT1): MicroSD card failed to initialize. Reformat with FAT/FAT16.
+ *   5 Blinks (STAT1): Baud rate has changed; power cycle OpenLog for settings to take effect.
+.  "Too many logs" Error:
+ *   OpenLog supports up to 65,534 log files in the root directory.
+ *   Solution: Reformat your microSD card to improve logging speed and reset log count.
+.  Emergency Reset:
+ *   If the OpenLog is stuck or at an unknown baud rate:
+ **   Tie the `RX` pin to `GND`.
+ **   Power up OpenLog.
+ **   Wait for the LEDs to blink in unison (approx. 2 seconds).
+ **   Power down OpenLog and remove the jumper.
+ *   Result: Resets to 9600bps with 3x Ctrl+Z escape character.
+ *   Note: This feature can be overridden by the `ignoreRX` setting in `config.txt`.

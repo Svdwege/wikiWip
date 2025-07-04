@@ -1,4 +1,5 @@
 = Time keeping
+Sjoerd van de Wege <s.vandewege@student.han.nl>
 
 The Data collection unit has a RTC on board for time data on boot and for when the time data from the GPS is unavailable.
 This time data is used for timestamping the incoming data from the sensors.
@@ -8,10 +9,10 @@ NOTE: All times stored and transmitted by the data collection unit are in UTC.
 
 == RTC
 
-This RTC is connected using i2c and is read on boot after which it is left alone. 
+This RTC is connected using I2C and is read on boot after which it is left alone. 
 The RTC emits a 32.768kHz square wave which is used to drive a timer for a millisecond interrupt where the time info is updated.
-Upon overflow of any of the time fields the next field is incremented as well meaning if the 1000th millisecond hits, 
-the counter gets set to 0 and the seconds field gets incremented by 1.
+Upon overflow of any of the time fields the next field is incremented as well,
+meaning if the 1000th millisecond hits the counter gets set to 0 and the seconds field gets incremented by 1.
 
 NOTE: The 32kHz output requires a pull up resistor to work, currently the internal pull-up on the stm32 is used.
 

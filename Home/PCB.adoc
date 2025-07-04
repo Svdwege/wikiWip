@@ -17,8 +17,8 @@ On the PCB there are 5 connectors and 4 sub-boards
 * GNSS
 
 .Sub-boards
-* NUCLEO(Collection)
-* ESP32 (transmission)
+* NUCLEO (Collection)
+* ESP32  (transmission)
 * Buck converter
 * OpenLog
 
@@ -39,6 +39,7 @@ The buck converter is also reverse polarity protected.
 
 The Nucleo board collects all data from the sensors and sources in the vehicle.
 This means all inputs to the PCB are in some way routed to this board.
+The pinout for this board can be taken from the STM32CubeIDE IOC Project file. 
 
 === OpenLog
 gets a serial input from the NUCLEO and logs the data to the microSD card 

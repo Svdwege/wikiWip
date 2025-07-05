@@ -20,8 +20,8 @@ This valid object can then be turned in to a string representation and be placed
 ----
 graph LR
 
-    Driver -> Memory
-    Memory -> Processing
-    Processing -> ProcessedDataObject
-    ProcessedDataObject -> TransmitBuffer
+    Driver --> Memory
+    Memory --> Processing
+    Processing --> ProcessedDataObject
+    ProcessedDataObject --> TransmitBuffer
 ----

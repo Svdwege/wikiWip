@@ -2,7 +2,8 @@
 
 The data is collected by the Data Collecting Unit, and send to the Data Transmission Unit.
 
-The protocol used for data transmission is documented in the "Protocol Specification" document, located at `/Home/Data Collector/Protocol Specification.adoc`. This document provides detailed information about the data format, transmission methods, and other relevant specifications.
+The protocol used for data transmission is documented in the "Protocol Specification" document, located at link:Home/Data%20Collector/Protocol%20Specification[Protocol specification STM to ESP].
+This document provides detailed information about the data format, transmission methods, and other relevant specifications.
 
 .Data transmission dataflow diagram
 [mermaid]
@@ -15,4 +16,5 @@ graph LR
     createjson --> Publish_mqtt[Publish on MQTT]
 ----
 
-The specification for publishing data to the MQTT broker is documented in the Protocol Specification located at `/Home/Data Transmission/Protocol Specification.adoc.`
+The specification for publishing data to the MQTT broker is documented in the Protocol Specification located at link:Home/Data%20Transmission/Protocol%20Specification[Protocol specification mqtt publishing].
+

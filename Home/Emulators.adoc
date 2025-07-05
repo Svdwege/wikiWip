@@ -10,7 +10,7 @@ The following emulators are available for use within the project.
 
 | Spectronik Emulator
 | Simulates the behavior of the Spectronik fuel cell.
-| link:home/emulators/spectronik[View Details]
+| link:Home/Emulators/Spectronik[View Details]
 
 |===
 

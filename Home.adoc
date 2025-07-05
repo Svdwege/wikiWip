@@ -1,4 +1,5 @@
 = Home
+:icons: font
 
 This is the wiki describing the components from which the Telemetry system is constructed.
 

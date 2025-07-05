@@ -30,8 +30,8 @@ You can exit Command Mode and return to Logging Mode either by sending specific 
 * RXI Input (Receive): 2.0V - 3.8V
 * TXO Output (Transmit): 3.3V
 * Current Draw (typical with microSD):
-** Idle: \~5mA - 6mA
-** Active Writing: \~20mA - 23mA (can vary with microSD card and baud rate)
+** Idle: ~5mA - 6mA
+** Active Writing: ~20mA - 23mA (can vary with microSD card and baud rate)
 
 == MicroSD Card
 

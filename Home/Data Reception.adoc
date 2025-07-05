@@ -2,7 +2,7 @@
 
 After the data is collected and sent via the MiFi to the MQTT broker, it is time to process the data.
 
-The protocol used for data transmission is documented in the "Protocol Specification" document, located link:"Home/Data%20Transmission/Protocol%20Specification.adoc"[here]. This document provides detailed information about the data format and transmission method.
+The protocol used for data transmission is documented in the "Protocol Specification" document, located link:"/Home/Data%20Transmission/Protocol%20Specification.adoc"[here]. This document provides detailed information about the data format and transmission method.
 
 
 The Data Reception unit also has a configuration file, which contains the specifications.

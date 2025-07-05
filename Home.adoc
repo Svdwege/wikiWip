@@ -77,3 +77,33 @@ graph LR
         Database --> Dashboard
     end
 ----
+
+== CI/CD
+The current repository has a CI/CD setup which test if the pushed code for STM32 compiles against the targeted board. 
+this is done using the cmake file in the CompleteSystem directory.
+The docker file for the container which tests the compilation is available in the docker_ci folder in the repository.
+This Dockerfile can be turned into a container with the command `docker build -t {Container_name}`.
+
+The CI/CD is configured using the `.gitlab-ci.yml` file in the root of the repository.
+This also has a old and currently non functional formatting checker but it is commented out.
+Gitlab is also used as the images Docker registry.
+
+[source,yml]
+----
+stm:build:
+  image: registry.gitlab.com/hydromotive/2425-acquistionmodule-dev/arm-none-eabi-gcc:1.0.0 # <1>
+  #needs: ["stm:fmt"]
+  stage: build
+  before_script:
+    - apt update && apt -y install make autoconf cmake
+  script:
+    - mkdir -p CompleteSystem/build
+    - cd CompleteSystem/build
+    - CC="arm-none-eabi-gcc" CXX="arm-none-eabi-g++" cmake ..
+    - cmake --build . --config Release -j 4
+  artifacts:
+    paths:
+      - CompleteSystem/build/CompleteSystem.elf # <2>
+----
+<1> Image used to compile the project
+<2> Binary file build by the image which is saved for a limited time on gitlab
